@@ -6,6 +6,7 @@ import {
   PRICE_THRESHOLD,
   applyFilters,
   bestDeals,
+  cheapestCountries,
   byDestination,
   byProvider,
   destinationFlag,
@@ -23,6 +24,7 @@ import {
 } from '@/lib/catalog';
 import { BarList, Columns, PriceHistogram, useTooltip } from './charts';
 import BestDeals from './BestDeals';
+import CheapestCountries from './CheapestCountries';
 import DestinationMatrix from './DestinationMatrix';
 import SimCard from './SimCard';
 
@@ -72,6 +74,7 @@ export default function Dashboard() {
         (d) => filters.provider === null || d.best.provider === filters.provider,
       ),
       destList: applyFilters(products, filters, 'destination'),
+      countries: cheapestCountries(applyFilters(products, filters, 'destination')),
       dest: byDestination(applyFilters(products, filters, 'destination')).sort((a, b) => b.count - a.count).slice(0, 10),
     };
   }, [filters]);
@@ -368,6 +371,12 @@ export default function Dashboard() {
                 <h2 id="h-matrix">Prix par destination</h2>
                 <p>Cliquez sur une destination pour filtrer le tableau de bord</p>
               </div>
+              <CheapestCountries
+                ranks={view.countries}
+                selected={filters.destination}
+                onSelect={(id) => set({ destination: filters.destination === id ? null : id })}
+              />
+              <div className="stack-gap" />
               <DestinationMatrix
                 list={view.destList}
                 selected={filters.destination}

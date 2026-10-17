@@ -183,6 +183,7 @@ const euro0 = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR
 const int = new Intl.NumberFormat('fr-FR');
 const dec1 = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 1 });
 const pct0 = new Intl.NumberFormat('fr-FR', { style: 'percent', maximumFractionDigits: 0 });
+const pct1 = new Intl.NumberFormat('fr-FR', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 });
 
 const safe = (fn: (n: number) => string) => (n: number) => (Number.isFinite(n) ? fn(n) : '–');
 export const fmt = {
@@ -191,6 +192,7 @@ export const fmt = {
   int: safe((n) => int.format(n)),
   dec1: safe((n) => dec1.format(n)),
   pct: safe((n) => pct0.format(n)),
+  pct1: safe((n) => pct1.format(n)),
 };
 
 export type MatrixCell = { value: number; count: number } | null;
@@ -282,4 +284,59 @@ export function bestDeals(list: Product[]): Deal[] {
     });
   }
   return deals.sort((a, b) => b.lead - a.lead || b.providers - a.providers);
+}
+
+export type CountryRank = {
+  id: number;
+  name: string;
+  /** Écart moyen à la moyenne des pays, à forfait égal (−0,07 = 7 % moins cher). */
+  gap: number;
+  offers: number;
+  reference: { gb: number; days: number; price: number; provider: number } | null;
+};
+
+const REFERENCE_PLAN = { gb: 10, days: 30 };
+
+/**
+ * Pays les moins chers à forfait égal. Chaque offre est comparée au prix moyen
+ * des pays pour le même volume et la même durée ; un pays est classé selon la
+ * moyenne de ces écarts, ce qui neutralise les différences de gamme.
+ */
+export function cheapestCountries(list: Product[]): CountryRank[] {
+  const countries = list.filter((p) => !destinations[p.destination].region);
+  const category = (p: Product) => `${p.gb ?? 'u'}|${p.days}`;
+
+  const sums = new Map<string, { total: number; n: number }>();
+  for (const p of countries) {
+    const s = sums.get(category(p)) ?? { total: 0, n: 0 };
+    s.total += p.price;
+    s.n++;
+    sums.set(category(p), s);
+  }
+
+  const byCountry = new Map<number, Product[]>();
+  for (const p of countries) {
+    const g = byCountry.get(p.destination);
+    if (g) g.push(p);
+    else byCountry.set(p.destination, [p]);
+  }
+
+  return [...byCountry.entries()]
+    .map(([id, items]) => {
+      const ratios = items.map((p) => {
+        const s = sums.get(category(p))!;
+        return p.price / (s.total / s.n);
+      });
+      const ref = items
+        .filter((p) => p.gb === REFERENCE_PLAN.gb && p.days === REFERENCE_PLAN.days)
+        .sort((a, b) => a.price - b.price)[0];
+      return {
+        id,
+        name: destinations[id].name,
+        gap: ratios.reduce((a, b) => a + b, 0) / ratios.length - 1,
+        offers: items.length,
+        reference: ref ? { gb: ref.gb as number, days: ref.days, price: ref.price, provider: ref.provider } : null,
+      };
+    })
+    .sort((a, b) => a.gap - b.gap);
 }
