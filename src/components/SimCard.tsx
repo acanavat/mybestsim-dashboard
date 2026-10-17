@@ -4,9 +4,9 @@ import { fmt } from '@/lib/catalog';
 // résumé du catalogue, et des couches empilées qui donnent l'épaisseur.
 const LAYERS = [-2, -1, 0, 1, 2];
 
-export default function SimCard({ count, providers }: { count: number; providers: number }) {
+export default function SimCard({ count, providers, mini = false }: { count: number; providers: number; mini?: boolean }) {
   return (
-    <div className="sim-stage" aria-hidden="true">
+    <div className={`sim-stage${mini ? ' sim-mini' : ''}`} aria-hidden="true">
       <div className="sim-tilt">
         <div className="sim">
           {LAYERS.map((z) => (
@@ -41,7 +41,7 @@ export default function SimCard({ count, providers }: { count: number; providers
           </div>
         </div>
       </div>
-      <div className="sim-shadow" />
+      {!mini && <div className="sim-shadow" />}
     </div>
   );
 }

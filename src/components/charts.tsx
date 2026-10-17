@@ -102,12 +102,16 @@ export function PriceHistogram({
   bins,
   showTip,
   hideTip,
+  height = 230,
+  thresholdLabel = 'seuil 100 €',
 }: {
   bins: { from: number; to: number; count: number }[];
   showTip: TipFn;
   hideTip: () => void;
+  height?: number;
+  thresholdLabel?: string;
 }) {
-  const W = 600, H = 230, L = 34, R = 8, T = 22, B = 26;
+  const W = 600, H = height, L = 34, R = 8, T = 22, B = 26;
   const pw = W - L - R, ph = H - T - B;
   const yMax = niceMax(Math.max(...bins.map((b) => b.count)));
   const xMax = bins[bins.length - 1].to;
@@ -161,7 +165,7 @@ export function PriceHistogram({
         );
       })}
       <line x1={x(PRICE_THRESHOLD)} x2={x(PRICE_THRESHOLD)} y1={T - 14} y2={T + ph} stroke="var(--red)" strokeWidth="1.5" />
-      <text x={x(PRICE_THRESHOLD) + 6} y={T - 4} style={{ fill: 'var(--red)' }}>seuil 100 €</text>
+      <text x={x(PRICE_THRESHOLD) + 6} y={T - 4} style={{ fill: 'var(--red)' }}>{thresholdLabel}</text>
     </svg>
   );
 }
@@ -172,12 +176,14 @@ export function Columns({
   items,
   showTip,
   hideTip,
+  height = 230,
 }: {
   items: { key: string; label: string; value: number; display: string; tip: ReactNode }[];
   showTip: TipFn;
   hideTip: () => void;
+  height?: number;
 }) {
-  const W = 600, H = 230, L = 8, R = 8, T = 24, B = 26;
+  const W = 600, H = height, L = 8, R = 8, T = 24, B = 26;
   const pw = W - L - R, ph = H - T - B;
   const yMax = Math.max(...items.map((i) => i.value), 0) * 1.08 || 1;
   const slot = pw / Math.max(items.length, 1);
