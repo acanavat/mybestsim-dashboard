@@ -13,6 +13,7 @@ import {
   perGbByVolume,
   priceHistogram,
   products,
+  providerLogo,
   providers,
   summarize,
   type Filters,
@@ -244,6 +245,7 @@ export default function Dashboard() {
                     items={view.providerShare.map((r) => ({
                       id: r.id,
                       label: r.name,
+                      icon: providerLogo(r.id),
                       value: r.count,
                       display: (
                         <>
@@ -260,15 +262,17 @@ export default function Dashboard() {
                 </div>
                 <div className="card">
                   <h3>Prix médian au Go par fournisseur</h3>
-                  <p className="sub">Du moins cher au plus cher, hors forfaits illimités</p>
+                  <p className="sub">Du moins cher au plus cher, hors forfaits illimités. Échelle resserrée pour montrer les écarts.</p>
                   <BarList
                     items={view.cheapest.map((r) => ({
                       id: r.id,
                       label: r.name,
+                      icon: providerLogo(r.id),
                       value: r.medianPerGb,
                       display: fmt.euro(r.medianPerGb),
                       tip: <ProviderTip r={r} />,
                     }))}
+                    dots
                     selected={filters.provider}
                     onSelect={(id) => set({ provider: filters.provider === id ? null : id })}
                     showTip={tip.show}
@@ -338,13 +342,58 @@ export default function Dashboard() {
               </div>
             </section>
 
-            <section className="section" aria-labelledby="h-dest">
+            <section className="section" aria-labelledby="h-table">
               <div className="section-head">
-                <h2 id="h-dest">Destinations</h2>
+                <h2 id="h-table">Comparatif des fournisseurs</h2>
+                <p>Cliquez sur un en-tête pour trier</p>
+              </div>
+              <div className="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col">Fournisseur</th>
+                      {COLUMNS.map((c) => (
+                        <th key={c.key} scope="col">
+                          <button type="button" aria-pressed={sort === c.key} onClick={() => setSort(c.key)}>
+                            {c.label}
+                            {sort === c.key ? (c.asc ? ' ↑' : ' ↓') : ''}
+                          </button>
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {sortedRows.map((r) => (
+                      <tr key={r.id}>
+                        <td>
+                          <span className="provider-cell">
+                            <img className="logo" src={providerLogo(r.id)} alt="" width={28} height={28} loading="lazy" />
+                            {r.name}
+                          </span>
+                        </td>
+                        <td>{fmt.int(r.count)}</td>
+                        <td>{fmt.euro(r.avgPrice)}</td>
+                        <td>
+                          {fmt.euro(r.medianPerGb)}
+                          {r.id === cheapestId && sortedRows.length > 1 && <span className="best">le moins cher</span>}
+                        </td>
+                        <td>{r.destinations}</td>
+                        <td>{fmt.pct(r.share5g)}</td>
+                        <td>{fmt.pct(r.shareTopUp)}</td>
+                        <td>{fmt.pct(r.shareUnlimited)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+            <details className="section fold">
+              <summary className="section-head">
+                <h2>Destinations</h2>
                 <p>
                   {total.destinationCount} destinations, dont {destinations.filter((d) => d.region).length} zones multi-pays
                 </p>
-              </div>
+              </summary>
               <div className="card wide-labels">
                 <h3>Les 10 destinations les plus couvertes</h3>
                 <p className="sub">Nombre d&apos;offres et prix médian par destination</p>
@@ -374,56 +423,16 @@ export default function Dashboard() {
                   hideTip={tip.hide}
                 />
               </div>
-            </section>
+            </details>
 
-            <section className="section" aria-labelledby="h-table">
-              <div className="section-head">
-                <h2 id="h-table">Comparatif des fournisseurs</h2>
-                <p>Cliquez sur un en-tête pour trier</p>
-              </div>
-              <div className="table-wrap">
-                <table>
-                  <thead>
-                    <tr>
-                      <th scope="col">Fournisseur</th>
-                      {COLUMNS.map((c) => (
-                        <th key={c.key} scope="col">
-                          <button type="button" aria-pressed={sort === c.key} onClick={() => setSort(c.key)}>
-                            {c.label}
-                            {sort === c.key ? (c.asc ? ' ↑' : ' ↓') : ''}
-                          </button>
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {sortedRows.map((r) => (
-                      <tr key={r.id}>
-                        <td>{r.name}</td>
-                        <td>{fmt.int(r.count)}</td>
-                        <td>{fmt.euro(r.avgPrice)}</td>
-                        <td>
-                          {fmt.euro(r.medianPerGb)}
-                          {r.id === cheapestId && sortedRows.length > 1 && <span className="best">le moins cher</span>}
-                        </td>
-                        <td>{r.destinations}</td>
-                        <td>{fmt.pct(r.share5g)}</td>
-                        <td>{fmt.pct(r.shareTopUp)}</td>
-                        <td>{fmt.pct(r.shareUnlimited)}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </section>
           </>
         )}
 
-        <section className="section" aria-labelledby="h-method">
-          <div className="section-head">
-            <h2 id="h-method">Méthode et qualité des données</h2>
+        <details className="section fold">
+          <summary className="section-head">
+            <h2>Méthode et qualité des données</h2>
             <p>Les choix faits pour calculer ces chiffres</p>
-          </div>
+          </summary>
           <div className="method">
             <div className="card">
               <h3>Contrôles à l&apos;import</h3>
@@ -457,7 +466,7 @@ export default function Dashboard() {
               </p>
             </div>
           </div>
-        </section>
+        </details>
       </main>
 
       <footer>

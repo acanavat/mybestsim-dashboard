@@ -27,7 +27,7 @@ type TipFn = ReturnType<typeof useTooltip>['show'];
 
 /* ---------- Barres horizontales (une seule série) ---------- */
 
-export type BarItem = { id: number; label: string; value: number; display: ReactNode; tip: ReactNode };
+export type BarItem = { id: number; label: string; icon?: string; value: number; display: ReactNode; tip: ReactNode };
 
 export function BarList({
   items,
@@ -36,6 +36,7 @@ export function BarList({
   showTip,
   hideTip,
   max,
+  dots,
 }: {
   items: BarItem[];
   selected: number | null;
@@ -43,8 +44,12 @@ export function BarList({
   showTip: TipFn;
   hideTip: () => void;
   max?: number;
+  /** Points sur une échelle resserrée (min → max) au lieu de barres partant de zéro. */
+  dots?: boolean;
 }) {
   const top = max ?? Math.max(...items.map((i) => i.value), 0);
+  const lo = Math.min(...items.map((i) => i.value));
+  const span = top - lo || 1;
   return (
     <ul className="bars">
       {items.map((item) => (
@@ -59,11 +64,23 @@ export function BarList({
             onFocus={(e) => showTip(e, item.tip)}
             onBlur={hideTip}
           >
-            <span className="bar-name">{item.label}</span>
-            <span className="bar-track">
-              <span className="bar-fill" style={{ width: `calc((100% - var(--reserve, 92px)) * ${top ? item.value / top : 0})` }} />
-              <span className="bar-value">{item.display}</span>
+            <span className="bar-name">
+              {item.icon && <img className="logo" src={item.icon} alt="" width={24} height={24} loading="lazy" />}
+              <span>{item.label}</span>
             </span>
+            {dots ? (
+              <span className="dot-track">
+                <span className="dot-line" />
+                <span className="dot" style={{ left: `calc((100% - 80px) * ${(item.value - lo) / span})` }}>
+                  <span className="bar-value">{item.display}</span>
+                </span>
+              </span>
+            ) : (
+              <span className="bar-track">
+                <span className="bar-fill" style={{ width: `calc((100% - var(--reserve, 92px)) * ${top ? item.value / top : 0})` }} />
+                <span className="bar-value">{item.display}</span>
+              </span>
+            )}
           </button>
         </li>
       ))}

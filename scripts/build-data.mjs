@@ -56,6 +56,7 @@ async function main() {
   if (files.length === 0) throw new Error(`Aucun fichier CSV trouvé dans ${DATA_DIR}`);
 
   const providers = [], providerIdx = new Map();
+  const providerFiles = [];
   const destinations = [], destinationIdx = new Map();
   const rows = [];
   const seenSku = new Set();
@@ -95,8 +96,10 @@ async function main() {
       seenSku.add(sku);
       if (isUnlimited) unlimited++;
       const code = get('country_code');
+      const provider = indexOf(providers, providerIdx, get('provider'));
+      providerFiles[provider] ??= path.basename(file, path.extname(file));
       rows.push([
-        indexOf(providers, providerIdx, get('provider')),
+        provider,
         indexOf(destinations, destinationIdx, `${code}|${get('country_name')}`),
         gb,
         days,
@@ -115,6 +118,8 @@ async function main() {
     issues,
     unlimited,
     providers,
+    // Logo de chaque fournisseur : public/logos/<nom du fichier CSV>.png
+    providerLogos: providerFiles,
     destinations: destinations.map((d) => {
       const [code, name] = d.split('|');
       return { code, name, region: REGION_CODES.has(code) };

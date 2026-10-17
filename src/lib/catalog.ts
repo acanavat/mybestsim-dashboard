@@ -18,6 +18,7 @@ type RawCatalog = {
   issues: string[];
   unlimited: number;
   providers: string[];
+  providerLogos: string[];
   destinations: Destination[];
   rows: [number, number, number | null, number, number, number, number][];
 };
@@ -25,6 +26,7 @@ type RawCatalog = {
 const catalog = raw as unknown as RawCatalog;
 
 export const providers = catalog.providers;
+export const providerLogo = (id: number) => `/logos/${catalog.providerLogos[id]}.png`;
 export const destinations = catalog.destinations;
 export const meta = {
   generatedAt: catalog.generatedAt,
