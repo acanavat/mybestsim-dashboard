@@ -228,6 +228,12 @@ tbody tr:hover td { background: var(--blue-wash); }
 
 /* ---------- Logos et blocs repliables ---------- */
 .logo { flex: none; width: 24px; height: 24px; border-radius: 6px; box-shadow: 0 0 0 1px var(--line); background: #fff; }
+.flag { flex: none; width: 24px; height: 24px; object-fit: contain; }
+.dest-cell { display: inline-flex; align-items: center; gap: 10px; }
+.dest-cell .flag { width: 22px; height: 22px; }
+.select-wrap { position: relative; display: block; }
+.select-wrap .flag { position: absolute; left: 11px; top: 50%; width: 20px; height: 20px; transform: translateY(-50%); pointer-events: none; }
+.select.has-flag { padding-left: 40px; }
 .provider-cell { display: inline-flex; align-items: center; gap: 12px; }
 .provider-cell .logo { width: 28px; height: 28px; border-radius: 7px; }
 .fold > summary { list-style: none; cursor: pointer; margin-bottom: 0; }

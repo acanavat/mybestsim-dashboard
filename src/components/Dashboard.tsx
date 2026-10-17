@@ -7,6 +7,7 @@ import {
   applyFilters,
   byDestination,
   byProvider,
+  destinationFlag,
   destinations,
   fmt,
   meta,
@@ -124,8 +125,10 @@ export default function Dashboard() {
           </label>
           <label className="field">
             <span className="field-label">Destination</span>
+            <span className="select-wrap">
+              {filters.destination !== null && <img className="flag" src={destinationFlag(filters.destination)} alt="" width={20} height={20} />}
             <select
-              className="select"
+              className={`select${filters.destination !== null ? ' has-flag' : ''}`}
               value={filters.destination ?? ''}
               onChange={(e) => set({ destination: e.target.value === '' ? null : Number(e.target.value) })}
             >
@@ -141,6 +144,7 @@ export default function Dashboard() {
                 ))}
               </optgroup>
             </select>
+            </span>
           </label>
           <div className="field" role="group" aria-labelledby="f-net">
             <span className="field-label" id="f-net">Réseau</span>
@@ -416,6 +420,7 @@ export default function Dashboard() {
                   items={view.dest.map((d) => ({
                     id: d.id,
                     label: d.region ? `${d.name} (zone)` : d.name,
+                    icon: destinationFlag(d.id),
                     value: d.count,
                     display: (
                       <>
@@ -436,6 +441,7 @@ export default function Dashboard() {
                   onSelect={(id) => set({ destination: filters.destination === id ? null : id })}
                   showTip={tip.show}
                   hideTip={tip.hide}
+                  iconKind="flag"
                 />
               </div>
             </details>

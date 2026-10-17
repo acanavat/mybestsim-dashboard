@@ -28,6 +28,8 @@ const catalog = raw as unknown as RawCatalog;
 export const providers = catalog.providers;
 export const providerLogo = (id: number) => `/logos/${catalog.providerLogos[id]}.png`;
 export const destinations = catalog.destinations;
+// Drapeaux Twemoji, les mêmes que ceux affichés sur mybestsim.com (globes pour les zones).
+export const destinationFlag = (id: number) => `/flags/${catalog.destinations[id].code}.svg`;
 export const meta = {
   generatedAt: catalog.generatedAt,
   files: catalog.files,

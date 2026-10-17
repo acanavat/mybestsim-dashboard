@@ -37,6 +37,7 @@ export function BarList({
   hideTip,
   max,
   dots,
+  iconKind = 'logo',
 }: {
   items: BarItem[];
   selected: number | null;
@@ -46,6 +47,7 @@ export function BarList({
   max?: number;
   /** Points sur une échelle resserrée (min → max) au lieu de barres partant de zéro. */
   dots?: boolean;
+  iconKind?: 'logo' | 'flag';
 }) {
   const top = max ?? Math.max(...items.map((i) => i.value), 0);
   const lo = Math.min(...items.map((i) => i.value));
@@ -65,7 +67,7 @@ export function BarList({
             onBlur={hideTip}
           >
             <span className="bar-name">
-              {item.icon && <img className="logo" src={item.icon} alt="" width={24} height={24} loading="lazy" />}
+              {item.icon && <img className={iconKind} src={item.icon} alt="" width={24} height={24} loading="lazy" />}
               <span>{item.label}</span>
             </span>
             {dots ? (

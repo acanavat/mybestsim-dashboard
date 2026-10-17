@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { destinationMatrix, fmt, type MatrixCell, type MatrixRow, type Product } from '@/lib/catalog';
+import { destinationFlag, destinationMatrix, fmt, type MatrixCell, type MatrixRow, type Product } from '@/lib/catalog';
 import type { useTooltip } from './charts';
 
 type Tip = ReturnType<typeof useTooltip>;
@@ -41,7 +41,13 @@ export default function DestinationMatrix({
     const dir = order === 'cheap' ? 1 : -1;
     return r.sort((a, b) => (Number.isFinite(a.medianPerGb) ? dir * (a.medianPerGb - b.medianPerGb) : 1));
   }, [rows, order]);
-  const visible = expanded ? sorted : sorted.slice(0, PREVIEW);
+  // La destination filtrée reste visible même si elle n'est pas dans l'aperçu.
+  const visible = useMemo(() => {
+    if (expanded) return sorted;
+    const head = sorted.slice(0, PREVIEW);
+    const picked = sorted.find((r) => r.id === selected);
+    return picked && !head.includes(picked) ? [...head, picked] : head;
+  }, [sorted, expanded, selected]);
 
   const labels = [...volumes.map((gb) => `${gb} Go`), 'Illimité'];
 
@@ -137,8 +143,11 @@ export default function DestinationMatrix({
                 aria-selected={selected === row.id}
               >
                 <th scope="row">
-                  {row.name}
-                  {row.region && <span className="zone">zone</span>}
+                  <span className="dest-cell">
+                    <img className="flag" src={destinationFlag(row.id as number)} alt="" width={22} height={22} loading="lazy" />
+                    {row.name}
+                    {row.region && <span className="zone">zone</span>}
+                  </span>
                 </th>
                 {row.cells.map((c, i) => cell(row, c, i))}
               </tr>
