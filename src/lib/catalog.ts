@@ -97,7 +97,24 @@ export function summarize(list: Product[]) {
     share5g: list.length ? list.filter((p) => p.is5g).length / list.length : NaN,
     shareTopUp: list.length ? list.filter((p) => p.topUp).length / list.length : NaN,
     providerCount: new Set(list.map((p) => p.provider)).size,
+    unlimitedPerDay: mean(list.filter((p) => p.gb === null).map((p) => p.price / p.days)),
+    expensive: expensiveProfile(list.filter((p) => p.price > PRICE_THRESHOLD)),
     destinationCount: new Set(list.map((p) => p.destination)).size,
+  };
+}
+
+/** Ce qui caractérise les offres à plus de 100 € : illimitées ? zones multi-pays ? durée ? */
+function expensiveProfile(list: Product[]) {
+  if (list.length === 0) return null;
+  const share = (fn: (p: Product) => boolean) => list.filter(fn).length / list.length;
+  const days = new Map<number, number>();
+  for (const p of list) days.set(p.days, (days.get(p.days) ?? 0) + 1);
+  const [topDays, topDaysCount] = [...days.entries()].sort((a, b) => b[1] - a[1])[0];
+  return {
+    unlimited: share((p) => p.gb === null),
+    region: share((p) => destinations[p.destination].region),
+    days: topDays,
+    daysShare: topDaysCount / list.length,
   };
 }
 
@@ -113,8 +130,8 @@ export type ProviderRow = {
   destinations: number;
 };
 
-export function byProvider(list: Product[]): ProviderRow[] {
-  const groups = new Map<number, Product[]>();
+export function byProvider(list: Product[], includeEmpty = false): ProviderRow[] {
+  const groups = new Map<number, Product[]>(includeEmpty ? providers.map((_, id) => [id, []]) : []);
   for (const p of list) {
     const g = groups.get(p.provider);
     if (g) g.push(p);
@@ -122,15 +139,16 @@ export function byProvider(list: Product[]): ProviderRow[] {
   }
   return [...groups.entries()].map(([id, items]) => {
     const metered = items.filter((p) => p.gb !== null);
+    const n = items.length || 1;
     return {
       id,
       name: providers[id],
       count: items.length,
       avgPrice: mean(items.map((p) => p.price)),
       medianPerGb: median(metered.map((p) => p.price / (p.gb as number))),
-      share5g: items.filter((p) => p.is5g).length / items.length,
-      shareTopUp: items.filter((p) => p.topUp).length / items.length,
-      shareUnlimited: (items.length - metered.length) / items.length,
+      share5g: items.filter((p) => p.is5g).length / n,
+      shareTopUp: items.filter((p) => p.topUp).length / n,
+      shareUnlimited: (items.length - metered.length) / n,
       destinations: new Set(items.map((p) => p.destination)).size,
     };
   });

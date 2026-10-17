@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import {
   NO_FILTERS,
   PRICE_THRESHOLD,
@@ -58,6 +58,19 @@ export default function Dashboard() {
   const [sort, setSort] = useState<SortKey>('count');
   const [tab, setTab] = useState<TabId>('deals');
   const tip = useTooltip();
+  const tablistRef = useRef<HTMLDivElement>(null);
+
+  // Changer d'onglet change la hauteur de la page : si les onglets sont sortis de l'écran
+  // par le haut, on les ramène en vue pour ne pas laisser le lecteur dans le vide.
+  const openTab = (id: TabId) => {
+    setTab(id);
+    const el = tablistRef.current;
+    if (!el) return;
+    const top = el.getBoundingClientRect().top;
+    const toolbar = document.querySelector('.toolbar') as HTMLElement | null;
+    const offset = toolbar && getComputedStyle(toolbar).position === 'sticky' ? toolbar.offsetHeight + 8 : 8;
+    if (top < offset) window.scrollTo({ top: window.scrollY + top - offset });
+  };
 
   const set = (patch: Partial<Filters>) => setFilters((f) => ({ ...f, ...patch }));
   const toggleProvider = (id: number) => set({ provider: filters.provider === id ? null : id });
@@ -68,12 +81,13 @@ export default function Dashboard() {
     const list = applyFilters(products, filters);
     // Les vues par fournisseur / destination ignorent leur propre filtre :
     // la sélection est mise en avant au lieu de faire disparaître les autres.
-    const allProviders = byProvider(applyFilters(products, filters, 'provider'));
+    // Les 18 fournisseurs restent toujours listés (0 si aucune offre) pour que la tuile ne change pas de taille.
+    const allProviders = byProvider(applyFilters(products, filters, 'provider'), true);
     const destList = applyFilters(products, filters, 'destination');
     return {
       s: summarize(list),
       providerRows: byProvider(list),
-      providerShare: [...allProviders].sort((a, b) => b.count - a.count),
+      providerShare: [...allProviders].sort((a, b) => b.count - a.count || collator.compare(a.name, b.name)),
       cheapest: allProviders.filter((r) => Number.isFinite(r.medianPerGb)).sort((a, b) => a.medianPerGb - b.medianPerGb),
       hist: priceHistogram(list),
       volume: perGbByVolume(list),
@@ -184,21 +198,21 @@ export default function Dashboard() {
           </button>
           <p className="result-count" aria-live="polite">
             <b>{fmt.int(s.count)}</b> offre{s.count > 1 ? 's' : ''}
-            {active && <span> sur {fmt.int(total.count)}</span>}
           </p>
         </div>
       </div>
 
       <main className="wrap dash">
         <h1 className="sr-only">Tableau de bord du catalogue eSIM</h1>
-        {empty ? (
-          <div className="tile empty">
-            <h2>Aucune offre ne correspond à ces filtres</h2>
-            <p className="sub">Retirez un filtre pour élargir la sélection.</p>
-            <button type="button" className="pill" onClick={() => setFilters(NO_FILTERS)}>Réinitialiser les filtres</button>
+        {empty && (
+          <div className="notice" role="status">
+            <span>
+              <b>Aucune offre ne correspond à ces filtres.</b> Retirez un filtre pour élargir la sélection.
+            </span>
+            <button type="button" className="pill" onClick={() => setFilters(NO_FILTERS)}>Réinitialiser</button>
           </div>
-        ) : (
-          <>
+        )}
+        <>
             <section className="kpis" aria-label="Chiffres clés">
               <div className="kpi">
                 <span className="kpi-label">Cartes eSIM</span>
@@ -210,7 +224,7 @@ export default function Dashboard() {
               <div className="kpi alert">
                 <span className="kpi-label">Offres à plus de 100&nbsp;€</span>
                 <span className="kpi-value">{fmt.int(s.over100)}</span>
-                <span className="kpi-note">{s.count ? fmt.dec1((s.over100 / s.count) * 100) : '–'} % des offres</span>
+                <span className="kpi-note" title={expensiveNote(s.expensive, true)}>{expensiveNote(s.expensive, false)}</span>
               </div>
               <div className="kpi">
                 <span className="kpi-label">Fourchette de prix</span>
@@ -271,13 +285,13 @@ export default function Dashboard() {
                   <div className="tile-head">
                     <div>
                       <h2>Distribution des prix</h2>
-                      <p className="sub">Nombre d&apos;offres par tranche de 5 €, médiane {fmt.euro(s.medianPrice)}</p>
+                      <p className="sub">Nombre d&apos;offres par tranche de 5 €</p>
                     </div>
                   </div>
                   <PriceHistogram
                     bins={view.hist}
                     height={180}
-                    thresholdLabel={`${fmt.int(s.over100)} offres > ${PRICE_THRESHOLD} €`}
+                    thresholdLabel={`${fmt.int(s.over100)} offre${s.over100 > 1 ? 's' : ''} > ${PRICE_THRESHOLD} €`}
                     showTip={tip.show}
                     hideTip={tip.hide}
                   />
@@ -285,10 +299,11 @@ export default function Dashboard() {
                 <div className="tile">
                   <div className="tile-head">
                     <div>
-                      <h2>Prix au Go selon le volume</h2>
-                      <p className="sub">Prix médian d&apos;un Go par taille de forfait, hors illimités</p>
+                      <h2>Prix selon le volume</h2>
+                      <p className="sub">Prix médian d&apos;un Go par taille de forfait ; l&apos;illimité, sans volume, est en prix par jour</p>
                     </div>
                   </div>
+                  <div className="volume-wrap">
                   <Columns
                     height={180}
                     items={view.volume.map((v) => ({
@@ -309,12 +324,19 @@ export default function Dashboard() {
                     showTip={tip.show}
                     hideTip={tip.hide}
                   />
+                  <div className="unlimited-col" aria-label="Forfaits illimités">
+                    <span className="unl-value">{fmt.euro(s.unlimitedPerDay)}</span>
+                    <span className="unl-unit">par jour</span>
+                    <span className="unl-count">{fmt.int(s.unlimitedCount)} offre{s.unlimitedCount > 1 ? 's' : ''}</span>
+                    <span className="unl-label">Illimité</span>
+                  </div>
+                  </div>
                 </div>
               </div>
             </section>
 
             <section className="tabs" aria-label="Analyses détaillées">
-              <div className="tablist" role="tablist">
+              <div className="tablist" role="tablist" ref={tablistRef}>
                 {TABS.map((t) => (
                   <button
                     key={t.id}
@@ -324,7 +346,7 @@ export default function Dashboard() {
                     aria-selected={tab === t.id}
                     aria-controls={`panel-${t.id}`}
                     className="tab"
-                    onClick={() => setTab(t.id)}
+                    onClick={() => openTab(t.id)}
                   >
                     {t.label}
                   </button>
@@ -461,8 +483,7 @@ export default function Dashboard() {
                 )}
               </div>
             </section>
-          </>
-        )}
+        </>
       </main>
 
       <footer className="site-footer">
@@ -474,6 +495,16 @@ export default function Dashboard() {
       {tip.node}
     </>
   );
+}
+
+function expensiveNote(e: ReturnType<typeof summarize>['expensive'], long: boolean) {
+  if (!e) return 'aucune';
+  const parts: string[] = [];
+  if (e.unlimited === 1) parts.push(long ? 'toutes illimitées' : 'illimité');
+  else if (e.unlimited >= 0.5) parts.push(`${fmt.pct(e.unlimited)} illimitées`);
+  if (e.daysShare === 1) parts.push(long ? `${e.days} jours` : `${e.days} j`);
+  if (e.region === 1) parts.push(long ? 'zones multi-pays' : 'multi-pays');
+  return parts.length ? parts.join(long ? ', ' : ' · ') : `surtout ${e.days} jours`;
 }
 
 function ProviderTip({ r }: { r: ProviderRow }) {

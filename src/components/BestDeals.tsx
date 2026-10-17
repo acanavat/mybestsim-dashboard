@@ -50,7 +50,7 @@ export default function BestDeals({ deals, hasFilters }: { deals: Deal[]; hasFil
             <header className="deal-top">
               <span className="deal-dest">
                 <img className="flag" src={destinationFlag(d.destination)} alt="" width={22} height={22} loading="lazy" />
-                {destinations[d.destination].name}
+                <span>{destinations[d.destination].name}</span>
               </span>
               <span className="deal-rank">n° {i + 1}</span>
             </header>
@@ -70,7 +70,9 @@ export default function BestDeals({ deals, hasFilters }: { deals: Deal[]; hasFil
             <div className="deal-gap">
               <span className="deal-lead">{`+${fmt.pct(d.lead)}`}</span>
               <p>
-                Le concurrent suivant, <b>{providers[d.runnerUp.provider]}</b>, est à {fmt.euro(d.runnerUp.price)}
+                <span>
+                  devant <b>{providers[d.runnerUp.provider]}</b> à {fmt.euro(d.runnerUp.price)}
+                </span>
               </p>
             </div>
 
