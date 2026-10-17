@@ -238,3 +238,48 @@ export function destinationMatrix(list: Product[]) {
   const overall: MatrixRow = { id: null, name: 'Toutes destinations', region: false, medianPerGb: perGbMedian(list), cells: cellsOf(list) };
   return { volumes, rows, overall };
 }
+
+export type Deal = {
+  key: string;
+  destination: number;
+  gb: number | null;
+  days: number;
+  best: { provider: number; price: number; is5g: boolean };
+  runnerUp: { provider: number; price: number };
+  /** De combien le concurrent suivant est plus cher que la meilleure offre (0,16 = +16 %). */
+  lead: number;
+  providers: number;
+};
+
+/**
+ * Meilleures offres du moment : dans chaque catégorie comparable
+ * (même destination, même volume, même durée), l'offre la moins chère
+ * et son avance sur le fournisseur suivant. Une catégorie doit compter
+ * au moins deux fournisseurs pour qu'on puisse parler d'avance.
+ */
+export function bestDeals(list: Product[]): Deal[] {
+  const segments = new Map<string, Map<number, Product>>();
+  for (const p of list) {
+    const key = `${p.destination}|${p.gb ?? 'u'}|${p.days}`;
+    let byProvider = segments.get(key);
+    if (!byProvider) segments.set(key, (byProvider = new Map()));
+    const current = byProvider.get(p.provider);
+    if (!current || p.price < current.price) byProvider.set(p.provider, p);
+  }
+  const deals: Deal[] = [];
+  for (const [key, byProvider] of segments) {
+    if (byProvider.size < 2) continue;
+    const [first, second] = [...byProvider.values()].sort((a, b) => a.price - b.price);
+    deals.push({
+      key,
+      destination: first.destination,
+      gb: first.gb,
+      days: first.days,
+      best: { provider: first.provider, price: first.price, is5g: first.is5g },
+      runnerUp: { provider: second.provider, price: second.price },
+      lead: second.price / first.price - 1,
+      providers: byProvider.size,
+    });
+  }
+  return deals.sort((a, b) => b.lead - a.lead || b.providers - a.providers);
+}

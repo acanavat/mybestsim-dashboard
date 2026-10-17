@@ -5,6 +5,7 @@ import {
   NO_FILTERS,
   PRICE_THRESHOLD,
   applyFilters,
+  bestDeals,
   byDestination,
   byProvider,
   destinationFlag,
@@ -21,6 +22,7 @@ import {
   type ProviderRow,
 } from '@/lib/catalog';
 import { BarList, Columns, PriceHistogram, useTooltip } from './charts';
+import BestDeals from './BestDeals';
 import DestinationMatrix from './DestinationMatrix';
 import SimCard from './SimCard';
 
@@ -64,6 +66,11 @@ export default function Dashboard() {
       cheapest: byProvider(applyFilters(products, filters, 'provider')).filter((r) => Number.isFinite(r.medianPerGb)).sort((a, b) => a.medianPerGb - b.medianPerGb),
       hist: priceHistogram(list),
       volume: perGbByVolume(list),
+      // Toutes les catégories sont comparées sans le filtre fournisseur ; s'il est actif,
+      // on garde celles où ce fournisseur est le moins cher.
+      deals: bestDeals(applyFilters(products, filters, 'provider')).filter(
+        (d) => filters.provider === null || d.best.provider === filters.provider,
+      ),
       destList: applyFilters(products, filters, 'destination'),
       dest: byDestination(applyFilters(products, filters, 'destination')).sort((a, b) => b.count - a.count).slice(0, 10),
     };
@@ -236,6 +243,14 @@ export default function Dashboard() {
                   </span>
                 </div>
               </div>
+            </section>
+
+            <section className="section" aria-labelledby="h-deals">
+              <div className="section-head">
+                <h2 id="h-deals">Meilleures offres du moment</h2>
+                <p>Même destination, même volume, même durée : l&apos;offre la moins chère et son avance sur le concurrent suivant</p>
+              </div>
+              <BestDeals deals={view.deals} hasFilters={active} />
             </section>
 
             <section className="section" aria-labelledby="h-prov">
@@ -490,7 +505,7 @@ export default function Dashboard() {
         </details>
       </main>
 
-      <footer>
+      <footer className="site-footer">
         <div className="wrap">
           <span>Tableau de bord réalisé par Alexandre Canavate pour le test MyBestSim</span>
           <span>Seuil « offre chère » : plus de {PRICE_THRESHOLD} €</span>
