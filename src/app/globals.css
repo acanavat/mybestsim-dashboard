@@ -287,3 +287,32 @@ footer a { color: var(--blue-ink); }
   .section { margin-top: 56px; }
   .fold + .fold { margin-top: 32px; }
 }
+
+/* ---------- Prix par destination ---------- */
+.matrix-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 12px 24px; }
+.matrix-head .sub { max-width: 620px; }
+.matrix-legend { margin-bottom: 16px; }
+.matrix-legend i { width: 14px; height: 14px; border-radius: 4px; }
+table.matrix { font-size: 14px; }
+.matrix th, .matrix td { padding: 10px 14px; text-align: center; }
+.matrix th:first-child { text-align: left; }
+.matrix thead th small { display: block; font-size: 11px; font-weight: 400; color: var(--muted); }
+.matrix tbody th { font-weight: 500; color: var(--ink); background: #fff; position: sticky; left: 0; z-index: 1; }
+.matrix td { color: var(--ink); cursor: default; }
+.matrix tbody tr:not(.overall) { cursor: pointer; }
+.matrix tbody tr:not(.overall):hover th { color: var(--blue-ink); }
+.matrix tbody tr:not(.overall):hover td { background: transparent; }
+.matrix tbody tr.on th { color: var(--blue-ink); box-shadow: inset 4px 0 0 var(--blue); }
+.matrix .unl { border-left: 2px solid var(--line); }
+.matrix .overall th, .matrix .overall td { font-weight: 600; background: var(--panel); border-bottom: 2px solid var(--line); }
+.zone { margin-left: 8px; font-size: 11px; font-weight: 500; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; }
+.more {
+  display: block; margin: 18px auto 0; height: 38px; padding: 0 18px; border: 1px solid var(--line-blue); border-radius: 999px;
+  background: #fff; color: var(--blue-ink); font-size: 14px; font-weight: 500; cursor: pointer;
+}
+.more:hover { background: var(--blue-wash); }
+@media (max-width: 640px) {
+  .matrix th, .matrix td { padding: 9px 10px; font-size: 13px; }
+  .matrix-legend { flex-wrap: wrap; gap: 6px 14px; }
+  .matrix-legend span { white-space: nowrap; }
+}

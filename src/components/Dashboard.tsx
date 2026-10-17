@@ -20,6 +20,7 @@ import {
   type ProviderRow,
 } from '@/lib/catalog';
 import { BarList, Columns, PriceHistogram, useTooltip } from './charts';
+import DestinationMatrix from './DestinationMatrix';
 import SimCard from './SimCard';
 
 const total = summarize(products);
@@ -62,6 +63,7 @@ export default function Dashboard() {
       cheapest: byProvider(applyFilters(products, filters, 'provider')).filter((r) => Number.isFinite(r.medianPerGb)).sort((a, b) => a.medianPerGb - b.medianPerGb),
       hist: priceHistogram(list),
       volume: perGbByVolume(list),
+      destList: applyFilters(products, filters, 'destination'),
       dest: byDestination(applyFilters(products, filters, 'destination')).sort((a, b) => b.count - a.count).slice(0, 10),
     };
   }, [filters]);
@@ -340,6 +342,19 @@ export default function Dashboard() {
                   )}
                 </div>
               </div>
+            </section>
+
+            <section className="section" aria-labelledby="h-matrix">
+              <div className="section-head">
+                <h2 id="h-matrix">Prix par destination</h2>
+                <p>Cliquez sur une destination pour filtrer le tableau de bord</p>
+              </div>
+              <DestinationMatrix
+                list={view.destList}
+                selected={filters.destination}
+                onSelect={(id) => set({ destination: filters.destination === id ? null : id })}
+                tip={tip}
+              />
             </section>
 
             <section className="section" aria-labelledby="h-table">

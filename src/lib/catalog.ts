@@ -190,3 +190,49 @@ export const fmt = {
   dec1: safe((n) => dec1.format(n)),
   pct: safe((n) => pct0.format(n)),
 };
+
+export type MatrixCell = { value: number; count: number } | null;
+export type MatrixRow = {
+  id: number | null; // null = ligne « toutes destinations »
+  name: string;
+  region: boolean;
+  medianPerGb: number;
+  cells: MatrixCell[]; // une case par volume de `volumes`, puis la case illimité
+};
+
+/**
+ * Prix moyen au Go par destination et par volume de forfait.
+ * La dernière case est le prix moyen par jour des forfaits illimités,
+ * qui n'ont pas de volume en Go.
+ */
+export function destinationMatrix(list: Product[]) {
+  const volumes = [...new Set(list.filter((p) => p.gb !== null).map((p) => p.gb as number))].sort((a, b) => a - b);
+
+  const cellsOf = (items: Product[]): MatrixCell[] => {
+    const avg = (values: number[]): MatrixCell =>
+      values.length ? { value: values.reduce((a, b) => a + b, 0) / values.length, count: values.length } : null;
+    return [
+      ...volumes.map((gb) => avg(items.filter((p) => p.gb === gb).map((p) => p.price / gb))),
+      avg(items.filter((p) => p.gb === null).map((p) => p.price / p.days)),
+    ];
+  };
+  const perGbMedian = (items: Product[]) =>
+    median(items.filter((p) => p.gb !== null).map((p) => p.price / (p.gb as number)));
+
+  const groups = new Map<number, Product[]>();
+  for (const p of list) {
+    const g = groups.get(p.destination);
+    if (g) g.push(p);
+    else groups.set(p.destination, [p]);
+  }
+
+  const rows: MatrixRow[] = [...groups.entries()].map(([id, items]) => ({
+    id,
+    name: destinations[id].name,
+    region: destinations[id].region,
+    medianPerGb: perGbMedian(items),
+    cells: cellsOf(items),
+  }));
+  const overall: MatrixRow = { id: null, name: 'Toutes destinations', region: false, medianPerGb: perGbMedian(list), cells: cellsOf(list) };
+  return { volumes, rows, overall };
+}
