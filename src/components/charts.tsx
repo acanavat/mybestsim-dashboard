@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useState, type ReactNode } from 'react';
 import { PRICE_THRESHOLD, fmt } from '@/lib/catalog';
 
 /* ---------- Infobulle partagée ---------- */
@@ -11,10 +11,25 @@ export function useTooltip() {
   const [tip, setTip] = useState<Tip>(null);
   const show = useCallback((e: React.MouseEvent | React.FocusEvent, content: ReactNode) => {
     const r = (e.currentTarget as Element).getBoundingClientRect();
-    const x = 'clientX' in e ? e.clientX : r.left + r.width / 2;
+    const raw = 'clientX' in e ? e.clientX : r.left + r.width / 2;
+    // L'infobulle est centrée sur x : on la garde à l'écran près des bords.
+    const margin = Math.min(130, window.innerWidth / 2);
+    const x = Math.min(Math.max(raw, margin), window.innerWidth - margin);
     setTip({ x, y: r.top, content });
   }, []);
   const hide = useCallback(() => setTip(null), []);
+
+  // Sur mobile, un toucher affiche l'infobulle mais rien ne la referme : on la retire
+  // dès que la page défile ou change de taille.
+  useEffect(() => {
+    if (!tip) return;
+    window.addEventListener('scroll', hide, { passive: true });
+    window.addEventListener('resize', hide);
+    return () => {
+      window.removeEventListener('scroll', hide);
+      window.removeEventListener('resize', hide);
+    };
+  }, [tip, hide]);
   const node = tip ? (
     <div className="tooltip" role="status" style={{ left: tip.x, top: tip.y }}>
       {tip.content}
@@ -60,7 +75,10 @@ export function BarList({
             type="button"
             className={`bar-row${selected !== null && selected !== item.id ? ' dim' : ''}`}
             aria-pressed={selected === item.id}
-            onClick={() => onSelect?.(item.id)}
+            onClick={() => {
+              hideTip();
+              onSelect?.(item.id);
+            }}
             onMouseMove={(e) => showTip(e, item.tip)}
             onMouseLeave={hideTip}
             onFocus={(e) => showTip(e, item.tip)}

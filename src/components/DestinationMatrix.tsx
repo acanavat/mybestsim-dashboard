@@ -39,7 +39,12 @@ export default function DestinationMatrix({
     const r = [...rows];
     if (order === 'alpha') return r.sort((a, b) => collator.compare(a.name, b.name));
     const dir = order === 'cheap' ? 1 : -1;
-    return r.sort((a, b) => (Number.isFinite(a.medianPerGb) ? dir * (a.medianPerGb - b.medianPerGb) : 1));
+    return r.sort((a, b) => {
+      const okA = Number.isFinite(a.medianPerGb);
+      const okB = Number.isFinite(b.medianPerGb);
+      if (okA !== okB) return okA ? -1 : 1;
+      return okA ? dir * (a.medianPerGb - b.medianPerGb) : collator.compare(a.name, b.name);
+    });
   }, [rows, order]);
   // La destination filtrée reste visible même si elle n'est pas dans l'aperçu.
   const visible = useMemo(() => {

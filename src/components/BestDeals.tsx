@@ -8,26 +8,9 @@ const MORE = 24;
 
 const planLabel = (d: Deal) => `${d.gb === null ? 'Illimité' : `${d.gb} Go`} · ${d.days} jours`;
 
-function hook(d: Deal) {
-  const dest = destinations[d.destination].name;
-  const data = d.gb === null ? 'internet illimité' : `${d.gb} Go`;
-  return `${dest} : ${data} pendant ${d.days} jours à ${fmt.euro(d.best.price)} chez ${providers[d.best.provider]}. Le concurrent suivant est ${fmt.pct(d.lead)} plus cher.`;
-}
-
 export default function BestDeals({ deals, hasFilters }: { deals: Deal[]; hasFilters: boolean }) {
   const [expanded, setExpanded] = useState(false);
-  const [copied, setCopied] = useState<string | null>(null);
   const visible = deals.slice(0, expanded ? PREVIEW + MORE : PREVIEW);
-
-  const copy = async (d: Deal) => {
-    try {
-      await navigator.clipboard.writeText(hook(d));
-      setCopied(d.key);
-      setTimeout(() => setCopied((k) => (k === d.key ? null : k)), 1800);
-    } catch {
-      setCopied(null);
-    }
-  };
 
   if (deals.length === 0) {
     return (
@@ -68,7 +51,7 @@ export default function BestDeals({ deals, hasFilters }: { deals: Deal[]; hasFil
             </div>
 
             <div className="deal-gap">
-              <span className="deal-lead">{`+${fmt.pct(d.lead)}`}</span>
+              <span className="deal-lead" title={`Le concurrent suivant est ${fmt.pct(d.lead)} plus cher`}>{`+${fmt.pct(d.lead)}`}</span>
               <p>
                 <span>
                   devant <b>{providers[d.runnerUp.provider]}</b> à {fmt.euro(d.runnerUp.price)}
@@ -77,12 +60,7 @@ export default function BestDeals({ deals, hasFilters }: { deals: Deal[]; hasFil
             </div>
 
             <footer className="deal-foot">
-              <span>
-                {d.providers} fournisseurs comparés
-              </span>
-              <button type="button" className="copy" onClick={() => copy(d)} aria-live="polite">
-                {copied === d.key ? 'Accroche copiée' : 'Copier l’accroche'}
-              </button>
+              <span>{d.providers} fournisseurs comparés dans cette catégorie</span>
             </footer>
           </article>
         ))}

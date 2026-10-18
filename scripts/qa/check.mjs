@@ -6,7 +6,7 @@
 //  - aucun texte coupé (« … ») ni défilement horizontal, filtres actifs ou non ;
 //  - aucun décalage de mise en page quand on clique sur un filtre ou une barre
 //    (seul un changement d'onglet a le droit de modifier la hauteur de la page) ;
-//  - les parcours principaux : filtres, onglets, accroche copiée, clic sur une tendance.
+//  - les parcours principaux : filtres, onglets, meilleures offres, clic sur une tendance.
 
 import { chromium } from 'playwright';
 
@@ -84,7 +84,7 @@ for (const width of WIDTHS) {
 }
 
 // Parcours principaux, sur grand écran
-const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, permissions: ['clipboard-read', 'clipboard-write'] });
+const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
 const page = await ctx.newPage();
 page.on('pageerror', (e) => fail(`parcours : erreur JS ${e.message}`));
 await page.goto(URL, { waitUntil: 'networkidle' });
@@ -92,9 +92,8 @@ await page.goto(URL, { waitUntil: 'networkidle' });
 const total = await page.locator('.kpi-value').first().innerText();
 if (total.replace(/\s/g, '') !== '5056') fail(`total affiché ${total}, attendu 5 056`);
 
-await page.locator('.copy').first().click();
-const hook = await page.evaluate(() => navigator.clipboard.readText());
-if (!/plus cher\.$/.test(hook)) fail(`accroche copiée inattendue : ${hook}`);
+const deals = await page.locator('.deal').count();
+if (deals !== 6) fail(`${deals} cartes « meilleures offres » au lieu de 6`);
 
 for (const tab of ['Tendances', 'Destinations', 'Fournisseurs', 'Méthode', 'Meilleures offres']) {
   await page.click(`.tab:has-text("${tab}")`);
@@ -110,6 +109,38 @@ if (await rising.count()) {
   const chosen = await page.locator('select >> nth=1').evaluate((s) => s.options[s.selectedIndex].text);
   if (chosen !== name) fail(`clic sur la tendance ${name} filtre sur ${chosen}`);
 }
+
+// Onglets au clavier : flèche droite depuis le premier onglet
+await page.click('.tab:has-text("Meilleures offres")');
+await page.keyboard.press('ArrowRight');
+const active = await page.locator('.tab[aria-selected="true"]').innerText();
+if (!active.includes('Tendances')) fail(`flèche droite sur les onglets : onglet actif « ${active} »`);
+const focused = await page.evaluate(() => document.activeElement?.textContent ?? '');
+if (!focused.includes('Tendances')) fail('le focus clavier ne suit pas l\u2019onglet actif');
+
+// Icône d'onglet du navigateur
+const icon = await page.evaluate(() => document.querySelector('link[rel="icon"]')?.getAttribute('href'));
+if (!icon) fail('aucune icône d\u2019onglet (favicon)');
+else if ((await page.request.get(new globalThis.URL(icon, URL).href)).status() !== 200) fail(`icône introuvable : ${icon}`);
+
+// Mobile : une infobulle ouverte au toucher doit se fermer quand on fait défiler
+const phone = await browser.newPage({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
+await phone.goto(URL, { waitUntil: 'networkidle' });
+// (une barre de fournisseur filtre au toucher et ferme l'infobulle : on teste une colonne d'histogramme)
+await phone.locator('.chart .hit').nth(3).scrollIntoViewIfNeeded();
+await phone.waitForTimeout(400); // laisser se terminer l'événement de défilement
+await phone.locator('.chart .hit').nth(3).tap();
+await phone.waitForTimeout(150);
+if (!(await phone.locator('.tooltip').count())) fail('mobile : aucune infobulle au toucher');
+await phone.mouse.wheel(0, 400);
+await phone.evaluate(() => window.scrollBy(0, 300));
+await phone.waitForTimeout(150);
+if (await phone.locator('.tooltip').count()) fail('mobile : l\u2019infobulle reste affichée après défilement');
+const tipBox = async () => phone.locator('.tooltip').boundingBox();
+await phone.evaluate(() => window.scrollTo(0, 0));
+await phone.locator('.chart .hit').last().dispatchEvent('mousemove', { clientX: 385, clientY: 600 });
+const box = await tipBox().catch(() => null);
+if (box && (box.x < 0 || box.x + box.width > 390)) fail(`mobile : infobulle hors de l'écran (x ${Math.round(box.x)} → ${Math.round(box.x + box.width)})`);
 
 await browser.close();
 

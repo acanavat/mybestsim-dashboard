@@ -155,7 +155,6 @@ export type ProviderRow = {
   share5g: number;
   shareTopUp: number;
   shareUnlimited: number;
-  destinations: number;
 };
 
 export function byProvider(list: Product[], includeEmpty = false): ProviderRow[] {
@@ -177,7 +176,6 @@ export function byProvider(list: Product[], includeEmpty = false): ProviderRow[]
       share5g: items.filter((p) => p.is5g).length / n,
       shareTopUp: items.filter((p) => p.topUp).length / n,
       shareUnlimited: (items.length - metered.length) / n,
-      destinations: new Set(items.map((p) => p.destination)).size,
     };
   });
 }
@@ -206,22 +204,6 @@ export function perGbByVolume(list: Product[]) {
   return [...groups.entries()]
     .sort((a, b) => a[0] - b[0])
     .map(([gb, values]) => ({ gb, medianPerGb: median(values), count: values.length }));
-}
-
-export function byDestination(list: Product[]) {
-  const groups = new Map<number, Product[]>();
-  for (const p of list) {
-    const g = groups.get(p.destination);
-    if (g) g.push(p);
-    else groups.set(p.destination, [p]);
-  }
-  return [...groups.entries()].map(([id, items]) => ({
-    id,
-    ...destinations[id],
-    count: items.length,
-    medianPrice: median(items.map((p) => p.price)),
-    providers: new Set(items.map((p) => p.provider)).size,
-  }));
 }
 
 const euro2 = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' });

@@ -303,7 +303,24 @@ export default function Dashboard() {
             </section>
 
             <section className="tabs" aria-label="Analyses détaillées">
-              <div className="tablist" role="tablist" ref={tablistRef}>
+              <div
+                className="tablist"
+                role="tablist"
+                ref={tablistRef}
+                onKeyDown={(e) => {
+                  const i = TABS.findIndex((t) => t.id === tab);
+                  const next =
+                    e.key === 'ArrowRight' ? (i + 1) % TABS.length
+                    : e.key === 'ArrowLeft' ? (i - 1 + TABS.length) % TABS.length
+                    : e.key === 'Home' ? 0
+                    : e.key === 'End' ? TABS.length - 1
+                    : -1;
+                  if (next < 0) return;
+                  e.preventDefault();
+                  openTab(TABS[next].id);
+                  document.getElementById(`tab-${TABS[next].id}`)?.focus();
+                }}
+              >
                 {TABS.map((t) => (
                   <button
                     key={t.id}
@@ -311,7 +328,8 @@ export default function Dashboard() {
                     role="tab"
                     id={`tab-${t.id}`}
                     aria-selected={tab === t.id}
-                    aria-controls={`panel-${t.id}`}
+                    aria-controls={tab === t.id ? `panel-${t.id}` : undefined}
+                    tabIndex={tab === t.id ? 0 : -1}
                     className="tab"
                     onClick={() => openTab(t.id)}
                   >
