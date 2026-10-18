@@ -26,6 +26,7 @@ import { BarList, Columns, PriceHistogram, useTooltip } from './charts';
 import BestDeals from './BestDeals';
 import CheapestCountries from './CheapestCountries';
 import DestinationMatrix from './DestinationMatrix';
+import KpiCards from './KpiCards';
 import SimCard from './SimCard';
 import TrendsPanel from './TrendsPanel';
 
@@ -216,44 +217,7 @@ export default function Dashboard() {
           </div>
         )}
         <>
-            <section className="kpis" aria-label="Chiffres clés">
-              <div className="kpi">
-                <span className="kpi-label">Cartes eSIM</span>
-                <span className="kpi-value">{fmt.int(s.count)}</span>
-                <span className="kpi-note">
-                  {s.providerCount} fournisseur{s.providerCount > 1 ? 's' : ''}
-                </span>
-              </div>
-              <div className="kpi alert">
-                <span className="kpi-label">Offres à plus de 100&nbsp;€</span>
-                <span className="kpi-value">{fmt.int(s.over100)}</span>
-                <span className="kpi-note" title={expensiveNote(s.expensive, true)}>{expensiveNote(s.expensive, false)}</span>
-              </div>
-              <div className="kpi">
-                <span className="kpi-label">Fourchette de prix</span>
-                <span className="kpi-value range-value">
-                  {fmt.euro(s.minPrice)} <small>–</small> {fmt.euro(s.maxPrice)}
-                </span>
-                <span className="kpi-note">minimum et maximum</span>
-              </div>
-              <div className="kpi">
-                <span className="kpi-label">Data moyenne</span>
-                <span className="kpi-value">
-                  {fmt.dec1(s.avgGb)} <small>Go</small>
-                </span>
-                <span className="kpi-note">hors {fmt.int(s.unlimitedCount)} illimitées</span>
-              </div>
-              <div className="kpi">
-                <span className="kpi-label">Prix moyen</span>
-                <span className="kpi-value">{fmt.euro(s.avgPrice)}</span>
-                <span className="kpi-note">médiane {fmt.euro(s.medianPrice)}</span>
-              </div>
-              <div className="kpi">
-                <span className="kpi-label">Prix médian au Go</span>
-                <span className="kpi-value">{fmt.euro(s.medianPerGb)}</span>
-                <span className="kpi-note">{fmt.pct(s.share5g)} des offres en 5G</span>
-              </div>
-            </section>
+            <KpiCards s={s} hist={view.hist} volume={view.volume} />
 
             <section className="overview" aria-label="Vue d'ensemble">
               <div className="tile">
@@ -511,16 +475,6 @@ export default function Dashboard() {
       {tip.node}
     </>
   );
-}
-
-function expensiveNote(e: ReturnType<typeof summarize>['expensive'], long: boolean) {
-  if (!e) return 'aucune';
-  const parts: string[] = [];
-  if (e.unlimited === 1) parts.push(long ? 'toutes illimitées' : 'illimité');
-  else if (e.unlimited >= 0.5) parts.push(`${fmt.pct(e.unlimited)} illimitées`);
-  if (e.daysShare === 1) parts.push(long ? `${e.days} jours` : `${e.days} j`);
-  if (e.region === 1) parts.push(long ? 'zones multi-pays' : 'multi-pays');
-  return parts.length ? parts.join(long ? ', ' : ' · ') : `surtout ${e.days} jours`;
 }
 
 function ProviderTip({ r }: { r: ProviderRow }) {

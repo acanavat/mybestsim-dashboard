@@ -85,6 +85,12 @@ export function applyFilters(list: Product[], f: Filters, ignore?: keyof Filters
   );
 }
 
+export function quantile(values: number[], q: number): number {
+  if (values.length === 0) return NaN;
+  const s = [...values].sort((a, b) => a - b);
+  return s[Math.floor(q * (s.length - 1))];
+}
+
 export function median(values: number[]): number {
   if (values.length === 0) return NaN;
   const s = [...values].sort((a, b) => a - b);
@@ -108,6 +114,8 @@ export function summarize(list: Product[]) {
     maxPrice: prices.length ? Math.max(...prices) : NaN,
     avgPrice: mean(prices),
     medianPrice: median(prices),
+    q1: quantile(prices, 0.25),
+    q3: quantile(prices, 0.75),
     avgGb: mean(metered.map((p) => p.gb as number)),
     meteredCount: metered.length,
     unlimitedCount: list.length - metered.length,
