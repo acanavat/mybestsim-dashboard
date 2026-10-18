@@ -60,6 +60,7 @@ async function main() {
   const destinations = [], destinationIdx = new Map();
   const rows = [];
   const seenSku = new Set();
+  const twins = new Map();
   const issues = [];
   const fileReport = [];
   let unlimited = 0;
@@ -94,6 +95,10 @@ async function main() {
       if (!isUnlimited && (!Number.isFinite(gb) || gb <= 0)) return issues.push(`${where} : data invalide « ${gbRaw} », ligne ignorée`);
 
       seenSku.add(sku);
+      // Offres « jumelles » : même fiche (fournisseur, pays, volume, durée, réseau, recharge),
+      // SKU et prix différents. Conservées (chaque SKU est un produit), mais comptées pour la transparence.
+      const twinKey = [get('provider'), get('country_code'), gbRaw, days, get('network'), get('top_up')].join('|');
+      twins.set(twinKey, (twins.get(twinKey) ?? 0) + 1);
       if (isUnlimited) unlimited++;
       const code = get('country_code');
       const provider = indexOf(providers, providerIdx, get('provider'));
@@ -142,6 +147,10 @@ async function main() {
     trends,
     files: fileReport,
     issues,
+    twins: {
+      groups: [...twins.values()].filter((n) => n > 1).length,
+      extraRows: [...twins.values()].reduce((a, n) => a + n - 1, 0),
+    },
     unlimited,
     providers,
     // Logo de chaque fournisseur : public/logos/<nom du fichier CSV>.png

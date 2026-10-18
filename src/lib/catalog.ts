@@ -32,6 +32,7 @@ type RawCatalog = {
   trends: Trends | null;
   files: { file: string; rows: number; kept: number }[];
   issues: string[];
+  twins: { groups: number; extraRows: number };
   unlimited: number;
   providers: string[];
   providerLogos: string[];
@@ -52,6 +53,7 @@ export const meta = {
   generatedAt: catalog.generatedAt,
   files: catalog.files,
   issues: catalog.issues,
+  twins: catalog.twins,
 };
 
 export const products: Product[] = catalog.rows.map(([p, d, gb, days, cents, g5, top]) => ({

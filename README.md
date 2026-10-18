@@ -36,7 +36,8 @@ Chaque nuit, la GitHub Action `.github/workflows/trends.yml` lance `scripts/fetc
 ## Choix de calcul
 
 - **Forfaits illimités** (653 offres, `data_gb` vide) : comptés dans le nombre d'offres et les prix, **exclus** de la data moyenne et du prix au Go, car leur attribuer un volume arbitraire fausserait ces moyennes.
-- **Plus de 100 €** : strictement supérieur à 100 €.
+- **Plus de 100 €** : strictement supérieur à 100 €. Aucune offre ne coûte exactement 100 € (les plus proches : 99,39 € et 100,49 €), donc « > 100 € » et « ≥ 100 € » donnent le même résultat : 56.
+- **Offres « jumelles »** : 219 groupes d'offres ont la même fiche (fournisseur, pays, volume, durée, réseau, recharge) mais des SKU et des prix différents (écart médian 7 %). Ce ne sont pas des copies, et leur nombre correspond à ce que le hasard produirait (≈ 205). Elles sont **conservées** : chaque SKU est un produit (5 056). Les fusionner donnerait 4 817 produits.
 - **Prix au Go** : on affiche la médiane plutôt que la moyenne, pour ne pas être tiré par les petits forfaits de 1 Go, très chers au Go.
 
 ## Lancer en local

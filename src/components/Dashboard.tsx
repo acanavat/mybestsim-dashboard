@@ -424,6 +424,13 @@ export default function Dashboard() {
                           {fmt.int(products.length)} lignes retenues sur {fmt.int(meta.files.reduce((a, f) => a + f.rows, 0))}
                         </li>
                         <li>Colonnes, devise (EUR), prix, durée et SKU uniques vérifiés</li>
+                        <li>Noms de produits cohérents avec pays, volume et durée ; aucun prix à exactement 100 €</li>
+                        {meta.twins.groups > 0 && (
+                          <li>
+                            {fmt.int(meta.twins.groups)} offres « jumelles » (même fiche, SKU et prix différents) : conservées,
+                            chaque SKU étant un produit. Les fusionner donnerait {fmt.int(products.length - meta.twins.extraRows)} produits.
+                          </li>
+                        )}
                         <li>
                           {meta.issues.length === 0 ? (
                             <span className="ok">Aucune anomalie détectée</span>
