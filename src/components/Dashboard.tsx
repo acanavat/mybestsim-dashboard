@@ -18,6 +18,7 @@ import {
   providerLogo,
   providers,
   summarize,
+  trends,
   type Filters,
   type ProviderRow,
 } from '@/lib/catalog';
@@ -26,6 +27,7 @@ import BestDeals from './BestDeals';
 import CheapestCountries from './CheapestCountries';
 import DestinationMatrix from './DestinationMatrix';
 import SimCard from './SimCard';
+import TrendsPanel from './TrendsPanel';
 
 const total = summarize(products);
 const collator = new Intl.Collator('fr');
@@ -47,6 +49,7 @@ const COLUMNS: { key: SortKey; label: string; asc?: boolean }[] = [
 
 const TABS = [
   { id: 'deals', label: 'Meilleures offres' },
+  { id: 'trends', label: 'Tendances' },
   { id: 'destinations', label: 'Destinations' },
   { id: 'providers', label: 'Fournisseurs' },
   { id: 'method', label: 'Méthode' },
@@ -364,6 +367,10 @@ export default function Dashboard() {
                   </>
                 )}
 
+                {tab === 'trends' && (
+                  <TrendsPanel data={trends} list={view.destList} selected={filters.destination} onSelect={toggleDestination} />
+                )}
+
                 {tab === 'destinations' && (
                   <div className="panel-stack">
                     <CheapestCountries ranks={view.countries} selected={filters.destination} onSelect={toggleDestination} />
@@ -469,6 +476,15 @@ export default function Dashboard() {
                         nombre d&apos;offres et les prix, mais sont <b>exclues de la data moyenne et du prix au Go</b> : leur donner une
                         valeur arbitraire fausserait ces deux moyennes. Dans le tableau par destination, elles sont comparées en prix
                         par jour.
+                      </p>
+                    </div>
+                    <div className="tile">
+                      <h2>Tendances de recherche</h2>
+                      <p>
+                        Chaque jour, une tâche planifiée interroge Google Trends sur « voyage + pays » en France (pays + ville
+                        principale quand c&apos;est elle qu&apos;on cherche : Dubaï, New York, Prague…). « esim + pays » a été testé
+                        mais n&apos;a pas assez de volume par pays. Si Google refuse la requête, les dernières données valides sont
+                        gardées et leur date est affichée.
                       </p>
                     </div>
                     <div className="tile">

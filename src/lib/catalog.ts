@@ -12,8 +12,17 @@ export type Product = {
   topUp: boolean;
 };
 
+export type TrendCountry = { destination: number; keyword: string; interest: number; change: number | null; weekly: number[] };
+export type Trends = {
+  fetchedAt: string;
+  period: { from: string; to: string; recentWeeks: number; baselineWeeks: number };
+  anchor: string;
+  countries: TrendCountry[];
+};
+
 type RawCatalog = {
   generatedAt: string;
+  trends: Trends | null;
   files: { file: string; rows: number; kept: number }[];
   issues: string[];
   unlimited: number;
@@ -30,6 +39,8 @@ export const providerLogo = (id: number) => `/logos/${catalog.providerLogos[id]}
 export const destinations = catalog.destinations;
 // Drapeaux Twemoji, les mêmes que ceux affichés sur mybestsim.com (globes pour les zones).
 export const destinationFlag = (id: number) => `/flags/${catalog.destinations[id].code}.svg`;
+export const trends = catalog.trends;
+
 export const meta = {
   generatedAt: catalog.generatedAt,
   files: catalog.files,
@@ -357,4 +368,12 @@ export function cheapestCountries(list: Product[]): CountryRank[] {
       };
     })
     .sort((a, b) => a.gap - b.gap);
+}
+
+/** Offre de référence d'une destination : la moins chère en 10 Go · 30 jours, sinon la moins chère au Go. */
+export function referenceOffer(list: Product[], destination: number) {
+  const here = list.filter((p) => p.destination === destination && p.gb !== null);
+  if (here.length === 0) return null;
+  const standard = here.filter((p) => p.gb === 10 && p.days === 30).sort((a, b) => a.price - b.price)[0];
+  return standard ?? [...here].sort((a, b) => a.price / (a.gb as number) - b.price / (b.gb as number))[0];
 }

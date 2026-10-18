@@ -112,8 +112,27 @@ async function main() {
     fileReport.push({ file, rows: lines.length, kept });
   }
 
+  // Tendances Google Trends (data/trends.json, mis à jour chaque jour par une GitHub Action).
+  // Facultatif : sans ce fichier, l'onglet Tendances l'indique simplement.
+  let trends = null;
+  try {
+    const raw = JSON.parse(await readFile(path.join(DATA_DIR, 'trends.json'), 'utf8'));
+    const byCode = new Map(destinations.map((d, i) => [d.split('|')[0], i]));
+    trends = {
+      fetchedAt: raw.fetchedAt,
+      period: raw.period,
+      anchor: raw.anchor,
+      countries: raw.countries
+        .filter((c) => byCode.has(c.code))
+        .map((c) => ({ destination: byCode.get(c.code), keyword: c.keyword, interest: c.interest, change: c.change, weekly: c.weekly })),
+    };
+  } catch (err) {
+    if (err.code !== 'ENOENT') issues.push(`trends.json illisible : ${err.message}`);
+  }
+
   const catalog = {
     generatedAt: new Date().toISOString(),
+    trends,
     files: fileReport,
     issues,
     unlimited,

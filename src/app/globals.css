@@ -106,14 +106,14 @@ button, select { font: inherit; color: inherit; }
 .field.inline { flex-direction: row; align-items: center; gap: 8px; }
 .field-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 .select {
-  appearance: none; -webkit-appearance: none; height: 36px; width: 186px; max-width: 100%;
+  appearance: none; -webkit-appearance: none; height: 36px; width: 200px; max-width: 100%;
   padding: 0 34px 0 12px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: #fff
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%2364748b' stroke-width='1.5'/%3E%3C/svg%3E")
     no-repeat right 12px center;
   font-size: 14px; cursor: pointer;
 }
 .select:hover { border-color: #cbd5e1; }
-label.field + label.field .select { width: 222px; }
+label.field + label.field .select { width: 220px; }
 .select-wrap { position: relative; display: block; }
 .select-wrap > img { position: absolute; left: 10px; top: 50%; width: 20px; height: 20px; transform: translateY(-50%); pointer-events: none; }
 .select.has-icon { padding-left: 38px; }
@@ -250,7 +250,7 @@ tbody tr:hover td { background: var(--blue-wash); }
 .best { display: inline-block; margin-left: 2px; font-size: 10px; font-weight: 600; color: var(--green-ink); background: var(--green-wash); border-radius: 4px; padding: 1px 6px; vertical-align: 1px; }
 
 /* ---------- Méthode ---------- */
-.method { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.method { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .method h2 { margin-bottom: 8px; }
 .method p, .method li { font-size: 13.5px; color: var(--ink-2); }
 .method ul { margin: 0; padding-left: 18px; }
@@ -399,4 +399,46 @@ table.matrix { font-size: 14px; }
   .podium-item > .flag { width: 28px; height: 28px; margin: 0; }
   .podium-name { flex: 1; }
   .podium-ref { margin-top: 4px; padding-top: 8px; justify-content: flex-start; }
+}
+
+/* ---------- Tendances ---------- */
+.trend-stamp { display: inline-block; margin-left: 8px; font-size: 12px; font-weight: 500; color: var(--green-ink); background: var(--green-wash); border-radius: 6px; padding: 1px 8px; }
+.trend-stamp.stale { color: #9a3412; background: #fff3e0; }
+.trends-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 12px; align-items: start; }
+.trend-list, .rising { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.trend-row {
+  width: 100%; display: grid; grid-template-columns: 22px 22px minmax(0, 150px) minmax(0, 1fr) 34px 78px; align-items: center; gap: 10px;
+  padding: 6px 8px; border: 0; border-radius: 8px; background: none; cursor: pointer; text-align: left; font-size: 13.5px;
+}
+.trend-row:hover { background: var(--panel); }
+.trend-row.on { background: var(--blue-wash); }
+.trend-rank { font-size: 12px; font-weight: 600; color: var(--muted); text-align: right; }
+.trend-name { font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.trend-bar { height: 10px; background: var(--panel); border-radius: 0 4px 4px 0; overflow: hidden; }
+.trend-bar i { display: block; height: 100%; background: var(--blue); border-radius: 0 4px 4px 0; }
+.trend-index { font-size: 13px; font-weight: 600; text-align: right; font-variant-numeric: tabular-nums; }
+.trend-chip { justify-self: end; font-size: 12px; font-weight: 600; border-radius: 6px; padding: 2px 7px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.trend-chip.up { color: var(--green-ink); background: var(--green-wash); }
+.trend-chip.down { color: var(--ink-2); background: var(--panel); border: 1px solid var(--line); }
+.trend-chip.flat { color: var(--muted); }
+.rising { gap: 8px; }
+.rising-item {
+  width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) 120px; grid-template-areas: 'head spark' 'offer offer'; gap: 8px 12px; align-items: center;
+  padding: 12px 14px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: #fff; cursor: pointer; text-align: left;
+}
+.rising-item:hover { border-color: var(--line-blue); background: var(--blue-wash); }
+.rising-item.on { border-color: var(--blue); box-shadow: inset 0 0 0 1px var(--blue); }
+.rising-head { grid-area: head; display: flex; align-items: center; gap: 10px; min-width: 0; font-size: 15px; }
+.rising-head b { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.spark { grid-area: spark; justify-self: end; overflow: visible; }
+.rising-offer { grid-area: offer; display: flex; align-items: center; gap: 8px; padding-top: 8px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--muted); }
+.rising-offer b { color: var(--ink); font-weight: 600; }
+.rising-offer .logo { width: 20px; height: 20px; border-radius: 5px; }
+@media (max-width: 1100px) { .trends-grid { grid-template-columns: 1fr; } }
+@media (max-width: 640px) {
+  .trend-row { grid-template-columns: 18px 20px minmax(0, 1fr) 30px 70px; gap: 8px; }
+  .trend-bar { display: none; }
+  .rising-item { grid-template-columns: minmax(0, 1fr) 84px; }
+  .spark { width: 84px; }
+  .trend-stamp { margin: 6px 0 0; }
 }
