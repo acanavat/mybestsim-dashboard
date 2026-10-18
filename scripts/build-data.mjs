@@ -124,7 +124,14 @@ async function main() {
       anchor: raw.anchor,
       countries: raw.countries
         .filter((c) => byCode.has(c.code))
-        .map((c) => ({ destination: byCode.get(c.code), keyword: c.keyword, interest: c.interest, change: c.change, weekly: c.weekly })),
+        .map((c) => ({
+          destination: byCode.get(c.code),
+          keyword: c.keyword,
+          interest: c.interest,
+          change: c.change ?? null,
+          yearChange: c.yearChange ?? null,
+          weekly: c.weekly,
+        })),
     };
   } catch (err) {
     if (err.code !== 'ENOENT') issues.push(`trends.json illisible : ${err.message}`);

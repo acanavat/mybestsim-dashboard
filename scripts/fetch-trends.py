@@ -11,6 +11,10 @@ Choix de méthode (testés avant d'écrire ce script) :
   Chaque paquet contient donc le même terme repère (« voyage japon ») pour remettre tous
   les paquets sur une échelle commune.
 
+Les évolutions (« ce mois-ci », « sur un an ») se calculent sur la courbe propre à chaque pays,
+interrogée avec des pays de volume proche : sinon un petit pays, écrasé par un gros dans la même
+requête, n'a que des valeurs 1, 2 ou 3 et un passage de 1 à 3 s'afficherait « +200 % ».
+
 Si Google refuse une requête (limite de débit), le script s'arrête sans toucher au fichier :
 le dashboard garde les dernières données valides et affiche leur date.
 """
@@ -18,14 +22,16 @@ le dashboard garde les dernières données valides et affiche leur date.
 import json
 import sys
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from pytrends.request import TrendReq
 
 OUT = Path(__file__).resolve().parent.parent / 'data' / 'trends.json'
 GEO = 'FR'
-TIMEFRAME = 'today 12-m'  # hebdomadaire : en quotidien, Google met à 0 les jours à faible volume
+# Un peu plus d'un an, pour comparer aux mêmes semaines de l'an dernier. Sur une telle durée, Google
+# renvoie des données hebdomadaires : en quotidien, il met à 0 les jours à faible volume.
+HISTORY_DAYS = 420
 ANCHOR = 'voyage japon'
 
 KEYWORDS = {
@@ -81,86 +87,140 @@ KEYWORDS = {
 }
 
 RECENT_WEEKS = 4     # période « en ce moment »
-BASELINE_WEEKS = 8   # période de comparaison, juste avant
+BASELINE_WEEKS = 8   # comparaison « ce mois-ci » : les semaines juste avant
+YEAR_WEEKS = 52      # comparaison « sur un an » : les mêmes semaines, 52 semaines plus tôt
+MIN_RAW = 5          # en dessous (valeur brute Google moyenne), une évolution n'est que de l'arrondi
 PAUSE = 12           # secondes entre deux requêtes, pour ne pas être bloqué
+
+
+def timeframe():
+    today = datetime.now(timezone.utc).date()
+    return f'{today - timedelta(days=HISTORY_DAYS)} {today}'
 
 
 def fetch(client, terms):
     for attempt in range(3):
         try:
-            client.build_payload(terms, timeframe=TIMEFRAME, geo=GEO)
+            client.build_payload(terms, timeframe=timeframe(), geo=GEO)
             df = client.interest_over_time()
-            if df.empty or ANCHOR not in df:
+            if df.empty or any(t not in df for t in terms):
                 raise RuntimeError('réponse vide')
             # La semaine en cours est incomplète (souvent à 0) : on l'écarte.
             if 'isPartial' in df:
                 df = df[~df['isPartial'].astype(bool)]
             return df
         except Exception as err:  # noqa: BLE001 - toute erreur réseau / 429 est retentée
-            wait = 60 * (attempt + 1)
-            print(f'  ! {terms[1:]} : {type(err).__name__} {err} — nouvel essai dans {wait} s', file=sys.stderr)
+            wait = 90 * (attempt + 1)
+            print(f'  ! {terms} : {type(err).__name__} {err} — nouvel essai dans {wait} s', file=sys.stderr)
             time.sleep(wait)
     raise RuntimeError(f'échec définitif pour {terms}')
 
 
+def mean(values):
+    return sum(values) / len(values) if values else 0
+
+
+def window_mean(values):
+    """Moyenne d'une période en ignorant les semaines à 0 isolées (trous de données Google).
+    Renvoie None s'il reste moins de 3 semaines sur 4 avec des données."""
+    data = [x for x in values if x > 0]
+    return mean(data) if values and len(data) >= 0.75 * len(values) else None
+
+
+def ratio(a, b):
+    return round(a / b - 1, 3) if b > 0 else None
+
+
 def main():
     client = TrendReq(hl='fr-FR', tz=-120)
-    others = [(code, kw) for code, kw in KEYWORDS.items() if kw != ANCHOR]
-    batches = [others[i:i + 4] for i in range(0, len(others), 4)]
+    codes = list(KEYWORDS)
 
-    series = {}  # code -> liste hebdomadaire, en % de la moyenne du repère
-    weeks = None
+    # 1. Volume comparé entre pays : chaque paquet contient le repère pour une échelle commune.
+    others = [c for c in codes if KEYWORDS[c] != ANCHOR]
+    batches = [others[i:i + 4] for i in range(0, len(others), 4)]
+    interest = {}
     for n, batch in enumerate(batches, 1):
-        terms = [ANCHOR] + [kw for _, kw in batch]
-        print(f'[{n}/{len(batches)}] {", ".join(code for code, _ in batch)}')
+        print(f'[volume {n}/{len(batches)}] {", ".join(batch)}')
+        terms = [ANCHOR] + [KEYWORDS[c] for c in batch]
         df = fetch(client, terms)
-        anchor_mean = df[ANCHOR].mean()
+        anchor_mean = df[ANCHOR].tail(RECENT_WEEKS).mean()
         if anchor_mean <= 0:
             raise RuntimeError('le terme repère est à 0, échelle impossible')
-        scale = 100 / anchor_mean
-        series.setdefault('JP', [round(v * scale, 2) for v in df[ANCHOR]])
-        for code, kw in batch:
-            series[code] = [round(v * scale, 2) for v in df[kw]]
+        interest.setdefault('JP', 100.0)
+        for c in batch:
+            interest[c] = df[KEYWORDS[c]].tail(RECENT_WEEKS).mean() / anchor_mean * 100
+        time.sleep(PAUSE)
+
+    # 2. Évolutions : ce sont des rapports sur la courbe propre à chaque pays, donc sans échelle
+    #    commune. On regroupe les pays de volume proche pour qu'aucun ne soit écrasé par un plus
+    #    gros (Google arrondit chaque requête à des entiers de 0 à 100).
+    by_volume = sorted(codes, key=lambda c: -interest[c])
+    groups = [by_volume[i:i + 5] for i in range(0, len(by_volume), 5)]
+    curves, weeks = {}, None
+    for n, group in enumerate(groups, 1):
+        print(f'[évolution {n}/{len(groups)}] {", ".join(group)}')
+        df = fetch(client, [KEYWORDS[c] for c in group])
+        for c in group:
+            curves[c] = [float(v) for v in df[KEYWORDS[c]]]
         weeks = [d.strftime('%Y-%m-%d') for d in df.index]
         time.sleep(PAUSE)
 
-    countries = []
-    for code, values in series.items():
-        recent = values[-RECENT_WEEKS:]
-        base = values[-(RECENT_WEEKS + BASELINE_WEEKS):-RECENT_WEEKS]
-        recent_mean = sum(recent) / len(recent)
-        base_mean = sum(base) / len(base) if base else 0
-        weekly = values[-12:]
-        countries.append({
-            'code': code,
-            'keyword': KEYWORDS[code],
-            'interest': recent_mean,
-            'change': (recent_mean / base_mean - 1) if base_mean > 0 else None,
-            'weekly': weekly,
-        })
+    write(interest, curves, weeks)
 
-    top = max(c['interest'] for c in countries) or 1
-    for c in countries:
-        c['interest'] = round(c['interest'] / top * 100, 1)
-        c['weekly'] = [round(v / top * 100, 1) for v in c['weekly']]
-        if c['change'] is not None:
-            c['change'] = round(c['change'], 3)
+
+def write(interest, curves, weeks, fetched_at=None):
+    top = max(interest.values()) or 1
+    countries = []
+    for c in KEYWORDS:
+        v = curves[c]
+        recent = v[-RECENT_WEEKS:]
+        base = v[-(RECENT_WEEKS + BASELINE_WEEKS):-RECENT_WEEKS]
+        last_year = v[-(RECENT_WEEKS + YEAR_WEEKS):-YEAR_WEEKS] if len(v) >= RECENT_WEEKS + YEAR_WEEKS else []
+        def compare(ref):
+            # Fiable seulement avec assez de volume des deux côtés (sinon ce n'est que de l'arrondi).
+            a, b = window_mean(recent), window_mean(ref)
+            return ratio(a, b) if a is not None and b is not None and min(a, b) >= MIN_RAW else None
+        spark_max = max(v[-12:]) or 1
+        countries.append({
+            'code': c,
+            'keyword': KEYWORDS[c],
+            'interest': round(interest[c] / top * 100, 1),
+            'change': compare(base),
+            'yearChange': compare(last_year) if last_year else None,
+            'weekly': [round(x / spark_max * 100, 1) for x in v[-12:]],
+            # Valeurs brutes Google (0-100 dans la requête du groupe), pour contrôler la fiabilité.
+            'raw': [int(x) for x in v],
+        })
     countries.sort(key=lambda c: -c['interest'])
 
     OUT.write_text(json.dumps({
-        'fetchedAt': datetime.now(timezone.utc).isoformat(timespec='seconds'),
+        'fetchedAt': fetched_at or datetime.now(timezone.utc).isoformat(timespec='seconds'),
         'source': 'Google Trends',
         'geo': GEO,
-        'period': {'from': weeks[0], 'to': weeks[-1], 'recentWeeks': RECENT_WEEKS, 'baselineWeeks': BASELINE_WEEKS},
+        'period': {
+            'from': weeks[0], 'to': weeks[-1], 'recentWeeks': RECENT_WEEKS, 'baselineWeeks': BASELINE_WEEKS,
+            'lastYearFrom': weeks[-(RECENT_WEEKS + YEAR_WEEKS)], 'lastYearTo': weeks[-(YEAR_WEEKS + 1)],
+        },
         'anchor': ANCHOR,
         'countries': countries,
     }, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
     print(f'✓ {len(countries)} destinations écrites dans {OUT}')
 
 
+def recompute():
+    """Recalcule les indicateurs à partir des courbes déjà enregistrées, sans interroger Google."""
+    old = json.loads(OUT.read_text(encoding='utf-8'))
+    start = datetime.strptime(old['period']['from'], '%Y-%m-%d')
+    by_code = {c['code']: c for c in old['countries']}
+    curves = {code: [float(x) for x in by_code[code]['raw']] for code in KEYWORDS}
+    weeks = [(start + timedelta(weeks=i)).strftime('%Y-%m-%d') for i in range(len(next(iter(curves.values()))))]
+    interest = {code: by_code[code]['interest'] for code in KEYWORDS}
+    write(interest, curves, weeks, old['fetchedAt'])
+
+
 if __name__ == '__main__':
     try:
-        main()
+        recompute() if '--recompute' in sys.argv else main()
     except Exception as err:  # noqa: BLE001
         print(f'✗ Tendances non mises à jour : {err}. Les données précédentes sont conservées.', file=sys.stderr)
         sys.exit(1)

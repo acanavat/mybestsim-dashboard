@@ -9,8 +9,10 @@ const STALE_DAYS = 3;
 const dateFr = (iso: string) =>
   new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Paris' }).format(new Date(iso));
 
+const LOW_VOLUME = 'Volume de recherche trop faible pour une évolution fiable';
+
 function Change({ value }: { value: number | null }) {
-  if (value === null) return <span className="trend-chip flat">–</span>;
+  if (value === null) return <span className="trend-chip flat" title={LOW_VOLUME}>–</span>;
   if (Math.abs(value) < 0.01) return <span className="trend-chip flat">= stable</span>;
   const up = value > 0;
   return (
@@ -56,10 +58,12 @@ export default function TrendsPanel({
 
   const ageDays = (Date.now() - new Date(data.fetchedAt).getTime()) / 86_400_000;
   const top = data.countries.slice(0, 10);
+  // « En vogue » = plus recherché qu'à la même époque l'an dernier : neutralise les effets de saison.
   const rising = data.countries
-    .filter((c) => c.interest >= MIN_INTEREST && c.change !== null && c.change > 0)
-    .sort((a, b) => (b.change as number) - (a.change as number))
+    .filter((c) => c.interest >= MIN_INTEREST && c.yearChange !== null && c.yearChange > 0)
+    .sort((a, b) => (b.yearChange as number) - (a.yearChange as number))
     .slice(0, 5);
+  const lastYear = new Date(data.period.lastYearTo).getFullYear();
 
   return (
     <>
@@ -82,6 +86,21 @@ export default function TrendsPanel({
               </p>
             </div>
           </div>
+          <div className="trend-row trend-head" aria-hidden="true">
+            <span />
+            <span />
+            <span>Destination</span>
+            <span />
+            <span>Indice</span>
+            <span>
+              <span className="hide-sm">Ce mois-ci</span>
+              <span className="show-sm">Mois</span>
+            </span>
+            <span>
+              <span className="hide-sm">Sur un an</span>
+              <span className="show-sm">1 an</span>
+            </span>
+          </div>
           <ol className="trend-list">
             {top.map((c, i) => (
               <li key={c.destination}>
@@ -100,6 +119,7 @@ export default function TrendsPanel({
                   </span>
                   <span className="trend-index">{fmt.int(Math.round(c.interest))}</span>
                   <Change value={c.change} />
+                  <Change value={c.yearChange} />
                 </button>
               </li>
             ))}
@@ -109,15 +129,14 @@ export default function TrendsPanel({
         <div className="tile">
           <div className="tile-head">
             <div>
-              <h2>En forte hausse</h2>
+              <h2>En vogue</h2>
               <p className="sub">
-                {data.period.recentWeeks} dernières semaines comparées aux {data.period.baselineWeeks} précédentes, et
-                l&apos;offre à pousser
+                Plus recherchées qu&apos;aux mêmes semaines de {lastYear}, et l&apos;offre à pousser
               </p>
             </div>
           </div>
           {rising.length === 0 ? (
-            <p className="sub">Aucune destination en hausse significative cette semaine.</p>
+            <p className="sub">Aucune destination n&apos;est plus recherchée qu&apos;à la même époque l&apos;an dernier.</p>
           ) : (
             <ul className="rising">
               {rising.map((c) => {
@@ -134,9 +153,12 @@ export default function TrendsPanel({
                       <span className="rising-head">
                         <img className="flag" src={destinationFlag(c.destination)} alt="" width={24} height={24} loading="lazy" />
                         <b>{destinations[c.destination].name}</b>
-                        <Change value={c.change} />
+                        <Change value={c.yearChange} />
                       </span>
                       <Sparkline values={c.weekly} />
+                      <span className="rising-month">
+                        ce mois-ci : {c.change === null ? '–' : `${c.change >= 0 ? '+' : '−'}${fmt.pct(Math.abs(c.change))}`}
+                      </span>
                       <span className="rising-offer">
                         {offer ? (
                           <>

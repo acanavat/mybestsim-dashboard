@@ -12,10 +12,17 @@ export type Product = {
   topUp: boolean;
 };
 
-export type TrendCountry = { destination: number; keyword: string; interest: number; change: number | null; weekly: number[] };
+export type TrendCountry = {
+  destination: number;
+  keyword: string;
+  interest: number;
+  change: number | null;
+  yearChange: number | null;
+  weekly: number[];
+};
 export type Trends = {
   fetchedAt: string;
-  period: { from: string; to: string; recentWeeks: number; baselineWeeks: number };
+  period: { from: string; to: string; recentWeeks: number; baselineWeeks: number; lastYearFrom: string; lastYearTo: string };
   anchor: string;
   countries: TrendCountry[];
 };

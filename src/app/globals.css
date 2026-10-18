@@ -42,6 +42,7 @@ button, select { font: inherit; color: inherit; }
 .wrap { max-width: 1360px; margin: 0 auto; padding: 0 var(--gutter); }
 
 /* ---------- Bandeau ---------- */
+.show-sm { display: none; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 .appbar { background: #fff; border-bottom: 1px solid var(--line); }
 .appbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 64px; }
@@ -291,6 +292,7 @@ tbody tr:hover td { background: var(--blue-wash); }
   .kpi-value.range-value { font-size: 17px; }
   .kpi:nth-child(3), .kpi:nth-child(6) { grid-column: span 2; }
   .hide-sm { display: none; }
+  .show-sm { display: inline; }
   .reset:disabled { display: none; }
   label.field + label.field .select { width: 100%; }
   .result-count { text-align: left; line-height: 32px; }
@@ -407,10 +409,13 @@ table.matrix { font-size: 14px; }
 .trends-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 12px; align-items: start; }
 .trend-list, .rising { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
 .trend-row {
-  width: 100%; display: grid; grid-template-columns: 22px 22px minmax(0, 150px) minmax(0, 1fr) 34px 78px; align-items: center; gap: 10px;
+  width: 100%; display: grid; grid-template-columns: 22px 22px minmax(0, 140px) minmax(0, 1fr) 40px 80px 80px; align-items: center; gap: 10px;
   padding: 6px 8px; border: 0; border-radius: 8px; background: none; cursor: pointer; text-align: left; font-size: 13.5px;
 }
 .trend-row:hover { background: var(--panel); }
+.trend-head { cursor: default; padding-top: 0; padding-bottom: 4px; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+.trend-head:hover { background: none; }
+.trend-head span:nth-child(n+5) { text-align: right; }
 .trend-row.on { background: var(--blue-wash); }
 .trend-rank { font-size: 12px; font-weight: 600; color: var(--muted); text-align: right; }
 .trend-name { font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -423,20 +428,23 @@ table.matrix { font-size: 14px; }
 .trend-chip.flat { color: var(--muted); }
 .rising { gap: 8px; }
 .rising-item {
-  width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) 120px; grid-template-areas: 'head spark' 'offer offer'; gap: 8px 12px; align-items: center;
+  width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) 120px; grid-template-areas: 'head spark' 'month month' 'offer offer'; gap: 8px 12px; align-items: center;
   padding: 12px 14px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: #fff; cursor: pointer; text-align: left;
 }
 .rising-item:hover { border-color: var(--line-blue); background: var(--blue-wash); }
 .rising-item.on { border-color: var(--blue); box-shadow: inset 0 0 0 1px var(--blue); }
 .rising-head { grid-area: head; display: flex; align-items: center; gap: 10px; min-width: 0; font-size: 15px; }
 .rising-head b { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rising-month { grid-area: month; margin-top: -6px; font-size: 12px; color: var(--muted); }
 .spark { grid-area: spark; justify-self: end; overflow: visible; }
 .rising-offer { grid-area: offer; display: flex; align-items: center; gap: 8px; padding-top: 8px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--muted); }
 .rising-offer b { color: var(--ink); font-weight: 600; }
 .rising-offer .logo { width: 20px; height: 20px; border-radius: 5px; }
 @media (max-width: 1100px) { .trends-grid { grid-template-columns: 1fr; } }
 @media (max-width: 640px) {
-  .trend-row { grid-template-columns: 18px 20px minmax(0, 1fr) 30px 70px; gap: 8px; }
+  .trend-row { grid-template-columns: 16px 20px minmax(0, 1fr) 30px 64px 64px; gap: 6px; }
+  .trend-chip { font-size: 11px; padding: 2px 5px; }
+  .trend-head span:nth-child(4) { display: none; }
   .trend-bar { display: none; }
   .rising-item { grid-template-columns: minmax(0, 1fr) 84px; }
   .spark { width: 84px; }
