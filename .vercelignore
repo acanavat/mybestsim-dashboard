@@ -1,0 +1,4 @@
+# Le script Google Trends tourne dans GitHub Actions, pas sur Vercel
+scripts/fetch-trends.py
+scripts/requirements.txt
+.venv
