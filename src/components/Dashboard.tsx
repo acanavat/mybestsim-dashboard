@@ -34,9 +34,6 @@ const total = summarize(products);
 const collator = new Intl.Collator('fr');
 const providerOptions = providers.map((name, id) => ({ id, name })).sort((a, b) => collator.compare(a.name, b.name));
 const destinationOptions = destinations.map((d, id) => ({ id, ...d })).sort((a, b) => collator.compare(a.name, b.name));
-const importDate = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Paris' }).format(
-  new Date(meta.generatedAt),
-);
 
 type SortKey = 'count' | 'avgPrice' | 'medianPerGb' | 'share5g' | 'shareTopUp' | 'shareUnlimited';
 const COLUMNS: { key: SortKey; label: string; asc?: boolean }[] = [
@@ -125,10 +122,6 @@ export default function Dashboard() {
               <span>Tableau de bord du catalogue eSIM</span>
             </div>
           </div>
-          <span className="stamp">
-            <span className="hide-sm">Données du </span>
-            {importDate}
-          </span>
         </div>
       </header>
 

@@ -49,10 +49,6 @@ button, select { font: inherit; color: inherit; }
 .brand { display: flex; align-items: center; gap: 14px; min-width: 0; }
 .brand b { display: block; font-size: 17px; font-weight: 700; line-height: 1.2; }
 .brand span { display: block; font-size: 13px; color: var(--muted); line-height: 1.3; }
-.stamp {
-  font-size: 13px; font-weight: 500; color: var(--green-ink); background: var(--green-wash);
-  border: 1px solid #c4e6c5; border-radius: 6px; padding: 3px 10px; white-space: nowrap;
-}
 
 /* ---------- Carte SIM 3D (logo animé du bandeau) ---------- */
 .sim-stage { position: relative; height: 300px; perspective: 1100px; display: grid; place-items: center; }
@@ -314,7 +310,6 @@ tbody tr:hover td { background: var(--blue-wash); }
   body { font-size: 14px; }
   .appbar .wrap { height: 58px; }
   .brand span { display: none; }
-  .stamp { font-size: 12px; }
   .toolbar { position: static; }
   label.field { flex: 1 1 100%; }
   .select { width: 100%; }
