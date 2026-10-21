@@ -4,10 +4,6 @@ import { destinationFlag, destinations, fmt, providerLogo, providers, referenceO
 
 // En dessous de cet indice, le volume de recherche est trop faible pour qu'une hausse soit significative.
 const MIN_INTEREST = 5;
-const STALE_DAYS = 3;
-
-const dateFr = (iso: string) =>
-  new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Paris' }).format(new Date(iso));
 
 const LOW_VOLUME = 'Volume de recherche trop faible pour une évolution fiable';
 
@@ -56,7 +52,6 @@ export default function TrendsPanel({
     );
   }
 
-  const ageDays = (Date.now() - new Date(data.fetchedAt).getTime()) / 86_400_000;
   const top = data.countries.slice(0, 10);
   // « En vogue » = plus recherché qu'à la même époque l'an dernier : neutralise les effets de saison.
   const rising = data.countries
@@ -70,10 +65,6 @@ export default function TrendsPanel({
       <p className="panel-intro">
         Recherches Google « voyage + pays » en France, mises à jour automatiquement chaque jour. C&apos;est un indicateur
         d&apos;intention de voyage, en amont de l&apos;achat d&apos;une eSIM : il sert à repérer les destinations à mettre en avant.
-        <span className={`trend-stamp${ageDays > STALE_DAYS ? ' stale' : ''}`}>
-          {ageDays > STALE_DAYS ? 'Dernière mise à jour réussie le ' : 'Mis à jour le '}
-          {dateFr(data.fetchedAt)}
-        </span>
       </p>
 
       <div className="trends-grid">

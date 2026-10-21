@@ -431,8 +431,6 @@ table.matrix { font-size: 14px; }
 }
 
 /* ---------- Tendances ---------- */
-.trend-stamp { display: inline-block; margin-left: 8px; font-size: 12px; font-weight: 500; color: var(--green-ink); background: var(--green-wash); border-radius: 6px; padding: 1px 8px; }
-.trend-stamp.stale { color: #9a3412; background: #fff3e0; }
 .trends-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 12px; align-items: start; }
 .trend-list, .rising { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
 .trend-row {
@@ -475,5 +473,4 @@ table.matrix { font-size: 14px; }
   .trend-bar { display: none; }
   .rising-item { grid-template-columns: minmax(0, 1fr) 84px; }
   .spark { width: 84px; }
-  .trend-stamp { margin: 6px 0 0; }
 }
