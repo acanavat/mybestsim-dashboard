@@ -1,0 +1,825 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Internet en croisière : quelle eSIM choisir en 2026 ?</title>
+<meta name="description" content="Quelle eSIM choisir pour une croisière ? Les meilleures offres par itinéraire avec codes promo, ce qui marche en mer et comment éviter 15 € le Mo.">
+<link rel="canonical" href="https://mybestsim.com/fr/internet-croisiere-quelle-esim-choisir/">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="MyBestSim">
+<meta property="og:title" content="Internet en croisière : quelle eSIM choisir en 2026 ?">
+<meta property="og:description" content="Escales, pleine mer, Wi-Fi du bord, eSIM croisière : le guide pour rester connecté sans facture surprise.">
+<meta property="og:url" content="https://mybestsim.com/fr/internet-croisiere-quelle-esim-choisir/">
+<meta property="og:image" content="https://mybestsim.com/wp-content/uploads/2026/10/paquebot-croisiere-mediterranee-escale.webp">
+<meta property="article:published_time" content="2026-10-19T09:00:00+02:00">
+<meta property="article:modified_time" content="2026-10-19T09:00:00+02:00">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Internet en croisière : quelle eSIM choisir en 2026 ?",
+      "description": "Quelle eSIM choisir pour une croisière ? Les meilleures offres par itinéraire avec codes promo, ce qui marche en mer et comment éviter 15 € le Mo.",
+      "image": ["https://mybestsim.com/wp-content/uploads/2026/10/paquebot-croisiere-mediterranee-escale.webp"],
+      "datePublished": "2026-10-19T09:00:00+02:00",
+      "dateModified": "2026-10-19T09:00:00+02:00",
+      "inLanguage": "fr-FR",
+      "author": { "@type": "Person", "name": "Alexandre Canavate" },
+      "publisher": { "@type": "Organization", "name": "MyBestSim", "url": "https://mybestsim.com/fr/" },
+      "mainEntityOfPage": "https://mybestsim.com/fr/internet-croisiere-quelle-esim-choisir/",
+      "about": ["eSIM", "croisière", "itinérance mobile", "Wi-Fi à bord"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://mybestsim.com/fr/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://mybestsim.com/fr/articles/" },
+        { "@type": "ListItem", "position": 3, "name": "Internet en croisière : quelle eSIM choisir ?" }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0e2b4d; --text: #243447; --muted: #64748b; --blue: #1e63d7; --blue-wash: #eef4fd;
+    --yellow: #ffcc00; --red: #de1414; --green: #16a34a; --line: #e2e8f0; --panel: #f6f8fb;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #fff; color: var(--text); font: 18px/1.72 'DM Sans', system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji'; -webkit-font-smoothing: antialiased; }
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  strong { color: var(--navy); font-weight: 700; }
+  h1, h2, h3, summary { font-family: 'Bricolage Grotesque', system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji'; color: var(--navy); }
+
+  .site-header { border-bottom: 1px solid var(--line); }
+  .site-header .in { max-width: 1160px; margin: 0 auto; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .logo { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 24px; color: var(--navy); }
+  .logo span { color: var(--blue); }
+  .site-header nav { display: flex; gap: 26px; font-size: 16px; }
+  /* Carte SIM 3D animée (même animation que le tableau de bord) */
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .sim-mini { position: relative; display: block; width: 54px; height: 38px; flex: none; }
+  .sim-mini .sim-tilt { position: absolute; left: 2px; top: 3px; transform-origin: 0 0; transform: scale(0.21) perspective(600px) rotateX(14deg) rotateZ(-6deg); transform-style: preserve-3d; }
+  /* Carte SIM : copie exacte de celle du dashboard (police Poppins, couleurs du dashboard) */
+  .sim { position: relative; display: block; width: 236px; height: 152px; transform-style: preserve-3d; animation: sim-spin 9s linear infinite; font-family: 'Poppins', sans-serif; }
+  .sim-layer, .sim-face { position: absolute; inset: 0; display: block; border-radius: 14px; clip-path: polygon(0 0, 82% 0, 100% 27%, 100% 100%, 0 100%); }
+  .sim-layer { background: #b9c6d8; }
+  .sim-face { backface-visibility: hidden; -webkit-backface-visibility: hidden; overflow: hidden; }
+  .sim-front { transform: translateZ(3px); background: linear-gradient(135deg, #ffffff 0%, #eef3fa 100%); box-shadow: inset 0 0 0 3px rgb(15 23 42 / 0.12); padding: 18px 20px; }
+  .sim-back { transform: rotateY(180deg) translateZ(3px); background: #0a6cf0; color: #fff; padding: 20px 22px; display: flex; flex-direction: column; justify-content: space-between; }
+  .sim-chip { position: absolute; left: 22px; top: 44px; width: 62px; height: 48px; }
+  .sim-word { position: absolute; right: 22px; bottom: 16px; font-weight: 700; font-size: 15px; color: #0f172a; }
+  .sim-word i { font-style: normal; color: #0a6cf0; }
+  .sim-tag { position: absolute; left: 22px; top: 16px; font-size: 10px; font-weight: 500; letter-spacing: 0.12em; color: #64748b; }
+  .sim-back b { display: block; color: #fff; font-size: 30px; font-weight: 700; line-height: 1; }
+  .sim-back small { display: block; font-size: 10px; font-weight: 500; letter-spacing: 0.12em; opacity: 0.85; }
+  .sim-back p { margin: 0; font-size: 13px; line-height: 1.4; opacity: 0.92; color: #fff; }
+  @keyframes sim-spin { to { transform: rotateY(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .sim { animation: none; transform: rotateY(-24deg); } }
+  .site-header nav a { color: var(--navy); }
+
+  main { max-width: 900px; margin: 0 auto; padding: 18px 24px 72px; }
+  .crumbs { font-size: 14px; color: var(--muted); margin: 6px 0 22px; }
+  .crumbs a { color: var(--muted); }
+  h1 { font-size: clamp(30px, 4.4vw, 42px); line-height: 1.14; text-align: center; margin: 10px 0 14px; letter-spacing: -0.01em; }
+  .byline { text-align: center; font-size: 15px; color: var(--muted); margin-bottom: 26px; }
+  .byline b { color: var(--navy); font-weight: 500; }
+  figure { margin: 30px 0; }
+  figure img { display: block; width: 100%; height: auto; border-radius: 18px; }
+  figure.photo img { box-shadow: 0 18px 40px rgb(14 43 77 / 0.16); }
+  figure.graphic img { border-radius: 16px; border: 1px solid var(--line); }
+  figure picture { display: block; }
+  figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; line-height: 1.5; }
+  figcaption small { display: block; font-size: 12px; color: #94a3b8; }
+
+  .brief { border-left: 5px solid var(--blue); border-radius: 14px; padding: 18px 22px; margin: 28px 0; background: linear-gradient(90deg, #f3f7fe, #fff); box-shadow: 0 0 0 1px #dbe6f8 inset; }
+  .toc { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 20px 24px; margin: 26px 0 40px; }
+  .toc-title { font-size: 14px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--navy); margin: 0 0 8px; }
+  .toc ol { margin: 0; padding-left: 22px; }
+  .toc li { margin: 4px 0; }
+  .toc ol ol { padding-left: 20px; font-size: 16px; }
+
+  h2 { font-size: clamp(25px, 3.2vw, 30px); line-height: 1.22; margin: 56px 0 18px; scroll-margin-top: 20px; }
+  h2::after { content: ''; display: block; width: 54px; height: 4px; border-radius: 2px; background: var(--yellow); margin-top: 14px; }
+  .part { display: block; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue); margin-bottom: 6px; }
+  h3 { font-size: 22px; line-height: 1.3; margin: 36px 0 10px; scroll-margin-top: 20px; }
+  p { margin: 0 0 18px; }
+  ul, ol { padding-left: 24px; margin: 0 0 18px; }
+  li { margin: 6px 0; }
+  .short-answer { background: var(--blue-wash); border-radius: 16px; padding: 22px 24px 6px; }
+
+  .table-wrap { overflow-x: auto; margin: 22px 0 28px; border-radius: 14px; border: 1px solid var(--line); }
+  table { width: 100%; border-collapse: collapse; font-size: 16px; line-height: 1.6; min-width: 560px; }
+  th { background: var(--navy); color: #fff; text-align: left; font: 600 15px/1.5 'Bricolage Grotesque', sans-serif; padding: 12px 16px; }
+  td { padding: 12px 16px; border-top: 1px solid var(--line); vertical-align: top; }
+  tr:nth-child(even) td { background: #fafbfd; }
+  td strong { white-space: nowrap; }
+
+  .callout { border-left: 5px solid; border-radius: 14px; padding: 16px 20px; margin: 22px 0; }
+  .callout p:last-child { margin-bottom: 0; }
+  .callout.ok { border-color: var(--green); background: #e9f7ee; color: #14532d; }
+  .callout.info { border-color: var(--blue); background: var(--blue-wash); }
+  .callout.warn { border-color: var(--red); background: #fdeeee; }
+  .callout.warn strong { color: #8f0d0d; }
+  .cta { background: #eaf4ff; border-radius: 18px; padding: 1.5rem clamp(1rem, 3vw, 2rem); margin: 1.5rem 0; text-align: center; }
+  .cta h3 { margin: 0 0 .5rem; font-size: clamp(1.05rem, 2vw, 1.25rem); color: #0f172a; }
+  .cta p { margin: 0 0 1rem; color: #475569; }
+  .cta-button { display: inline-block; padding: 12px 24px; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: #fff; font-weight: 700; font-size: 14px; border-radius: 25px; text-transform: uppercase; letter-spacing: .5px; box-shadow: 0 4px 12px rgba(239, 68, 68, .3); transition: all .3s ease; }
+  .cta-button:hover, .cta-button:focus-visible { background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(239, 68, 68, .4); color: #fff; }
+
+  .route { border: 1px solid var(--line); border-radius: 16px; padding: 18px 22px; margin: 16px 0; }
+  .route h3 { margin: 0 0 6px; font-size: 20px; }
+  .route p { margin: 0; }
+
+  .checklist { counter-reset: step; list-style: none; padding: 0; }
+  .checklist li { counter-increment: step; position: relative; padding: 2px 0 2px 46px; margin: 12px 0; }
+  .checklist li::before { content: counter(step); position: absolute; left: 0; top: 2px; width: 30px; height: 30px; border-radius: 50%; background: var(--navy); color: #fff; font: 700 15px/30px 'DM Sans', sans-serif; text-align: center; }
+
+  .profiles { display: grid; gap: 14px; margin: 20px 0; }
+  .profile { border-radius: 16px; padding: 18px 22px; background: var(--panel); border: 1px solid var(--line); }
+  .profile.main { background: #f3f7fe; border-color: #cfe0fb; }
+  .profile h3 { margin: 0 0 6px; font-size: 20px; }
+  .profile p { margin: 0; }
+
+  .faq details { border: 1px solid var(--line); border-radius: 14px; padding: 0 20px; margin: 12px 0; background: #fff; }
+  .faq summary { cursor: pointer; font-size: 18px; font-weight: 600; padding: 16px 28px 16px 0; list-style: none; position: relative; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: '+'; position: absolute; right: 0; top: 12px; font-size: 26px; color: var(--blue); }
+  .faq details[open] summary::after { content: '–'; }
+  .faq details p { margin: 0 0 16px; }
+
+  .takeaways { background: var(--navy); color: #fff; border-radius: 18px; padding: 24px 28px; margin: 40px 0; }
+  .takeaways h2 { color: #fff; margin-top: 0; }
+  .takeaways strong { color: var(--yellow); }
+  .takeaways ul { margin: 0; }
+  .method { font-size: 15.5px; background: var(--panel); border-radius: 14px; padding: 18px 22px; border: 1px solid var(--line); }
+  .method h2 { font-size: 22px; margin: 0 0 10px; }
+  .method h2::after { display: none; }
+  .author { display: flex; gap: 16px; align-items: center; border-top: 1px solid var(--line); margin-top: 40px; padding-top: 24px; font-size: 15.5px; }
+  .avatar { flex: none; width: 56px; height: 56px; border-radius: 50%; background: var(--blue); color: #fff; display: grid; place-items: center; font: 700 20px 'Bricolage Grotesque', sans-serif; }
+  .author p { margin: 0; }
+  .usage-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 16px 0 28px; }
+  .usage-card { background: #f8fafc; border: 1px solid #e8f1ff; border-radius: 12px; padding: 20px 16px; text-align: center; transition: border-color .2s, box-shadow .2s; }
+  .usage-card:hover { border-color: #007bff; box-shadow: 0 2px 12px rgba(0, 123, 255, .07); }
+  .usage-card--highlight { background: #f0f7ff; border-color: #cce4ff; }
+  .usage-amount { font-size: 1.35rem; font-weight: 800; color: #007bff; line-height: 1.2; margin-bottom: 4px; }
+  .usage-label { font-size: .85rem; font-weight: 700; color: #0f172a; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 6px; }
+  .usage-desc { font-size: .88rem; color: #64748b; line-height: 1.5; }
+  .related h2 { font-size: 24px; }
+  .related-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .related-card { display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: #fff; transition: border-color .15s, box-shadow .15s, transform .15s; }
+  .related-card:hover, .related-card:focus-visible { border-color: var(--blue); box-shadow: 0 8px 22px rgba(14, 43, 77, .1); transform: translateY(-2px); }
+  .related-card img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+  .related-body { display: flex; flex-direction: column; gap: 6px; flex: 1; padding: 16px 18px 18px; }
+  .related-title { font: 700 17px/1.35 'Bricolage Grotesque', sans-serif; color: var(--navy); }
+  .related-text { font-size: 15px; color: var(--muted); }
+  .related-more { margin-top: auto; padding-top: 4px; font-size: 15px; font-weight: 700; color: var(--blue); }
+  .affiliate-disclosure { background: #f1f5f9; border-top: 1px solid #e2e8f0; padding: 14px 24px; text-align: center; }
+  .affiliate-disclosure p { margin: 0 auto; max-width: 860px; font-size: 0.78rem; line-height: 1.6; color: #64748b; }
+
+  @media (max-width: 760px) {
+    body { font-size: 17px; }
+    .site-header nav { display: none; }
+    main { padding: 12px 18px 56px; }
+    .related-grid { grid-template-columns: 1fr; }
+    .usage-grid { grid-template-columns: 1fr; }
+    .related-card { flex-direction: row; }
+    .related-card img { flex: none; width: 112px; aspect-ratio: auto; }
+    .related-body { padding: 12px 14px; }
+    .related-title { font-size: 16px; }
+    .related-text { display: none; }
+    h2 { margin-top: 44px; }
+    .brief, .toc, .short-answer, .callout, .route, .profile, .takeaways { padding-left: 18px; padding-right: 18px; }
+  }
+
+  /* ---------- Offres façon comparateur MyBestSim ---------- */
+  .offers { margin: 22px 0 30px; }
+  .offers-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; font-size: 14px; color: var(--muted); margin-bottom: 12px; }
+  .fresh { color: #2f7d32; background: #e8f7e8; border: 1px solid #c4e6c5; border-radius: 6px; padding: 2px 9px; font-weight: 500; }
+  .offer { position: relative; display: grid; grid-template-columns: 120px 1fr 1.25fr 1fr auto auto; align-items: center; gap: 16px;
+    border: 1px solid #b9d3f8; border-radius: 14px; padding: 16px 18px; margin: 12px 0; background: #fff; }
+  .offer.top { border: 2px solid var(--blue); padding-top: 34px; }
+  .offer-badge { position: absolute; top: 0; left: 0; right: 0; background: var(--blue); color: #fff; text-align: center; font: 700 13px/24px 'DM Sans', sans-serif; border-radius: 11px 11px 0 0; }
+  .offer-provider { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; font-weight: 700; font-size: 15px; color: var(--navy); border-right: 1px solid var(--line); padding-right: 14px; }
+  .offer-provider img { width: 48px; height: 48px; object-fit: contain; border-radius: 10px; }
+  .offer-plan b { display: block; font: 700 26px/1.1 'Bricolage Grotesque', sans-serif; color: var(--navy); }
+  .offer-plan span { font-size: 14px; color: var(--muted); }
+  .offer-zone { font-size: 14.5px; color: var(--text); line-height: 1.4; }
+  .net { display: inline-block; margin-left: 6px; font-size: 11px; font-weight: 700; color: #6d28d9; background: #f1ebff; border-radius: 6px; padding: 1px 7px; vertical-align: 1px; }
+  .offer-price { text-align: right; }
+  .offer-price b { display: block; font: 700 26px/1.1 'Bricolage Grotesque', sans-serif; color: var(--navy); }
+  .offer-price span { font-size: 13px; color: var(--muted); }
+  .offer-price .after { display: block; font-size: 12.5px; font-weight: 700; color: #2f7d32; white-space: nowrap; }
+  .offer-code { text-align: center; line-height: 1.2; }
+  .offer-code span { display: block; font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .offer-code b { display: inline-block; background: var(--blue); color: #fff; font-size: 13.5px; border-radius: 4px; padding: 4px 8px; white-space: nowrap; }
+  .offer-cta { background: #ee3b3b; color: #fff; font: 700 15px/1 'DM Sans', sans-serif; text-transform: uppercase; padding: 15px 16px; border-radius: 10px; white-space: nowrap; box-shadow: 0 6px 14px rgb(238 59 59 / 0.25); }
+  .offer-cta:hover { background: #d92b2b; text-decoration: none; }
+  .offers-more { display: inline-block; margin-top: 4px; font-weight: 700; }
+  .offers.single { margin: 14px 0 24px; }
+  .offers.single .offer { margin: 8px 0 0; }
+  .pick { color: #fff; background: var(--navy); border-radius: 6px; padding: 2px 10px; font-weight: 700; }
+  .tiers { margin: 14px 0 26px; border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px 6px; background: #fff; }
+  .tier { display: grid; grid-template-columns: 150px 1.6fr 1fr auto; align-items: center; gap: 14px; padding: 12px 0; border-top: 1px solid var(--line); }
+  .tier-provider { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .tier-provider img { flex: none; width: 40px; height: 40px; object-fit: contain; border-radius: 8px; }
+  .tier-provider b { display: block; font-size: 15px; color: var(--navy); }
+  .tier-provider small { display: block; font-size: 13px; color: var(--muted); line-height: 1.35; }
+  .tier-plan b { display: block; font: 700 21px/1.15 'Bricolage Grotesque', sans-serif; color: var(--navy); }
+  .tier-plan span { font-size: 13px; color: var(--muted); }
+  .tier-price { text-align: right; }
+  .tier-price > b { display: block; font: 700 21px/1.1 'Bricolage Grotesque', sans-serif; color: var(--navy); }
+  .tier-price .after { display: block; font-size: 12.5px; font-weight: 500; color: #2f7d32; white-space: nowrap; }
+  .tier-price .after b { font-weight: 700; color: #2f7d32; }
+  .tier .offer-cta { padding: 12px 14px; font-size: 14px; }
+  .yes { color: #2f7d32; font-weight: 700; } .no { color: #a11212; font-weight: 700; }
+
+  /* ---------- Codes promo façon encarts MyBestSim ---------- */
+  .promos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 22px 0 30px; }
+  .promo { position: relative; border-radius: 16px; padding: 18px; background: linear-gradient(180deg, #fff, #fff7f5); box-shadow: 0 10px 28px rgb(14 43 77 / 0.10); border: 1px solid #f1e3df; overflow: hidden; }
+  .promo::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #ee3b3b, #f59e0b); }
+  .promo-head { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  .promo-head img { width: 44px; height: 44px; object-fit: contain; border-radius: 10px; box-shadow: 0 0 0 1px var(--line); background: #fff; }
+  .promo-head b { font: 700 19px 'Bricolage Grotesque', sans-serif; color: #1f3a93; }
+  .promo-tag { margin-left: auto; white-space: nowrap; font-size: 12px; font-weight: 700; color: #2f7d32; background: #e8f7e8; border-radius: 999px; padding: 2px 10px; }
+  .promo p { font-size: 15px; line-height: 1.5; margin: 0 0 12px; color: var(--text); }
+  .promo-code { border: 2px dashed #8fb8f5; border-radius: 12px; background: #eef4fd; text-align: center; padding: 9px; font-size: 15px; letter-spacing: 0.04em; color: var(--muted); margin-bottom: 10px; }
+  .promo-code em { font-style: normal; font-weight: 700; color: #de1414; font-size: 18px; }
+  .promo-code b { color: #1f3a93; font-size: 16px; white-space: nowrap; }
+  .promo-cta { display: block; text-align: center; background: #ee3b3b; color: #fff; font: 700 12.5px/1 'DM Sans', sans-serif; text-transform: uppercase; letter-spacing: 0.02em; padding: 14px 8px; border-radius: 999px; white-space: nowrap; }
+  .promo-cta:hover { background: #d92b2b; text-decoration: none; }
+
+  .insight { display: flex; gap: 12px; align-items: flex-start; background: #fff8e6; border: 1px solid #f5dfa0; border-radius: 14px; padding: 14px 18px; margin: 14px 0; font-size: 16.5px; }
+  .insight b { color: #8a4b05; }
+
+  @media (max-width: 860px) {
+    .offer { grid-template-columns: 96px 1fr 1fr; grid-template-areas: 'p plan price' 'p zone code' 'cta cta cta'; gap: 10px 14px; }
+    .offer-provider { grid-area: p; padding-right: 10px; font-size: 13.5px; }
+    .offer-plan { grid-area: plan; } .offer-zone { grid-area: zone; font-size: 13.5px; }
+    .offer-price { grid-area: price; } .offer-code { grid-area: code; text-align: right; }
+    .offer-cta { grid-area: cta; text-align: center; }
+    .offer-plan b, .offer-price b { font-size: 22px; }
+    .tiers { padding: 10px 12px 4px; }
+    .tier { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: 'plan price' 'prov cta'; gap: 10px 12px; padding: 14px 0; }
+    .tier-plan { grid-area: plan; } .tier-price { grid-area: price; }
+    .tier-provider { grid-area: prov; } .tier .offer-cta { grid-area: cta; width: 124px; text-align: center; padding: 11px 8px; font-size: 13px; }
+    .offer-price .after { white-space: normal; }
+    .promos { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+
+<header class="site-header">
+  <div class="in">
+    <span class="brand">
+      <span class="sim-mini" aria-hidden="true"><span class="sim-tilt"><span class="sim">
+        <span class="sim-layer" style="transform: translateZ(-2px)"></span><span class="sim-layer" style="transform: translateZ(-1px)"></span><span class="sim-layer"></span><span class="sim-layer" style="transform: translateZ(1px)"></span><span class="sim-layer" style="transform: translateZ(2px)"></span>
+        <span class="sim-face sim-front"><svg class="sim-chip" viewBox="0 0 62 48"><defs><linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f3d27a"/><stop offset="0.55" stop-color="#d9a93b"/><stop offset="1" stop-color="#b8862a"/></linearGradient></defs><rect x="0.5" y="0.5" width="61" height="47" rx="8" fill="url(#gold)" stroke="#a8791f"/><g fill="none" stroke="#8a6418" stroke-width="1.2" opacity="0.75"><path d="M0 16h20M0 32h20M42 16h20M42 32h20M20 0v48M42 0v48"/><rect x="20" y="12" width="22" height="24" rx="3"/></g></svg><span class="sim-tag">eSIM · 4G/5G</span><span class="sim-word">MyBest<i>Sim</i></span></span>
+        <span class="sim-face sim-back"><small>CATALOGUE</small><span><b>5 056</b><p>offres de 18 fournisseurs</p></span></span>
+      </span></span></span>
+      <span class="logo">MyBest<span>Sim</span></span>
+    </span>
+    <nav aria-label="Navigation principale">
+      <a href="https://mybestsim.com/fr/">Comparateur eSIM</a>
+      <a href="https://mybestsim.com/fr/codes-promo-cartes-esim/">Codes promo</a>
+      <a href="https://mybestsim.com/fr/meilleurs-fournisseurs-esim/">Meilleures eSIM</a>
+      <a href="https://mybestsim.com/fr/articles/">Blog</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <nav class="crumbs" aria-label="Fil d'Ariane"><a href="https://mybestsim.com/fr/">Accueil</a> › <a href="https://mybestsim.com/fr/articles/">Blog</a> › Internet en croisière</nav>
+
+  <article>
+    <h1>Internet en croisière : quelle eSIM choisir en 2026 ?</h1>
+    <p class="byline">Par <b>Alexandre Canavate</b> · 9 min de lecture</p>
+
+    <figure class="photo">
+      <img src="/article/images/paquebot-croisiere-mediterranee-escale.webp" width="1400" height="786" fetchpriority="high" decoding="async"
+           alt="Paquebot de croisière MSC Seaview en escale dans un port de Méditerranée bordé de palmiers">
+      <figcaption>Aux escales, votre téléphone capte le réseau du pays : c'est là qu'une eSIM de voyage est utile.
+        <small>Photo : MSC Seaview, mark sheridan, domaine public (CC0), via Wikimedia Commons.</small></figcaption>
+    </figure>
+
+    <div class="brief">
+      <p><strong>En bref :</strong> les <strong>meilleures offres eSIM croisière par itinéraire</strong>, avec nos codes promo, ce qui fonctionne <strong>au port et en pleine mer</strong>, et les réglages qui évitent de payer jusqu'à 15,84 € le mégaoctet.</p>
+    </div>
+
+    <nav class="toc" aria-label="Sommaire">
+      <p class="toc-title">Sommaire</p>
+      <ol>
+        <li><a href="#reponse-courte">La réponse courte et les meilleures offres</a></li>
+        <li><a href="#comprendre">Comprendre : internet au port et en pleine mer</a></li>
+        <li><a href="#risques">Les risques : ce qui coûte cher en croisière</a></li>
+        <li><a href="#solutions">Les solutions : quelle eSIM choisir ?</a></li>
+        <li><a href="#itineraire">La meilleure eSIM selon votre itinéraire</a></li>
+        <li><a href="#codes-promo">Codes promo eSIM pour votre croisière</a></li>
+        <li><a href="#recommandation">Recommandation MyBestSim</a></li>
+        <li><a href="#preparer">Préparer son téléphone avant d'embarquer</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ol>
+    </nav>
+
+    <section class="short-answer" aria-labelledby="reponse-courte">
+      <h2 id="reponse-courte">Quelle eSIM choisir pour une croisière ? La réponse courte</h2>
+      <p><strong>Prenez une eSIM régionale qui couvre toutes vos escales</strong>, installée avant le départ. <strong>En pleine mer, une eSIM classique ne capte pas</strong> : il faut le Wi-Fi du bateau ou une eSIM croisière compatible avec votre navire. Et coupez l'itinérance de votre ligne française au large.</p>
+    </section>
+
+    <p>Pour une croisière en Méditerranée, l'itinéraire le plus courant, voici les forfaits les moins chers de notre comparateur qui couvrent l'Espagne, la France, l'Italie, la Grèce et la Croatie :</p>
+    <div class="offers" data-route="mediterranee-ue">
+      <div class="offers-head"><span>428 forfaits couvrent tout l'itinéraire · Méditerranée (Espagne, France, Italie, Grèce, Croatie)</span></div>
+      
+      <div class="offer top">
+        <div class="offer-badge">Les plus populaires</div>
+        <div class="offer-provider"><img src="https://mybestsim.com/wp-content/uploads/2026/02/4sesim-logo.jpg" alt="Logo 4S eSIM" width="48" height="48" loading="lazy"><span>4S eSIM</span></div>
+        <div class="offer-plan"><b>5 Go</b><span>15 jours</span></div>
+        <div class="offer-zone">Europe · 34 pays <span class="net">5G</span></div>
+        <div class="offer-price"><b>3,33 €</b><span>0,67 €/Go</span><small class="after">2,83 € avec le code</small></div>
+        <div class="offer-code"><span>Code promo</span><b>MYBESTSIM -15 %</b></div>
+        <a class="offer-cta" href="https://4s.sjv.io/c/5411968/3727592/44530?prodsku=100009351&amp;u=https%3A%2F%2F4s.net%2Fpackage_id%2F100009351%2F333%2Fen&amp;intsrc=APIG_29822" rel="sponsored noopener" target="_blank">Voir l'offre</a>
+      </div>
+      <div class="offer">
+        
+        <div class="offer-provider"><img src="https://mybestsim.com/wp-content/uploads/2026/02/yatelo-esim-logo.jpg" alt="Logo Yatelo" width="48" height="48" loading="lazy"><span>Yatelo</span></div>
+        <div class="offer-plan"><b>5 Go</b><span>30 jours</span></div>
+        <div class="offer-zone">Europe · 28 pays <span class="net">5G</span></div>
+        <div class="offer-price"><b>4,68 €</b><span>0,94 €/Go</span><small class="after">3,98 € avec le code</small></div>
+        <div class="offer-code"><span>Code promo</span><b>MYBESTSIM -15 %</b></div>
+        <a class="offer-cta" href="https://yatelo.com/destination/europe?ref=mybestsim&amp;utm_source=mybestsim&amp;utm_medium=affiliate" rel="sponsored noopener" target="_blank">Voir l'offre</a>
+      </div>
+      <div class="offer">
+        
+        <div class="offer-provider"><img src="https://mybestsim.com/wp-content/uploads/2026/05/jambosim-esim-logo.png" alt="Logo JamboSim" width="48" height="48" loading="lazy"><span>JamboSim</span></div>
+        <div class="offer-plan"><b>5 Go</b><span>30 jours</span></div>
+        <div class="offer-zone">Europe · 28 pays <span class="net">5G</span></div>
+        <div class="offer-price"><b>4,99 €</b><span>1,00 €/Go</span><small class="after">4,24 € avec le code</small></div>
+        <div class="offer-code"><span>Code promo</span><b>MYBESTSIM -15 %</b></div>
+        <a class="offer-cta" href="https://connect.jambosim.com/c/?si=21847&amp;li=1920005&amp;wi=421234&amp;ws=&amp;dl=plans%2Feurope-uk%3Fplan%3D8844d36a-0557-4595-b5cd-dc885e95a15e%26coupon%3DMYBESTSIM" rel="sponsored noopener" target="_blank">Voir l'offre</a>
+      </div>
+      <a class="offers-more" href="https://mybestsim.com/fr/">Comparer tous les forfaits →</a>
+    </div>
+
+    <!-- ===================== PARTIE 1 ===================== -->
+    <h2 id="comprendre"><span class="part">Partie 1 · Comprendre</span>Comment fonctionne internet sur un bateau de croisière ?</h2>
+    <p><strong>Votre téléphone change de réseau selon la distance à la côte.</strong> C'est ce qui décide de l'eSIM à prendre, et de ce que vous paierez.</p>
+
+    <figure class="graphic">
+      <picture><source media="(max-width: 640px)" srcset="/article/images/reseau-mobile-croisiere-port-cotes-pleine-mer-mobile.svg" width="480" height="640"><img src="/article/images/reseau-mobile-croisiere-port-cotes-pleine-mer.svg" width="960" height="520" loading="lazy" decoding="async"
+           alt="Schéma des trois zones de réseau pendant une croisière : réseau 4G/5G au port, signal terrestre qui faiblit jusqu'à 2 milles nautiques, réseau du navire relié par satellite en pleine mer"></picture>
+    </figure>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Où est le navire</th><th>Réseau utilisé</th><th>Qui vous facture</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Au port</strong></td><td>4G/5G du pays : votre eSIM de voyage fonctionne</td><td>Votre eSIM, au tarif normal</td></tr>
+          <tr><td><strong>Près des côtes</strong></td><td>Réseau terrestre qui faiblit, puis disparaît</td><td>Votre eSIM, tant qu'il y a du signal</td></tr>
+          <tr><td><strong>En pleine mer</strong></td><td>Réseau du navire, relié par satellite, ou Wi-Fi du bord</td><td>Votre opérateur français (très cher) ou la compagnie (Wi-Fi)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>En Europe, le réseau du navire <strong>doit rester éteint à moins de 2 milles nautiques des côtes</strong> (environ 3,7 km), selon la <a href="https://eur-lex.europa.eu/eli/dec/2010/166/2017-02-03/eng" rel="noopener">décision européenne 2010/166/UE</a>. Au-delà, il prend le relais. Il est exploité par des opérateurs maritimes comme Telenor Maritime, présent sur plus de 280 navires (<a href="https://cruiseindustrynews.com/cruise-news/2024/04/telenor-maritime-and-att-ink-new-roaming-deal/" rel="noopener">Cruise Industry News</a>).</p>
+    <p><strong>Le Wi-Fi du bord, lui, a beaucoup progressé grâce à Starlink.</strong> MSC, Royal Caribbean, Carnival et Norwegian en ont équipé toute leur flotte (<a href="https://thepointsguy.com/guide/starlink-on-cruise-ships" rel="noopener">The Points Guy</a>) : ces satellites en orbite basse donnent une connexion bien plus rapide que les anciens. Il reste <strong>payant et partagé entre les passagers</strong>, donc plus lent aux heures de pointe.</p>
+
+    <h3 id="esim-en-mer">Une eSIM fonctionne-t-elle en pleine mer ?</h3>
+    <figure class="photo">
+      <img src="/article/images/pont-navire-croisiere-pleine-mer.webp" width="1400" height="1050" loading="lazy" decoding="async"
+           alt="Pont supérieur d'un navire de croisière en pleine mer, la côte au loin">
+      <figcaption>Au large, seuls le réseau du navire et son Wi-Fi restent disponibles.
+        <small>Photo : Hornstrandir1, CC BY-SA 4.0, via Wikimedia Commons.</small></figcaption>
+    </figure>
+    <p><strong>Une eSIM de voyage classique, non</strong> : elle affiche « Pas de service » au large. <strong>Les eSIM croisière, oui</strong>, sur les navires partenaires :</p>
+    <ul>
+      <li><strong><a href="https://www.gigsky.com/blog/what-is-an-esim-for-cruise-ships" rel="noopener">GigSky</a></strong> : forfaits « Cruise + Land » (bateau et escales) sur plus de 290 navires, dès 18,99 $, activation environ une heure après le départ.</li>
+      <li><strong>Saily</strong> : forfaits croisière sur une sélection de navires, en cours de déploiement.</li>
+    </ul>
+    <div class="callout info"><p>💡 <strong>Vérifiez que votre navire figure dans la liste du fournisseur</strong> avant d'acheter. Nos codes promo GigSky et Saily sont <a href="#codes-promo">plus bas</a>.</p></div>
+
+    <!-- ===================== PARTIE 2 ===================== -->
+    <h2 id="risques"><span class="part">Partie 2 · Les risques</span>Ce qui coûte cher en croisière</h2>
+
+    <h3>Le réseau du bateau avec votre forfait français</h3>
+    <figure class="graphic">
+      <picture><source media="(max-width: 640px)" srcset="/article/images/cout-internet-en-mer-operateurs-francais-mobile.svg" width="480" height="512"><img src="/article/images/cout-internet-en-mer-operateurs-francais.svg" width="960" height="410" loading="lazy" decoding="async"
+           alt="Graphique du prix d'un mégaoctet sur le réseau d'un navire : 9,70 € chez Free, 14 € chez Bouygues Telecom, 15,84 € chez SFR"></picture>
+    </figure>
+    <p>Tarifs maritimes relevés dans les brochures des opérateurs par <a href="https://www.jechange.fr/telecom/mobile/news/itinerance-maritime-10-16-euros-megaoctet-ferry-reglage-embarquer" rel="noopener">JeChange</a>. Des plafonds existent (SFR bloque à 0 € par défaut, Bouygues à 60 €, soit environ 4 Mo), mais <strong>ils sont atteints en quelques minutes et ne couvrent pas les appels</strong>, facturés jusqu'à 7,92 € la minute.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Piège</th><th>Ce qui se passe</th><th>Comment l'éviter</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Connexion automatique</strong></td><td>Avec l'itinérance activée, le téléphone se branche seul sur le réseau du bateau : photos, mises à jour…</td><td>Itinérance coupée sur la ligne française, mode avion en mer</td></tr>
+          <tr><td><strong>Basculement double SIM</strong></td><td>L'eSIM perd le signal au large, la ligne française prend le relais (<a href="https://mybestsim.com/fr/facture-de-roaming-a-900-e-le-piege-de-lesim/">le cas de la facture à 900 €</a>)</td><td>Désactiver le basculement automatique des données</td></tr>
+          <tr><td><strong>Wi-Fi du bord</strong></td><td>10 à 30 € par jour et par appareil (MSC), environ 21 €/jour (Royal Caribbean), débit partagé</td><td>Le réserver avant l'embarquement, seulement si besoin en mer</td></tr>
+          <tr><td><strong>Escales hors UE</strong></td><td>Turquie, Tunisie, Maroc, Égypte… : hors-forfait avec votre ligne française</td><td>Une eSIM qui inclut ces pays</td></tr>
+          <tr><td><strong>eSIM « Europe » incomplète</strong></td><td>Elle ne couvre pas toujours la Turquie, et presque jamais le Maroc ou la Tunisie</td><td>Vérifier chaque escale dans la liste des pays</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>À noter : dans l'Union européenne, en Norvège et en Islande, votre forfait français fonctionne comme en France. Pour le Royaume-Uni ou la Suisse, cela dépend de votre offre.</p>
+
+    <!-- ===================== PARTIE 3 ===================== -->
+    <h2 id="solutions"><span class="part">Partie 3 · Les solutions</span>Quelle eSIM choisir pour votre croisière ?</h2>
+    <h3 id="comparatif">eSIM d'escale, eSIM croisière ou Wi-Fi du bord : le comparatif</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Solution</th><th>En mer</th><th>Aux escales</th><th>Prix indicatif</th><th>Idéale pour</th></tr></thead>
+        <tbody>
+          <tr><td><strong>eSIM de voyage régionale</strong></td><td class="no">✗</td><td class="yes">✓</td><td>Dès 2,83 € les 5 Go (Europe)</td><td>Profiter des escales : cartes, excursions, réseaux sociaux</td></tr>
+          <tr><td><strong>eSIM croisière</strong></td><td class="yes">✓ navires partenaires</td><td class="yes">✓ selon l'offre</td><td>Dès 18,99 $</td><td>Rester joignable pendant les journées en mer</td></tr>
+          <tr><td><strong>Wi-Fi du bord</strong></td><td class="yes">✓</td><td class="no">✗</td><td>10 à 30 € par jour et par appareil</td><td>Travailler ou appeler en visio au large</td></tr>
+          <tr><td><strong>Forfait français</strong></td><td class="no">✗ jusqu'à 15,84 €/Mo</td><td>✓ dans l'UE seulement</td><td>Inclus</td><td>Croisières 100 % européennes</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 id="fournisseurs">Quels fournisseurs fonctionnent en mer ?</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Fournisseur</th><th>En mer</th><th>Aux escales</th><th>Notre code</th></tr></thead>
+        <tbody>
+          <tr><td><strong>GigSky</strong></td><td class="yes">✓ plus de 290 navires</td><td class="yes">✓ avec « Cruise + Land »</td><td>MYBESTSIM20 (-20 %)</td></tr>
+          <tr><td><strong>Saily</strong></td><td class="yes">✓ croisières sélectionnées</td><td class="yes">✓</td><td>MYBESTSIM (-10 %)</td></tr>
+          <tr><td><strong>Airalo</strong></td><td class="no">✗</td><td class="yes">✓ Europe, Caraïbes, Asie, Monde</td><td>MYBEST15 (-15 %)</td></tr>
+          <tr><td><strong>Holafly</strong></td><td class="no">✗</td><td class="yes">✓</td><td>MYBESTSIM (-5 %)</td></tr>
+          <tr><td><strong>Ubigi</strong></td><td class="no">✗</td><td class="yes">✓</td><td>MYBESTSIM10 (-10 %)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="cta">
+      <h3>Trouvez la meilleure eSIM pour votre voyage</h3>
+      <p>Comparez les forfaits disponibles dès maintenant et partez l'esprit léger !</p>
+      <a class="cta-button" href="https://mybestsim.com/fr/">Choisir la meilleure carte eSIM</a>
+    </div>
+
+    <h3 id="itineraire">La meilleure eSIM selon votre itinéraire</h3>
+    <figure class="graphic">
+      <picture><source media="(max-width: 640px)" srcset="/article/images/quelle-esim-choisir-selon-itineraire-croisiere-mobile.svg" width="480" height="1316"><img src="/article/images/quelle-esim-choisir-selon-itineraire-croisiere.svg" width="960" height="560" loading="lazy" decoding="async"
+           alt="Tableau visuel de l'eSIM conseillée selon la croisière : Méditerranée dans l'UE, Méditerranée hors UE, fjords et Baltique, Caraïbes, Asie, tour du monde"></picture>
+    </figure>
+    <p>Pour chaque itinéraire, voici <strong>le forfait le moins cher de notre comparateur qui couvre toutes les escales</strong>, dans trois tailles : <strong>5 Go</strong> (usage léger à moyen), <strong>20 Go</strong> (usage intensif) et <strong>illimité</strong>.</p>
+
+    <h3>🌍 Méditerranée orientale : Italie, Grèce, Turquie</h3>
+    <div class="insight">🧭 <span><b>Bonne nouvelle :</b> beaucoup de forfaits Europe (jusqu'à 37 pays) incluent la Turquie. Vérifiez-le quand même avant d'acheter.</span></div>
+    <div class="offers tiers" data-route="mediterranee-est">
+      <div class="offers-head"><span class="pick">Nos meilleures offres</span><span>Le moins cher par taille de forfait · 253 forfaits couvrent tout l'itinéraire</span></div>
+      
+      <div class="tier">
+        <div class="tier-plan"><b>5 Go</b><span>1,20 €/Go</span></div>
+        <div class="tier-provider"><img src="https://mybestsim.com/wp-content/uploads/2026/04/nadanada-esim-logo.png" alt="Logo nadanada" width="40" height="40" loading="lazy"><span><b>nadanada</b><small>Europe · 37 pays · 30 jours</small></span></div>
+        <div class="tier-price"><b>5,99 €</b><small class="after">5,09 € avec <b>MYBESTSIM</b></small></div>
+        <a class="offer-cta" href="https://nadanada.me/esim/data-plans/europe?ref=MYBESTSIM" rel="sponsored noopener" target="_blank">Voir l'offre</a>
+      </div>
+      <div class="tier">
+        <div class="tier-plan"><b>20 Go</b><span>0,85 €/Go</span></div>
+        <div class="tier-provider"><img src="https://mybestsim.com/wp-content/uploads/2026/04/nadanada-esim-logo.png" alt="Logo nadanada" width="40" height="40" loading="lazy"><span><b>nadanada</b><small>Europe · 37 pays · 30 jours</small></span></div>
+        <div class="tier-price"><b>16,99 €</b><small class="after">14,44 € avec <b>MYBESTSIM</b></small></div>
+        <a class="offer-cta" href="https://nadanada.me/esim/data-plans/europe?ref=MYBESTSIM" rel="sponsored noopener" target="_blank">Voir l'offre</a>
+      </div>
+      <div class="tier">
+        <div class="tier-plan"><b>Illimité</b><span>sans plafond</span></div>
+        <div class="tier-provider"><img src="https://mybestsim.com/wp-content/uploads/2025/11/roamic-esim-logo.png" alt="Logo Roamic" width="40" height="40" loading="lazy"><span><b>Roamic</b><small>Europe · 34 pays · 21 jours</small></span></div>
+        <div class="tier-price"><b>31,99 €</b><small class="after">28,79 € avec <b>MYBESTSIM</b></small></div>
+        <a class="offer-cta" href="https://clk.roamic.com/c/5411968/3930670/53795?prodsku=51949077758299&amp;u=https%3A%2F%2Froamic.com%2Fproducts%2Feurope-esim%3Fvariant%3D51949077758299&amp;intsrc=APIG_34399&amp;sharedid=mybestsim" rel="sponsored noopener" target="_blank">Voir l'offre</a>
+      </div>
+    </div>
+    <figure class="photo">
+      <img src="/article/images/croisiere-santorin-grece-mediterranee-orientale.webp" width="1400" height="928" loading="lazy" decoding="async"
+           alt="Paquebot de croisière au mouillage dans la caldeira de Santorin, en Grèce">
+      <figcaption>Santorin, en Grèce : une escale phare des croisières en Méditerranée orientale.
+        <small>Photo : Norbert Nagel, CC BY-SA 3.0, via Wikimedia Commons.</small></figcaption>
+    </figure>
+
+    <h3>🌍 Méditerranée occidentale : Espagne, Italie, Maroc, Tunisie</h3>
+    <div class="insight">⚠️ <span><b>Piège :</b> dans notre comparateur, <b>aucun forfait Europe ne couvre à la fois le Maroc et la Tunisie</b>. Il faut un forfait Monde, ou une eSIM locale (<a href="https://mybestsim.com/fr/meilleure-carte-esim-maroc/">Maroc</a>, <a href="https://mybestsim.com/fr/comparaison-meilleure-carte-esim-tunisie/">Tunisie</a>) en complément.</span></div>
+    <div class="offers tiers" data-route="mediterranee-ouest">
+      <div class="offers-head"><span class="pick">Nos meilleures offres</span><span>Le moins cher par taille de forfait · 57 forfaits couvrent tout l'itinéraire</span></div>
+      
+      <div class="tier">
+        <div class="tier-plan"><b>5 Go</b><span>3,10 €/Go</span></div>
+        <div class="tier-provider"><img src="https://mybestsim.com/wp-content/uploads/2026/06/nimbussim-esim-logo.png" alt="Logo Nimbus" width="40" height="40" loading="lazy"><span><b>Nimbus</b><small>Monde · 193 pays · 60 jours</small></span></div>
+        <div class="tier-price"><b>15,49 €</b><small class="after">14,72 € avec <b>MYBESTSIM</b></small></div>
+        <a class="offer-cta" href="https://nimbussim.com/destinations/global/platinum/?utm_source=mybestsim&amp;utm_medium=referral" rel="sponsored noopener" target="_blank">Voir l'offre</a>
+      </div>
+      <div class="tier">
+        <div class="tier-plan"><b>25 Go</b><span>2,36 €/Go</span></div>
+        <div class="tier-provider"><img src="https://mybestsim.com/wp-content/uploads/2025/04/ubigi-esim-logo.png" alt="Logo Ubigi" width="40" height="40" loading="lazy"><span><b>Ubigi</b><small>Monde · 179 pays · 90 jours</small></span></div>
+        <div class="tier-price"><b>59,00 €</b><small class="after">53,10 € avec <b>MYBESTSIM10</b></small></div>
+        <a class="offer-cta" href="https://go.ubigi.com/c/5411968/2167448/27303?prodsku=WW_901O_STACK_ONEOFF_BEST_WORLD_25GB_3M&amp;u=https%3A%2F%2Fcellulardata.ubigi.com%2Frates-and-coverage%2Fbest-world-data-plans%2Fbest-world-25gb-3-months&amp;intsrc=APIG_19558" rel="sponsored noopener" target="_blank">Voir l'offre</a>
+      </div>
+      <div class="tier">
+        <div class="tier-plan"><b>Illimité</b><span>5 Go/jour à haut débit</span></div>
+        <div class="tier-provider"><img src="https://mybestsim.com/wp-content/uploads/2025/04/maya-esim-logo.png" alt="Logo Maya" width="40" height="40" loading="lazy"><span><b>Maya</b><small>Monde · 179 pays · 30 jours</small></span></div>
+        <div class="tier-price"><b>42,49 €</b></div>
+        <a class="offer-cta" href="https://mayamobile.pxf.io/0Gj0VL?sharedid=mybestsim&amp;u=https%3A%2F%2Fmaya.net%2Fesim%2Fglobal%2F30-days-unlimited-global-data" rel="sponsored noopener" target="_blank">Voir l'offre</a>
+      </div>
+    </div>
+    <figure class="photo">
+      <img src="/article/images/escale-croisiere-palma-majorque-mediterranee.webp" width="1400" height="933" loading="lazy" decoding="async"
+           alt="Paquebot Anthem of the Seas en escale dans la baie de Palma de Majorque, en Espagne">
+      <figcaption>Palma de Majorque : une escale fréquente des croisières en Méditerranée occidentale.
+        <small>Photo : Javier Pérez Montes, CC BY-SA 4.0, via Wikimedia Commons.</small></figcaption>
+    </figure>
+
+    <h3>🏔️ Fjords et Europe du Nord : Norvège, Royaume-Uni</h3>
+    <p>La Norvège est couverte par le roaming européen, pas toujours le Royaume-Uni : ces forfaits Europe couvrent les deux.</p>
+    <div class="offers tiers" data-route="europe-nord">
+      <div class="offers-head"><span class="pick">Nos meilleures offres</span><span>Le moins cher par taille de forfait · 439 forfaits couvrent tout l'itinéraire</span></div>
+      
+      <div class="tier">
+        <div class="tier-plan"><b>5 Go</b><span>0,30 €/Go</span></div>
+        <div class="tier-provider"><img src="https://mybestsim.com/wp-content/uploads/2026/04/StellaEsim-esim-logo.png" alt="Logo Stellar Esim" width="40" height="40" loading="lazy"><span><b>Stellar Esim</b><small>Europe · 35 pays · 30 jours</small></span></div>
+        <div class="tier-price"><b>1,49 €</b><small class="after">1,42 € avec <b>MYBESTSIM</b></small></div>
+        <a class="offer-cta" href="https://stellarafi.com/r/mybestesim?src=esim&amp;campaign=esim&amp;sub1=&amp;sub2=&amp;product=europe-35-areas-esim&amp;redirect=https://stellarsecurity.com/stellar-esim/europe-35-areas-esim/5gb-30-days-pv0q6pz7g" rel="sponsored noopener" target="_blank">Voir l'offre</a>
+      </div>
+      <div class="tier">
+        <div class="tier-plan"><b>20 Go</b><span>0,35 €/Go</span></div>
+        <div class="tier-provider"><img src="https://mybestsim.com/wp-content/uploads/2026/04/StellaEsim-esim-logo.png" alt="Logo Stellar Esim" width="40" height="40" loading="lazy"><span><b>Stellar Esim</b><small>Europe · 35 pays · 30 jours</small></span></div>
+        <div class="tier-price"><b>6,95 €</b><small class="after">6,60 € avec <b>MYBESTSIM</b></small></div>
+        <a class="offer-cta" href="https://stellarafi.com/r/mybestesim?src=esim&amp;campaign=esim&amp;sub1=&amp;sub2=&amp;product=europe-35-areas-esim&amp;redirect=https://stellarsecurity.com/stellar-esim/europe-35-areas-esim/20gb-30-days-p6pbyx5g4" rel="sponsored noopener" target="_blank">Voir l'offre</a>
+      </div>
+      <div class="tier">
+        <div class="tier-plan"><b>Illimité</b><span>3 Go/jour à haut débit</span></div>
+        <div class="tier-provider"><img src="https://mybestsim.com/wp-content/uploads/2026/04/StellaEsim-esim-logo.png" alt="Logo Stellar Esim" width="40" height="40" loading="lazy"><span><b>Stellar Esim</b><small>Europe · 35 pays · 15 jours</small></span></div>
+        <div class="tier-price"><b>14,40 €</b><small class="after">13,68 € avec <b>MYBESTSIM</b></small></div>
+        <a class="offer-cta" href="https://stellarafi.com/r/mybestesim?src=esim&amp;campaign=esim&amp;sub1=&amp;sub2=&amp;product=europe-35-areas-esim&amp;redirect=https://stellarsecurity.com/stellar-esim/europe-35-areas-esim/unlimited-15-days" rel="sponsored noopener" target="_blank">Voir l'offre</a>
+      </div>
+    </div>
+    <figure class="photo">
+      <img src="/article/images/croisiere-alaska-fjords-navire.webp" width="1400" height="691" loading="lazy" decoding="async"
+           alt="Navire de croisière Vision of the Seas naviguant dans un fjord d'Alaska devant des montagnes enneigées">
+      <figcaption>Dans les fjords, les journées de navigation s'enchaînent loin de tout réseau terrestre.
+        <small>Photo : Matthew T Rader, CC BY-SA 4.0, via Wikimedia Commons.</small></figcaption>
+    </figure>
+
+    <h3>🏝️ Caraïbes : Bahamas, Mexique, îles Caïmans, Jamaïque</h3>
+    <div class="insight">⚠️ <span><b>Chaque escale est un pays différent :</b> pour couvrir cet itinéraire, seuls des forfaits Monde passent partout. Détails dans notre guide <a href="https://mybestsim.com/fr/meilleure-esim-pour-croisiere-dans-les-caraibes-que-choisir-en-2026/">eSIM pour une croisière dans les Caraïbes</a>.</span></div>
+    <div class="offers tiers" data-route="caraibes">
+      <div class="offers-head"><span class="pick">Nos meilleures offres</span><span>Le moins cher par taille de forfait · 69 forfaits couvrent tout l'itinéraire</span></div>
+      
+      <div class="tier">
+        <div class="tier-plan"><b>5 Go</b><span>1,75 €/Go</span></div>
+        <div class="tier-provider"><img src="https://mybestsim.com/wp-content/uploads/2026/02/4sesim-logo.jpg" alt="Logo 4S eSIM" width="40" height="40" loading="lazy"><span><b>4S eSIM</b><small>Monde · 118 pays · 15 jours</small></span></div>
+        <div class="tier-price"><b>8,74 €</b><small class="after">7,43 € avec <b>MYBESTSIM</b></small></div>
+        <a class="offer-cta" href="https://4s.sjv.io/c/5411968/3727592/44530?prodsku=16230&amp;u=https%3A%2F%2F4s.net%2Fpackage_id%2F16230%2F874%2Fen&amp;intsrc=APIG_29822" rel="sponsored noopener" target="_blank">Voir l'offre</a>
+      </div>
+      <div class="tier">
+        <div class="tier-plan"><b>20 Go</b><span>1,50 €/Go</span></div>
+        <div class="tier-provider"><img src="https://mybestsim.com/wp-content/uploads/2026/02/4sesim-logo.jpg" alt="Logo 4S eSIM" width="40" height="40" loading="lazy"><span><b>4S eSIM</b><small>Monde · 118 pays · 15 jours</small></span></div>
+        <div class="tier-price"><b>30,07 €</b><small class="after">25,56 € avec <b>MYBESTSIM</b></small></div>
+        <a class="offer-cta" href="https://4s.sjv.io/c/5411968/3727592/44530?prodsku=16222&amp;u=https%3A%2F%2F4s.net%2Fpackage_id%2F16222%2F3007%2Fen&amp;intsrc=APIG_29822" rel="sponsored noopener" target="_blank">Voir l'offre</a>
+      </div>
+      <div class="tier">
+        <div class="tier-plan"><b>Illimité</b><span>5 Go/jour à haut débit</span></div>
+        <div class="tier-provider"><img src="https://mybestsim.com/wp-content/uploads/2025/04/maya-esim-logo.png" alt="Logo Maya" width="40" height="40" loading="lazy"><span><b>Maya</b><small>Monde · 179 pays · 7 jours</small></span></div>
+        <div class="tier-price"><b>16,99 €</b></div>
+        <a class="offer-cta" href="https://mayamobile.pxf.io/0Gj0VL?sharedid=mybestsim&amp;u=https%3A%2F%2Fmaya.net%2Fesim%2Fglobal%2F7-days-unlimited-global-data" rel="sponsored noopener" target="_blank">Voir l'offre</a>
+      </div>
+    </div>
+    <figure class="photo">
+      <img src="/article/images/escale-croisiere-caraibes-cozumel.webp" width="1400" height="933" loading="lazy" decoding="async"
+           alt="Terminal de croisière de Punta Langosta à Cozumel, au Mexique, escale fréquente des croisières dans les Caraïbes">
+      <figcaption>Cozumel, au Mexique : une escale incontournable des croisières dans les Caraïbes.
+        <small>Photo : Rene Cortin, CC BY-SA 4.0, via Wikimedia Commons.</small></figcaption>
+    </figure>
+
+    <h3>🌏 Asie : Japon, Singapour, Thaïlande</h3>
+    <div class="offers tiers" data-route="asie">
+      <div class="offers-head"><span class="pick">Nos meilleures offres</span><span>Le moins cher par taille de forfait · 257 forfaits couvrent tout l'itinéraire</span></div>
+      
+      <div class="tier">
+        <div class="tier-plan"><b>5 Go</b><span>1,14 €/Go</span></div>
+        <div class="tier-provider"><img src="https://mybestsim.com/wp-content/uploads/2026/02/4sesim-logo.jpg" alt="Logo 4S eSIM" width="40" height="40" loading="lazy"><span><b>4S eSIM</b><small>Asie · 13 pays · 15 jours</small></span></div>
+        <div class="tier-price"><b>5,71 €</b><small class="after">4,85 € avec <b>MYBESTSIM</b></small></div>
+        <a class="offer-cta" href="https://4s.sjv.io/c/5411968/3727592/44530?prodsku=16522&amp;u=https%3A%2F%2F4s.net%2Fpackage_id%2F16522%2F571%2Fen&amp;intsrc=APIG_29822" rel="sponsored noopener" target="_blank">Voir l'offre</a>
+      </div>
+      <div class="tier">
+        <div class="tier-plan"><b>20 Go</b><span>0,60 €/Go</span></div>
+        <div class="tier-provider"><img src="https://mybestsim.com/wp-content/uploads/2026/05/jambosim-esim-logo.png" alt="Logo JamboSim" width="40" height="40" loading="lazy"><span><b>JamboSim</b><small>Asie · 18 pays · 30 jours</small></span></div>
+        <div class="tier-price"><b>11,99 €</b><small class="after">10,19 € avec <b>MYBESTSIM</b></small></div>
+        <a class="offer-cta" href="https://connect.jambosim.com/c/?si=21847&amp;li=1920005&amp;wi=421234&amp;ws=&amp;dl=plans%2Fasia%3Fplan%3D29f6d5ac-2754-4af2-8988-38949c2605b6%26coupon%3DMYBESTSIM" rel="sponsored noopener" target="_blank">Voir l'offre</a>
+      </div>
+      <div class="tier">
+        <div class="tier-plan"><b>Illimité</b><span>3 Go/jour à haut débit</span></div>
+        <div class="tier-provider"><img src="https://mybestsim.com/wp-content/uploads/2026/05/jambosim-esim-logo.png" alt="Logo JamboSim" width="40" height="40" loading="lazy"><span><b>JamboSim</b><small>Asie · 18 pays · 15 jours</small></span></div>
+        <div class="tier-price"><b>29,99 €</b><small class="after">25,49 € avec <b>MYBESTSIM</b></small></div>
+        <a class="offer-cta" href="https://connect.jambosim.com/c/?si=21847&amp;li=1920005&amp;wi=421234&amp;ws=&amp;dl=plans%2Fasia%3Fplan%3D6bc03fad-cdd6-4b41-aa7f-456e7eff4cf0%26coupon%3DMYBESTSIM" rel="sponsored noopener" target="_blank">Voir l'offre</a>
+      </div>
+    </div>
+    <figure class="photo">
+      <img src="/article/images/croisiere-asie-singapour-terminal.webp" width="1400" height="937" loading="lazy" decoding="async"
+           alt="Paquebot Costa Victoria amarré au terminal de croisière de Singapour">
+      <figcaption>Singapour, point de départ de nombreuses croisières en Asie du Sud-Est.
+        <small>Photo : Smuconlaw, CC BY-SA 3.0, via Wikimedia Commons.</small></figcaption>
+    </figure>
+
+    <h3>🌐 Tour du monde et transatlantique</h3>
+    <p>Pour les escales, un forfait Monde ; pour les longues journées en mer, ajoutez une <a href="#codes-promo">eSIM croisière</a> si votre navire est compatible.</p>
+    <div class="offers tiers" data-route="monde">
+      <div class="offers-head"><span class="pick">Nos meilleures offres</span><span>Le moins cher par taille de forfait · 296 forfaits couvrent tout l'itinéraire</span></div>
+      
+      <div class="tier">
+        <div class="tier-plan"><b>5 Go</b><span>1,91 €/Go</span></div>
+        <div class="tier-provider"><img src="https://mybestsim.com/wp-content/uploads/2026/02/4sesim-logo.jpg" alt="Logo 4S eSIM" width="40" height="40" loading="lazy"><span><b>4S eSIM</b><small>Monde · 118 pays · 30 jours</small></span></div>
+        <div class="tier-price"><b>9,55 €</b><small class="after">8,12 € avec <b>MYBESTSIM</b></small></div>
+        <a class="offer-cta" href="https://4s.sjv.io/c/5411968/3727592/44530?prodsku=16231&amp;u=https%3A%2F%2F4s.net%2Fpackage_id%2F16231%2F955%2Fen&amp;intsrc=APIG_29822" rel="sponsored noopener" target="_blank">Voir l'offre</a>
+      </div>
+      <div class="tier">
+        <div class="tier-plan"><b>20 Go</b><span>1,25 €/Go</span></div>
+        <div class="tier-provider"><img src="https://mybestsim.com/wp-content/uploads/2026/06/Orange-eSIM-Logo.jpg" alt="Logo Orange Travel" width="40" height="40" loading="lazy"><span><b>Orange Travel</b><small>Monde · 196 pays · 30 jours</small></span></div>
+        <div class="tier-price"><b>24,99 €</b><small class="after">23,74 € avec <b>MYBESTSIM</b></small></div>
+        <a class="offer-cta" href="https://lb.affilae.com/r/?p=638f1671f395b825518bc665&amp;af=341&amp;lp=https%3A%2F%2Ftravel.orange.com%2Fen%2Fbuy-a-sim%2Foffers%2Fworld%3Futm_source%3Daffiliation%26utm_medium%3Daffilae%26utm_campaign%3Dmybestsim" rel="sponsored noopener" target="_blank">Voir l'offre</a>
+      </div>
+      <div class="tier">
+        <div class="tier-plan"><b>Illimité</b><span>5 Go/jour à haut débit</span></div>
+        <div class="tier-provider"><img src="https://mybestsim.com/wp-content/uploads/2025/04/maya-esim-logo.png" alt="Logo Maya" width="40" height="40" loading="lazy"><span><b>Maya</b><small>Monde · 179 pays · 30 jours</small></span></div>
+        <div class="tier-price"><b>42,49 €</b></div>
+        <a class="offer-cta" href="https://mayamobile.pxf.io/0Gj0VL?sharedid=mybestsim&amp;u=https%3A%2F%2Fmaya.net%2Fesim%2Fglobal%2F30-days-unlimited-global-data" rel="sponsored noopener" target="_blank">Voir l'offre</a>
+      </div>
+    </div>
+    <figure class="photo">
+      <img src="/article/images/paquebot-croisiere-transatlantique-floride.webp" width="1400" height="788" loading="lazy" decoding="async"
+           alt="Paquebot de croisière à quai en Floride sous un ciel bleu">
+      <figcaption>Depuis la Floride, de nombreuses croisières partent vers les Caraïbes et l'Atlantique.
+        <small>Photo : JK Liu, CC BY-SA 4.0, via Wikimedia Commons.</small></figcaption>
+    </figure>
+
+    <h3 id="donnees">Combien de données prévoir ?</h3>
+    <p>Pour une croisière de 5 escales, d'après le <a href="https://mybestsim.com/fr/calculateur-de-donnee-voyage/">calculateur MyBestSim</a> (marge de sécurité de 25 % incluse) :</p>
+    <div class="usage-grid">
+      <div class="usage-card">
+        <div class="usage-amount">1 Go</div>
+        <div class="usage-label">Usage léger</div>
+        <div class="usage-desc">Messagerie, GPS, quelques photos<br>environ 200&nbsp;Mo par escale</div>
+      </div>
+      <div class="usage-card usage-card--highlight">
+        <div class="usage-amount">3 Go</div>
+        <div class="usage-label">Usage moyen</div>
+        <div class="usage-desc">+ 1 h de réseaux sociaux, 30 photos<br>environ 500&nbsp;Mo par escale</div>
+      </div>
+      <div class="usage-card">
+        <div class="usage-amount">7,5 Go</div>
+        <div class="usage-label">Usage intensif</div>
+        <div class="usage-desc">+ visio, vidéos envoyées, 50 photos<br>environ 1,5&nbsp;Go par escale</div>
+      </div>
+    </div>
+    <p><strong>Comptez par jour d'escale, pas par jour de croisière</strong> : en mer, votre eSIM ne consomme rien. Pour 7 nuits et 5 escales, <strong>3 Go suffisent à un usage moyen</strong>, d'après notre calculateur. Désactivez la sauvegarde automatique des photos et vidéos : elle peut vite consommer plusieurs centaines de Mo.</p>
+    <div class="cta">
+      <h3>Combien de données pour votre voyage&nbsp;?</h3>
+      <p>Estimez votre consommation en quelques secondes selon vos habitudes : streaming, réseaux sociaux, navigation.</p>
+      <a class="cta-button" href="https://mybestsim.com/fr/calculateur-de-donnee-voyage/">Calculer mes besoins en données</a>
+    </div>
+
+    <!-- ===================== CODES PROMO ===================== -->
+    <h2 id="codes-promo">Codes promo eSIM pour votre croisière</h2>
+    <p>Les deux eSIM qui fonctionnent en mer et la référence des escales, avec nos codes exclusifs. Tous les autres sont sur notre page <a href="https://mybestsim.com/fr/codes-promo-cartes-esim/">codes promo eSIM</a>.</p>
+    <div class="promos">
+      <div class="promo">
+        <div class="promo-head"><img src="https://mybestsim.com/wp-content/uploads/2024/10/gigsky-esim-logo.png" alt="Logo GigSky" width="44" height="44" loading="lazy"><b>GigSky</b><span class="promo-tag">En mer</span></div>
+        <p>Le spécialiste des eSIM croisière : forfaits « Cruise + Land » qui fonctionnent en mer sur plus de 290 navires.</p>
+        <div class="promo-code"><em>-20 %</em> avec <b>MYBESTSIM20</b></div>
+        <a class="promo-cta" href="https://mybestsim.com/affiliation/gigsky" rel="sponsored noopener" target="_blank">Obtenez -20 % chez GigSky →</a>
+      </div>
+      <div class="promo">
+        <div class="promo-head"><img src="https://mybestsim.com/wp-content/uploads/2025/08/saily-logo.png" alt="Logo Saily" width="44" height="44" loading="lazy"><b>Saily</b><span class="promo-tag">En mer</span></div>
+        <p>eSIM de voyage de Nord Security, avec des forfaits croisière sur une sélection de navires.</p>
+        <div class="promo-code"><em>-10 %</em> avec <b>MYBESTSIM</b></div>
+        <a class="promo-cta" href="https://mybestsim.com/affiliation/saily" rel="sponsored noopener" target="_blank">Obtenez -10 % chez Saily →</a>
+      </div>
+      <div class="promo">
+        <div class="promo-head"><img src="https://mybestsim.com/wp-content/uploads/2025/04/airalo-esim-logo.png" alt="Logo Airalo" width="44" height="44" loading="lazy"><b>Airalo</b><span class="promo-tag">Escales</span></div>
+        <p>Le plus grand catalogue d&#x27;eSIM régionales : Europe, Caraïbes, Asie, Monde, idéales pour les escales.</p>
+        <div class="promo-code"><em>-15 %</em> avec <b>MYBEST15</b></div>
+        <a class="promo-cta" href="https://mybestsim.com/affiliation/airalo" rel="sponsored noopener" target="_blank">Obtenez -15 % chez Airalo →</a>
+      </div></div>
+
+    <h2 id="recommandation">Recommandation MyBestSim</h2>
+    <div class="profiles">
+      <div class="profile">
+        <h3>🧘 Vous voulez décrocher</h3>
+        <p>Mode avion en mer, Wi-Fi gratuit dans les cafés des ports. Votre forfait français suffit aux escales européennes, itinérance coupée avant d'embarquer.</p>
+      </div>
+      <div class="profile main">
+        <h3>📸 Vous voulez profiter des escales (la plupart des croisiéristes)</h3>
+        <p><strong>Une eSIM régionale qui couvre toutes vos escales</strong>, 3 à 5 Go pour une semaine, et le mode avion au large. Un petit forfait messagerie du Wi-Fi de bord si vous voulez rester joignable sur WhatsApp en mer.</p>
+      </div>
+      <div class="profile">
+        <h3>💼 Vous devez rester joignable en mer</h3>
+        <p><strong>Une eSIM croisière</strong> si votre navire est partenaire (GigSky, Saily), sinon le Wi-Fi du bord réservé avant le départ, plus une eSIM régionale pour les escales.</p>
+      </div>
+    </div>
+
+    <!-- ===================== PRÉPARER ===================== -->
+    <h2 id="preparer">Comment préparer votre téléphone avant d'embarquer ?</h2>
+    <ol class="checklist">
+      <li><strong>Vérifiez que votre téléphone est compatible eSIM</strong> (<a href="https://mybestsim.com/fr/telephones-compatibles-esim/">liste des téléphones compatibles</a>).</li>
+      <li><strong>Installez l'eSIM chez vous, en Wi-Fi</strong>, avec le QR code reçu par e-mail. La plupart des forfaits ne démarrent qu'à la première connexion dans le pays couvert.</li>
+      <li><strong>Données mobiles : l'eSIM de voyage</strong>, avec l'itinérance activée sur cette ligne.</li>
+      <li><strong>Ligne française : itinérance des données coupée</strong>, elle garde les appels et les SMS de votre banque.</li>
+      <li><strong>Désactivez le basculement automatique des données</strong> entre les deux lignes.</li>
+      <li><strong>En mer : mode avion</strong>, puis réactivez le Wi-Fi si vous utilisez celui du bord.</li>
+    </ol>
+    <figure class="graphic">
+      <picture><source media="(max-width: 640px)" srcset="/article/images/reglages-iphone-itinerance-donnees-croisiere-mobile.svg" width="480" height="1000"><img src="/article/images/reglages-iphone-itinerance-donnees-croisiere.svg" width="960" height="600" loading="lazy" decoding="async"
+           alt="Réglages iPhone avant une croisière : données cellulaires sur l'eSIM de voyage, basculement désactivé, itinérance coupée sur la ligne française et activée sur l'eSIM"></picture>
+      <figcaption>Sur iPhone : Réglages &gt; Données cellulaires. Sur Android : Paramètres &gt; Réseau et Internet (ou Connexions) &gt; Cartes SIM.</figcaption>
+    </figure>
+    <div class="cta">
+      <h3>Votre téléphone est-il compatible eSIM&nbsp;?</h3>
+      <p>Consultez la liste complète des smartphones compatibles : iPhone, Samsung, Google Pixel et 200+ modèles.</p>
+      <a class="cta-button" href="https://mybestsim.com/fr/telephones-compatibles-esim/">Vérifier la compatibilité</a>
+    </div>
+
+    <section class="faq" aria-labelledby="faq">
+      <h2 id="faq">FAQ sur internet en croisière</h2>
+      <details><summary>Est-ce qu'on capte sur un bateau de croisière ?</summary>
+        <p>Oui, mais pas le même réseau partout : le réseau mobile du pays au port et près des côtes, puis le réseau du navire, relié par satellite, et le Wi-Fi du bord en pleine mer.</p></details>
+      <details><summary>Une eSIM fonctionne-t-elle en pleine mer ?</summary>
+        <p>Une eSIM classique, non. Seules les eSIM croisière, comme GigSky ou Saily, fonctionnent en mer, et uniquement sur les navires partenaires.</p></details>
+      <details><summary>Quelle eSIM pour une croisière en Méditerranée ?</summary>
+        <p>Une eSIM Europe si vos escales sont dans l'UE ou en Turquie. Si l'itinéraire passe par le Maroc ou la Tunisie, prenez un forfait Monde : les forfaits Europe ne couvrent presque jamais ces deux pays.</p></details>
+      <details><summary>Mon forfait français fonctionne-t-il pendant une croisière ?</summary>
+        <p>Aux escales de l'UE, en Norvège et en Islande, oui. Hors UE, c'est le plus souvent du hors-forfait. En mer, sur le réseau du navire, comptez jusqu'à 15,84 € le mégaoctet.</p></details>
+      <details><summary>Combien coûte le Wi-Fi sur un bateau de croisière ?</summary>
+        <p>En moyenne 10 à 30 € par jour et par appareil, ou 60 à 90 € la semaine en Méditerranée selon les compagnies. Il est souvent moins cher réservé avant l'embarquement.</p></details>
+      <details><summary>Comment éviter les frais de roaming en croisière ?</summary>
+        <p>Coupez l'itinérance des données de votre ligne française, désactivez le basculement automatique des données, et passez en mode avion dès que le navire prend le large.</p></details>
+    </section>
+
+    <section class="takeaways" aria-labelledby="a-retenir">
+      <h2 id="a-retenir">À retenir</h2>
+      <ul>
+        <li><strong>Une eSIM régionale qui couvre toutes vos escales</strong> : dès 2,83 € les 5 Go pour une croisière en Méditerranée, avec code promo.</li>
+        <li><strong>En mer, seules les eSIM croisière fonctionnent</strong> (GigSky -20 % avec MYBESTSIM20).</li>
+        <li><strong>Maroc, Tunisie, Caraïbes</strong> : prenez un forfait Monde, les forfaits régionaux ne passent pas partout.</li>
+        <li><strong>Itinérance coupée et mode avion au large</strong> : le réseau du navire coûte jusqu'à 15,84 € le Mo.</li>
+      </ul>
+    </section>
+
+    <section class="method" aria-labelledby="methode">
+      <h2 id="methode">Comment nous avons sélectionné ces offres</h2>
+      <p>Offres et codes promo issus du comparateur MyBestSim : pour chaque itinéraire, nous avons gardé les forfaits couvrant toutes les escales citées, de 5 à 10 Go (3 Go pour les Caraïbes), valables au moins une semaine, et retenu le moins cher (les trois moins chers pour la Méditerranée, chez trois fournisseurs différents). Couverture en mer des fournisseurs : sites et pages d'aide de GigSky, Saily, Holafly et Ubigi. Règles des réseaux à bord : <a href="https://eur-lex.europa.eu/eli/dec/2010/166/2017-02-03/eng" rel="noopener">décision 2010/166/UE</a>. Données à prévoir : débits moyens du <a href="https://mybestsim.com/fr/calculateur-de-donnee-voyage/">calculateur MyBestSim</a>, marge de 25 %. Tarifs maritimes des opérateurs : <a href="https://www.jechange.fr/telecom/mobile/news/itinerance-maritime-10-16-euros-megaoctet-ferry-reglage-embarquer" rel="noopener">JeChange</a>. Wi-Fi Starlink à bord : <a href="https://thepointsguy.com/guide/starlink-on-cruise-ships" rel="noopener">The Points Guy</a>.</p>
+    </section>
+
+    <section class="related" aria-labelledby="articles-recommandes">
+      <h2 id="articles-recommandes">Nos articles recommandés</h2>
+      <div class="related-grid">
+        <a class="related-card" href="https://mybestsim.com/fr/meilleure-esim-pour-les-navires-de-croisiere-2026-ce-qui-fonctionne/">
+          <img src="/article/images/article-esim-navires-de-croisiere.webp" width="600" height="400" loading="lazy" decoding="async" alt="Voyageur sur le pont d'un navire de croisière, smartphone en main">
+          <span class="related-body">
+            <span class="related-title">Meilleure eSIM pour les navires de croisière 2026&nbsp;: ce qui fonctionne</span>
+            <span class="related-text">eSIM croisière, Wi-Fi du navire ou roaming : quand choisir quoi.</span>
+            <span class="related-more">Lire l'article →</span>
+          </span>
+        </a>
+        <a class="related-card" href="https://mybestsim.com/fr/meilleure-esim-pour-croisiere-dans-les-caraibes-que-choisir-en-2026/">
+          <img src="/article/images/article-esim-croisiere-caraibes.webp" width="600" height="400" loading="lazy" decoding="async" alt="Croisiériste au port devant son paquebot, sur une île des Caraïbes">
+          <span class="related-body">
+            <span class="related-title">Meilleure eSIM pour une croisière dans les Caraïbes&nbsp;: que choisir en 2026</span>
+            <span class="related-text">Bahamas, Mexique, Jamaïque : le guide île par île.</span>
+            <span class="related-more">Lire l'article →</span>
+          </span>
+        </a>
+        <a class="related-card" href="https://mybestsim.com/fr/frais-de-roaming-en-croisiere-dans-lue-guide-2026/">
+          <img src="/article/images/article-roaming-croisiere-ue.webp" width="600" height="400" loading="lazy" decoding="async" alt="Passagers consultant leur téléphone sur le quai d'un port européen, devant un paquebot">
+          <span class="related-body">
+            <span class="related-title">Frais de roaming en croisière dans l'UE&nbsp;: guide 2026</span>
+            <span class="related-text">Ce que couvre vraiment le roaming européen aux escales.</span>
+            <span class="related-more">Lire l'article →</span>
+          </span>
+        </a>
+        <a class="related-card" href="https://mybestsim.com/fr/facture-de-roaming-a-900-e-le-piege-de-lesim/">
+          <img src="/article/images/article-facture-roaming-900-euros.webp" width="600" height="400" loading="lazy" decoding="async" alt="Voyageur inquiet devant une alerte de facture sur son téléphone, dans un aéroport">
+          <span class="related-body">
+            <span class="related-title">Facture de roaming à 900&nbsp;€&nbsp;: le piège de l'eSIM</span>
+            <span class="related-text">Le basculement double SIM qui coûte cher, et comment l'éviter.</span>
+            <span class="related-more">Lire l'article →</span>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <footer class="author">
+      <span class="avatar" aria-hidden="true">AC</span>
+      <p><strong>Alexandre Canavate</strong>, rédacteur pour MyBestSim. Il compare les offres eSIM et vérifie chaque tarif à la source pour vous aider à rester connecté en voyage, au juste prix.</p>
+    </footer>
+  </article>
+</main>
+<div class="affiliate-disclosure"><p>Mentions commerciales : MyBestSim utilise des liens d'affiliation. Si vous achetez via nos liens, nous pouvons percevoir une commission, sans frais supplémentaires pour vous. Cela ne modifie pas nos classements, qui restent entièrement indépendants.</p></div>
+</body>
+</html>

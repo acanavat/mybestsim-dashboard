@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 1000" font-family="Helvetica, Arial, sans-serif">
+  <title>Réglages d'un iPhone à faire avant une croisière : ligne pour les données, basculement et itinérance</title>
+  <rect width="480" height="1000" rx="18" fill="#f5f8fd"/>
+  <!-- téléphone -->
+  <g transform="translate(90 24)">
+    <rect width="300" height="540" rx="44" fill="#0e2b4d"/>
+    <rect x="12" y="12" width="276" height="516" rx="34" fill="#f2f2f7"/>
+    <rect x="110" y="24" width="80" height="22" rx="11" fill="#0e2b4d"/>
+    <text x="34" y="86" font-size="13" fill="#1e63d7">‹ Réglages</text>
+    <text x="34" y="118" font-size="22" font-weight="700" fill="#111827">Données cellulaires</text>
+
+    <text x="34" y="152" font-size="11" fill="#6b7280">DONNÉES CELLULAIRES</text>
+    <rect x="24" y="160" width="252" height="88" rx="12" fill="#ffffff"/>
+    <text x="40" y="190" font-size="14" fill="#111827">Données cellulaires</text>
+    <text x="260" y="190" font-size="14" fill="#6b7280" text-anchor="end">eSIM voyage ›</text>
+    <line x1="40" y1="204" x2="276" y2="204" stroke="#e5e7eb"/>
+    <text x="40" y="224" font-size="12.5" fill="#111827">Autoriser le basculement</text>
+    <text x="40" y="240" font-size="12.5" fill="#111827">des données cellulaires</text>
+    <rect x="220" y="216" width="44" height="26" rx="13" fill="#e5e7eb"/><circle cx="233" cy="229" r="11" fill="#ffffff" stroke="#d1d5db"/>
+
+    <text x="34" y="282" font-size="11" fill="#6b7280">LIGNE FRANÇAISE</text>
+    <rect x="24" y="290" width="252" height="88" rx="12" fill="#ffffff"/>
+    <text x="40" y="320" font-size="14" fill="#111827">Activer cette ligne</text>
+    <rect x="220" y="304" width="44" height="26" rx="13" fill="#34c759"/><circle cx="251" cy="317" r="11" fill="#ffffff"/>
+    <line x1="40" y1="334" x2="276" y2="334" stroke="#e5e7eb"/>
+    <text x="40" y="360" font-size="14" fill="#111827">Itinérance des données</text>
+    <rect x="220" y="344" width="44" height="26" rx="13" fill="#e5e7eb"/><circle cx="233" cy="357" r="11" fill="#ffffff" stroke="#d1d5db"/>
+
+    <text x="34" y="412" font-size="11" fill="#6b7280">ESIM VOYAGE</text>
+    <rect x="24" y="420" width="252" height="48" rx="12" fill="#ffffff"/>
+    <text x="40" y="450" font-size="14" fill="#111827">Itinérance des données</text>
+    <rect x="220" y="432" width="44" height="26" rx="13" fill="#34c759"/><circle cx="251" cy="445" r="11" fill="#ffffff"/>
+  </g>
+
+  
+  <circle cx="44" cy="616" r="18" fill="#1e63d7"/><text x="44" y="622" font-size="17" font-weight="700" fill="#ffffff" text-anchor="middle">1</text>
+  <text x="76" y="614" font-size="19" font-weight="700" fill="#0e2b4d">Données : l'eSIM de voyage</text>
+  <text x="76" y="640" font-size="17" fill="#243447">C'est elle qui paie internet aux escales.</text>
+  <circle cx="44" cy="702" r="18" fill="#de1414"/><text x="44" y="708" font-size="17" font-weight="700" fill="#ffffff" text-anchor="middle">2</text>
+  <text x="76" y="700" font-size="19" font-weight="700" fill="#0e2b4d">Basculement : désactivé</text>
+  <text x="76" y="726" font-size="17" fill="#243447">Sinon la ligne française prend le relais.</text>
+  <circle cx="44" cy="788" r="18" fill="#de1414"/><text x="44" y="794" font-size="17" font-weight="700" fill="#ffffff" text-anchor="middle">3</text>
+  <text x="76" y="786" font-size="19" font-weight="700" fill="#0e2b4d">Ligne française : itinérance coupée</text>
+  <text x="76" y="812" font-size="17" fill="#243447">Elle garde les appels et les SMS.</text>
+  <circle cx="44" cy="874" r="18" fill="#16a34a"/><text x="44" y="880" font-size="17" font-weight="700" fill="#ffffff" text-anchor="middle">4</text>
+  <text x="76" y="872" font-size="19" font-weight="700" fill="#0e2b4d">eSIM voyage : itinérance activée</text>
+  <text x="76" y="898" font-size="17" fill="#243447">Elle en a besoin pour fonctionner.</text>
+  <text x="24" y="972" font-size="15" fill="#64748b">En mer : mode avion, puis Wi-Fi si vous utilisez celui du bord.</text>
+</svg>

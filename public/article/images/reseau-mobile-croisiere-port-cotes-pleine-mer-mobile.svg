@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 640" font-family="Helvetica, Arial, sans-serif">
+  <title>Les trois zones de réseau pendant une croisière : au port, près des côtes, en pleine mer</title>
+  <defs>
+    <g id="ship">
+      <path d="M0 0 L120 0 L106 22 L10 22 Z" fill="#ffffff" stroke="#0e2b4d" stroke-width="2.4"/>
+      <rect x="18" y="-16" width="78" height="16" rx="2" fill="#ffffff" stroke="#0e2b4d" stroke-width="2.4"/>
+      <rect x="32" y="-30" width="48" height="14" rx="2" fill="#ffffff" stroke="#0e2b4d" stroke-width="2.4"/>
+      <rect x="58" y="-44" width="10" height="14" fill="#de1414"/>
+      <g fill="#1e63d7"><circle cx="30" cy="-8" r="2.6"/><circle cx="44" cy="-8" r="2.6"/><circle cx="58" cy="-8" r="2.6"/><circle cx="72" cy="-8" r="2.6"/><circle cx="86" cy="-8" r="2.6"/></g>
+    </g>
+  </defs>
+  <rect width="480" height="640" rx="18" fill="#f5f8fd"/>
+
+  <!-- 1. au port -->
+  <g transform="translate(16 16)">
+    <rect width="448" height="190" rx="16" fill="#ffffff" stroke="#bfe3c0" stroke-width="2"/>
+    <rect width="7" height="190" rx="3" fill="#16a34a"/>
+    <rect x="18" y="16" width="160" height="158" rx="12" fill="#e8f1ff"/>
+    <rect x="18" y="120" width="160" height="54" rx="0" fill="#4f8fe8"/>
+    <path d="M18 120 L80 120 L80 96 L18 96 Z" fill="#cbd8ea"/>
+    <path d="M44 120 L52 52 L60 120" fill="none" stroke="#0e2b4d" stroke-width="3"/>
+    <circle cx="52" cy="48" r="5" fill="#de1414"/>
+    <g fill="none" stroke="#1e63d7" stroke-width="3" stroke-linecap="round"><path d="M66 36 A 18 18 0 0 1 66 62"/><path d="M76 28 A 30 30 0 0 1 76 70"/></g>
+    <use href="#ship" transform="translate(84 118) scale(0.72)"/>
+    <text x="196" y="58" font-size="24" font-weight="700" fill="#0e2b4d">Au port</text>
+    <text x="196" y="94" font-size="19" fill="#243447">Réseau 4G/5G</text>
+    <text x="196" y="120" font-size="19" fill="#243447">du pays.</text>
+    <text x="196" y="156" font-size="18" font-weight="700" fill="#2f7d32">L'eSIM de voyage marche</text>
+  </g>
+
+  <!-- 2. près des côtes -->
+  <g transform="translate(16 222)">
+    <rect width="448" height="190" rx="16" fill="#ffffff" stroke="#f8d7a8" stroke-width="2"/>
+    <rect width="7" height="190" rx="3" fill="#f59e0b"/>
+    <rect x="18" y="16" width="160" height="158" rx="12" fill="#e8f1ff"/>
+    <rect x="18" y="120" width="160" height="54" fill="#4f8fe8"/>
+    <use href="#ship" transform="translate(52 118) scale(0.72)"/>
+    <g fill="none" stroke="#1e63d7" stroke-width="3" stroke-linecap="round" stroke-opacity="0.45"><path d="M44 56 A 18 18 0 0 0 44 82"/></g>
+    <text x="196" y="58" font-size="24" font-weight="700" fill="#0e2b4d">Près des côtes</text>
+    <text x="196" y="94" font-size="19" fill="#243447">Le réseau terrestre</text>
+    <text x="196" y="120" font-size="19" fill="#243447">faiblit, puis disparaît.</text>
+    <text x="196" y="156" font-size="18" font-weight="700" fill="#8a4b05">Limite : 2 milles ≈ 3,7 km</text>
+  </g>
+
+  <!-- 3. pleine mer -->
+  <g transform="translate(16 428)">
+    <rect width="448" height="196" rx="16" fill="#ffffff" stroke="#f6c9c9" stroke-width="2"/>
+    <rect width="7" height="196" rx="3" fill="#de1414"/>
+    <rect x="18" y="16" width="160" height="164" rx="12" fill="#e8f1ff"/>
+    <rect x="18" y="126" width="160" height="54" fill="#1e63d7"/>
+    <g transform="translate(130 40)">
+      <rect x="-9" y="-7" width="18" height="14" rx="2" fill="#0e2b4d"/>
+      <rect x="-31" y="-5" width="20" height="10" fill="#4f8fe8" stroke="#0e2b4d" stroke-width="1.5"/>
+      <rect x="11" y="-5" width="20" height="10" fill="#4f8fe8" stroke="#0e2b4d" stroke-width="1.5"/>
+    </g>
+    <path d="M128 50 L112 92" stroke="#ffcc00" stroke-width="3" stroke-dasharray="6 5"/>
+    <use href="#ship" transform="translate(52 124) scale(0.72)"/>
+    <text x="196" y="58" font-size="24" font-weight="700" fill="#0e2b4d">En pleine mer</text>
+    <text x="196" y="94" font-size="19" fill="#243447">Réseau du navire,</text>
+    <text x="196" y="120" font-size="19" fill="#243447">relié par satellite.</text>
+    <text x="196" y="156" font-size="18" font-weight="700" fill="#a11212">Facturé très cher</text>
+    <text x="196" y="178" font-size="18" font-weight="700" fill="#a11212">par votre opérateur</text>
+  </g>
+</svg>

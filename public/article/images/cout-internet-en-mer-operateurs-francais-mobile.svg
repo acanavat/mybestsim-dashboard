@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512" font-family="Helvetica, Arial, sans-serif">
+  <title>Prix d'un mégaoctet sur le réseau d'un navire selon l'opérateur français</title>
+  <rect width="480" height="512" rx="18" fill="#ffffff"/>
+  <text x="24" y="48" font-size="25" font-weight="700" fill="#0e2b4d">Internet sur le réseau</text>
+  <text x="24" y="80" font-size="25" font-weight="700" fill="#0e2b4d">du navire : le prix du Mo</text>
+  <text x="24" y="110" font-size="17" fill="#64748b">Hors-forfait facturé par votre opérateur</text>
+
+  <g font-size="20" font-weight="700" fill="#0e2b4d">
+    <text x="24" y="158">Free</text>
+    <rect x="24" y="170" width="208" height="34" rx="6" fill="#1e63d7"/>
+    <text x="246" y="195">9,70 €</text>
+
+    <text x="24" y="246">Bouygues Telecom</text>
+    <rect x="24" y="258" width="301" height="34" rx="6" fill="#1e63d7"/>
+    <text x="339" y="283">14 €</text>
+
+    <text x="24" y="334">SFR</text>
+    <rect x="24" y="346" width="340" height="34" rx="6" fill="#de1414"/>
+    <text x="378" y="371">15,84 €</text>
+  </g>
+
+  <rect x="24" y="406" width="432" height="72" rx="12" fill="#fff4e5" stroke="#f8d7a8" stroke-width="2"/>
+  <text x="42" y="436" font-size="17" fill="#8a4b05">Une mise à jour de 50 Mo :</text>
+  <text x="42" y="462" font-size="17" font-weight="700" fill="#8a4b05">485 € chez Free, 792 € chez SFR</text>
+  <text x="456" y="500" font-size="12" fill="#94a3b8" text-anchor="end">Source : JeChange, brochures des opérateurs</text>
+</svg>

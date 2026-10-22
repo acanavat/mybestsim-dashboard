@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" font-family="Helvetica, Arial, sans-serif">
+  <title>Les trois zones de réseau pendant une croisière : au port, près des côtes, en pleine mer</title>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e8f1ff"/>
+      <stop offset="1" stop-color="#f7fbff"/>
+    </linearGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4f8fe8"/>
+      <stop offset="1" stop-color="#1e63d7"/>
+    </linearGradient>
+    <g id="ship">
+      <path d="M0 0 L120 0 L106 22 L10 22 Z" fill="#ffffff" stroke="#0e2b4d" stroke-width="2"/>
+      <rect x="18" y="-16" width="78" height="16" rx="2" fill="#ffffff" stroke="#0e2b4d" stroke-width="2"/>
+      <rect x="32" y="-30" width="48" height="14" rx="2" fill="#ffffff" stroke="#0e2b4d" stroke-width="2"/>
+      <rect x="58" y="-44" width="10" height="14" fill="#de1414"/>
+      <g fill="#1e63d7"><circle cx="30" cy="-8" r="2.4"/><circle cx="42" cy="-8" r="2.4"/><circle cx="54" cy="-8" r="2.4"/><circle cx="66" cy="-8" r="2.4"/><circle cx="78" cy="-8" r="2.4"/><circle cx="88" cy="-8" r="2.4"/></g>
+      <path d="M10 22 L106 22" stroke="#1e63d7" stroke-width="3"/>
+    </g>
+  </defs>
+
+  <rect width="960" height="520" fill="url(#sky)"/>
+  <!-- mer -->
+  <rect x="0" y="250" width="960" height="120" fill="url(#sea)"/>
+  <path d="M0 262 Q 40 254 80 262 T 160 262 T 240 262 T 320 262 T 400 262 T 480 262 T 560 262 T 640 262 T 720 262 T 800 262 T 880 262 T 960 262" fill="none" stroke="#ffffff" stroke-opacity="0.35" stroke-width="2"/>
+
+  <!-- terre et ville -->
+  <path d="M0 250 L0 170 L40 170 L40 140 L70 140 L70 160 L95 160 L95 125 L125 125 L125 175 L150 175 L150 250 Z" fill="#cbd8ea"/>
+  <path d="M0 250 L190 250 L170 236 L0 236 Z" fill="#9fb4d1"/>
+  <!-- antenne -->
+  <path d="M120 236 L132 150 L144 236" fill="none" stroke="#0e2b4d" stroke-width="3"/>
+  <path d="M124 205 L140 205 M127 180 L137 180" stroke="#0e2b4d" stroke-width="2"/>
+  <circle cx="132" cy="146" r="5" fill="#de1414"/>
+  <g fill="none" stroke="#1e63d7" stroke-width="3" stroke-linecap="round">
+    <path d="M150 128 A 26 26 0 0 1 150 164"/>
+    <path d="M162 116 A 42 42 0 0 1 162 176"/>
+    <path d="M174 104 A 58 58 0 0 1 174 188" stroke-opacity="0.6"/>
+  </g>
+
+  <!-- navire 1 : au port -->
+  <use href="#ship" transform="translate(196 228) scale(0.82)"/>
+
+  <!-- navire 2 : près des côtes, signal faible -->
+  <use href="#ship" transform="translate(430 226) scale(0.82)"/>
+  <g fill="none" stroke="#1e63d7" stroke-width="3" stroke-linecap="round" stroke-opacity="0.45">
+    <path d="M400 150 A 26 26 0 0 0 400 186"/>
+  </g>
+  <text x="372" y="140" font-size="14" fill="#64748b">signal faible</text>
+
+  <!-- navire 3 : pleine mer + satellite -->
+  <use href="#ship" transform="translate(760 226) scale(0.82)"/>
+  <g transform="translate(838 58)">
+    <rect x="-12" y="-9" width="24" height="18" rx="3" fill="#0e2b4d"/>
+    <rect x="-44" y="-7" width="28" height="14" fill="#1e63d7" stroke="#0e2b4d" stroke-width="2"/>
+    <rect x="16" y="-7" width="28" height="14" fill="#1e63d7" stroke="#0e2b4d" stroke-width="2"/>
+  </g>
+  <path d="M836 72 L816 186" stroke="#ffcc00" stroke-width="3" stroke-dasharray="8 7"/>
+  <text x="690" y="58" font-size="14" fill="#0e2b4d" font-weight="700">satellite</text>
+  <circle cx="815" cy="190" r="5" fill="#ffcc00" stroke="#0e2b4d" stroke-width="2"/>
+  <text x="652" y="150" font-size="14" fill="#0e2b4d">antenne mobile du navire</text>
+
+  <!-- règle des distances -->
+  <g font-size="14" fill="#0e2b4d">
+    <line x1="190" y1="300" x2="940" y2="300" stroke="#ffffff" stroke-width="2"/>
+    <line x1="190" y1="292" x2="190" y2="308" stroke="#ffffff" stroke-width="3"/>
+    <line x1="600" y1="290" x2="600" y2="310" stroke="#ffcc00" stroke-width="4"/>
+    <text x="198" y="328" fill="#ffffff" font-weight="700">côte</text>
+    <text x="548" y="328" fill="#ffffff" font-weight="700">2 milles ≈ 3,7 km</text>
+    <text x="842" y="328" fill="#ffffff" font-weight="700">pleine mer</text>
+  </g>
+
+  <!-- cartes légendes -->
+  <g>
+    <rect x="20" y="392" width="290" height="110" rx="14" fill="#ffffff" stroke="#cfe0fb" stroke-width="2"/>
+    <rect x="20" y="392" width="6" height="110" rx="3" fill="#16a34a"/>
+    <text x="44" y="424" font-size="18" font-weight="700" fill="#0e2b4d">Au port</text>
+    <text x="44" y="452" font-size="15" fill="#243447">Réseau 4G/5G du pays.</text>
+    <text x="44" y="476" font-size="15" fill="#243447">Votre eSIM de voyage marche.</text>
+
+    <rect x="335" y="392" width="290" height="110" rx="14" fill="#ffffff" stroke="#cfe0fb" stroke-width="2"/>
+    <rect x="335" y="392" width="6" height="110" rx="3" fill="#f59e0b"/>
+    <text x="359" y="424" font-size="18" font-weight="700" fill="#0e2b4d">Près des côtes</text>
+    <text x="359" y="452" font-size="15" fill="#243447">Le réseau terrestre faiblit,</text>
+    <text x="359" y="476" font-size="15" fill="#243447">puis disparaît.</text>
+
+    <rect x="650" y="392" width="290" height="110" rx="14" fill="#ffffff" stroke="#f6c9c9" stroke-width="2"/>
+    <rect x="650" y="392" width="6" height="110" rx="3" fill="#de1414"/>
+    <text x="674" y="424" font-size="18" font-weight="700" fill="#0e2b4d">En pleine mer</text>
+    <text x="674" y="452" font-size="15" fill="#243447">Réseau du navire, facturé</text>
+    <text x="674" y="476" font-size="15" fill="#243447">très cher par votre opérateur.</text>
+  </g>
+</svg>

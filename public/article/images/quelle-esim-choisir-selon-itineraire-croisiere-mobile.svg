@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 1316" font-family="Helvetica, Arial, sans-serif">
+  <title>Quelle eSIM choisir selon l'itinéraire de votre croisière</title>
+  <rect width="480" height="1316" rx="18" fill="#f5f8fd"/>
+  <text x="24" y="48" font-size="25" font-weight="700" fill="#0e2b4d">Quelle eSIM selon</text>
+  <text x="24" y="80" font-size="25" font-weight="700" fill="#0e2b4d">votre croisière ?</text>
+  <text x="24" y="104" font-size="16" fill="#64748b">D'après vos escales, pas le nom de la région</text>
+  <g transform="translate(16 118)">
+    <rect width="448" height="186" rx="16" fill="#ffffff" stroke="#cfe0fb" stroke-width="2"/>
+    <circle cx="44" cy="46" r="22" fill="#1e63d7"/><circle cx="58.0" cy="46.0" r="2.4" fill="#ffcc00"/><circle cx="53.89949655416375" cy="55.89949331905932" r="2.4" fill="#ffcc00"/><circle cx="44.00000457512855" cy="59.999999999999254" r="2.4" fill="#ffcc00"/><circle cx="34.10050991604616" cy="55.89949978926711" r="2.4" fill="#ffcc00"/><circle cx="30.00000000000299" cy="46.0000091502571" r="2.4" fill="#ffcc00"/><circle cx="34.10049697563058" cy="36.1005131511527" r="2.4" fill="#ffcc00"/><circle cx="43.99998627461435" cy="32.00000000000673" r="2.4" fill="#ffcc00"/><circle cx="53.89948361373971" cy="36.10049374052933" r="2.4" fill="#ffcc00"/>
+    <text x="80" y="42" font-size="21" font-weight="700" fill="#0e2b4d">Méditerranée</text>
+    <text x="80" y="66" font-size="16" fill="#64748b">escales dans l'UE</text>
+    <text x="22" y="106" font-size="18" fill="#243447">Votre forfait français</text>
+    <text x="22" y="130" font-size="18" fill="#243447">suffit souvent.</text>
+    <rect x="22" y="144" width="404" height="30" rx="8" fill="#e8f7e8"/>
+    <text x="36" y="165" font-size="16" font-weight="700" fill="#2f7d32">+ eSIM Europe si peu de Go</text>
+  </g>
+  <g transform="translate(16 318)">
+    <rect width="448" height="186" rx="16" fill="#ffffff" stroke="#f6c9c9" stroke-width="2"/>
+    <circle cx="44" cy="46" r="22" fill="#fdecec"/><text x="44" y="56" font-size="28" font-weight="700" fill="#de1414" text-anchor="middle">!</text>
+    <text x="80" y="42" font-size="21" font-weight="700" fill="#0e2b4d">Méditerranée</text>
+    <text x="80" y="66" font-size="16" fill="#64748b">escales hors UE</text>
+    <text x="22" y="106" font-size="18" fill="#243447">Turquie, Tunisie, Maroc,</text>
+    <text x="22" y="130" font-size="18" fill="#243447">Égypte, Monténégro…</text>
+    <rect x="22" y="144" width="404" height="30" rx="8" fill="#fdecec"/>
+    <text x="36" y="165" font-size="16" font-weight="700" fill="#a11212">eSIM multi-pays qui les inclut</text>
+  </g>
+  <g transform="translate(16 518)">
+    <rect width="448" height="186" rx="16" fill="#ffffff" stroke="#cfe0fb" stroke-width="2"/>
+    <circle cx="44" cy="46" r="22" fill="#e8f1ff"/><path d="M26 58 L39 34 L47 47 L52 39 L63 58 Z" fill="#1e63d7"/><path d="M39 34 L43 41 L35 41 Z" fill="#fff"/>
+    <text x="80" y="42" font-size="21" font-weight="700" fill="#0e2b4d">Fjords, Baltique</text>
+    <text x="80" y="66" font-size="16" fill="#64748b">Europe du Nord</text>
+    <text x="22" y="106" font-size="18" fill="#243447">Norvège et Islande incluses</text>
+    <text x="22" y="130" font-size="18" fill="#243447">dans le roaming européen.</text>
+    <rect x="22" y="144" width="404" height="30" rx="8" fill="#fff4e5"/>
+    <text x="36" y="165" font-size="16" font-weight="700" fill="#8a4b05">Royaume-Uni : vérifiez</text>
+  </g>
+  <g transform="translate(16 718)">
+    <rect width="448" height="186" rx="16" fill="#ffffff" stroke="#cfe0fb" stroke-width="2"/>
+    <circle cx="44" cy="46" r="22" fill="#e8f1ff"/><circle cx="52" cy="38" r="7" fill="#ffcc00"/><path d="M26 56 Q 35 50 44 56 T 62 56" fill="none" stroke="#1e63d7" stroke-width="3" stroke-linecap="round"/>
+    <text x="80" y="42" font-size="21" font-weight="700" fill="#0e2b4d">Caraïbes</text>
+    <text x="80" y="66" font-size="16" fill="#64748b">et Bahamas</text>
+    <text x="22" y="106" font-size="18" fill="#243447">Un pays différent presque</text>
+    <text x="22" y="130" font-size="18" fill="#243447">à chaque escale.</text>
+    <rect x="22" y="144" width="404" height="30" rx="8" fill="#e8f1ff"/>
+    <text x="36" y="165" font-size="16" font-weight="700" fill="#1e63d7">eSIM Monde conseillée</text>
+  </g>
+  <g transform="translate(16 918)">
+    <rect width="448" height="186" rx="16" fill="#ffffff" stroke="#cfe0fb" stroke-width="2"/>
+    <circle cx="44" cy="46" r="22" fill="#e8f1ff"/><circle cx="44" cy="46" r="11" fill="#de1414"/>
+    <text x="80" y="42" font-size="21" font-weight="700" fill="#0e2b4d">Asie</text>
+    <text x="80" y="66" font-size="16" fill="#64748b">Japon, Singapour, Thaïlande</text>
+    <text x="22" y="106" font-size="18" fill="#243447">Une eSIM régionale couvre</text>
+    <text x="22" y="130" font-size="18" fill="#243447">la plupart des itinéraires.</text>
+    <rect x="22" y="144" width="404" height="30" rx="8" fill="#e8f1ff"/>
+    <text x="36" y="165" font-size="16" font-weight="700" fill="#1e63d7">eSIM Asie</text>
+  </g>
+  <g transform="translate(16 1118)">
+    <rect width="448" height="186" rx="16" fill="#ffffff" stroke="#cfe0fb" stroke-width="2"/>
+    <circle cx="44" cy="46" r="22" fill="#e8f1ff"/><circle cx="44" cy="46" r="13" fill="none" stroke="#1e63d7" stroke-width="2.5"/><ellipse cx="44" cy="46" rx="5.5" ry="13" fill="none" stroke="#1e63d7" stroke-width="2"/><path d="M31 46 H57" stroke="#1e63d7" stroke-width="2"/>
+    <text x="80" y="42" font-size="21" font-weight="700" fill="#0e2b4d">Tour du monde</text>
+    <text x="80" y="66" font-size="16" fill="#64748b">transatlantique, Alaska</text>
+    <text x="22" y="106" font-size="18" fill="#243447">Longues journées en mer,</text>
+    <text x="22" y="130" font-size="18" fill="#243447">plusieurs continents.</text>
+    <rect x="22" y="144" width="404" height="30" rx="8" fill="#e8f1ff"/>
+    <text x="36" y="165" font-size="16" font-weight="700" fill="#1e63d7">eSIM Monde + eSIM croisière</text>
+  </g>
+</svg>
